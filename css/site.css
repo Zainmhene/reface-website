@@ -502,3 +502,34 @@ div.service-card { cursor: default; }
 .review-more .big-stars { font-size: 1.6rem; color: #e3a73a; letter-spacing: 3px; }
 .review-more h3 { margin: 0; }
 .service-card .svc-tag { position: absolute; top: 18px; left: 18px; padding: 6px 12px; border-radius: 999px; background: rgba(255, 255, 255, .92); color: var(--navy-deep); font-size: .72rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+
+/* Review text: the reviewer's paragraphs, curly quotes, long ones cut with "Read more" */
+.review blockquote p, .job-review blockquote p { margin: 0 0 .8em; }
+.review blockquote p:last-child, .job-review blockquote p:last-child { margin-bottom: 0; }
+.review blockquote p:first-child::before, .job-review blockquote p:first-child::before { content: "“"; }
+.review blockquote p:last-child::after, .job-review blockquote p:last-child::after { content: "”"; }
+.review blockquote { max-height: calc(1.6em * 9); overflow: hidden; }
+.review blockquote.cut { -webkit-mask-image: linear-gradient(#000 60%, transparent); mask-image: linear-gradient(#000 60%, transparent); }
+.review blockquote.cut.open { max-height: none; -webkit-mask-image: none; mask-image: none; }
+.review-more-btn { align-self: flex-start; margin-top: -6px; padding: 0; border: 0; background: none; color: var(--navy); font-weight: 800; font-size: .92rem; cursor: pointer; text-decoration: underline; text-decoration-color: var(--brass); text-underline-offset: 4px; }
+.review-more-btn[hidden] { display: none; }
+
+/* Jobs with only 1–3 photos: photos and review side by side on bigger screens */
+.job.n1 .job-photos { grid-template-columns: 1fr; }
+.job.n1 .job-photo { aspect-ratio: 4 / 3; border-radius: var(--radius-lg); }
+.job.n2 .job-photos { grid-template-columns: 1fr 1fr; }
+.job.n2 .job-photo { aspect-ratio: 4 / 5; }
+.job.n3 .job-photos { grid-template-columns: repeat(3, 1fr); }
+@media (min-width: 900px) {
+  .job.compact { grid-template-columns: 1.25fr 1fr; column-gap: 36px; align-items: start;
+    grid-template-areas: "head head" "photos review" "photos credit"; }
+  .job.compact .job-head { grid-area: head; }
+  .job.compact .job-photos { grid-area: photos; grid-template-rows: none; }
+  .job.compact .job-review { grid-area: review; }
+  .job.compact .job-credit { grid-area: credit; margin-top: 0; }
+  .job.n1 .job-photos { grid-template-columns: 1fr; }
+  .job.n2 .job-photos { grid-template-columns: 1fr 1fr; }
+  .job.n3 .job-photos { grid-template-columns: repeat(3, 1fr); }
+}
+.review footer { flex-wrap: wrap; gap: 4px 14px; }
+.review footer b { white-space: nowrap; }

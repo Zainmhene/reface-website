@@ -21,8 +21,8 @@ Keep it separate from Zain's personal website, TSUGI and other client projects. 
   the photo; tap or swipe to wipe in the new colour. The first time it scrolls into view it plays one slow wipe so people
   see it changes. Its "Free Photoquote in this colour" button opens WhatsApp with the room and colour filled in.
   Photos in `assets/img/studio/` are brochure photos recoloured with the real brochure colours (made by `tools/images/recolour.py`,
-  in git history). The bathroom photo is AI-made (no Reface bathroom photos yet) and is labelled as a visualisation;
-  swap in a real job photo when Reface sends one. Oak swatch tiles are in `assets/img/swatches/`.
+  in git history). The bathroom photo is AI-made and labelled as a visualisation; it
+  could be swapped for a real one (Reface now has real bathroom jobs, see the gallery). Oak swatch tiles are in `assets/img/swatches/`.
 - Plain HTML, CSS and JavaScript. No build step needed to host it (GitHub Pages or any static host).
 - The HTML pages are **generated** by `python3 tools/pages/build.py` from `tools/pages/` (shared head/header/footer in
   `parts.py`, the page title band and enquiry block in `blocks.py`, one file per page in `tools/pages/pages/`).
@@ -34,11 +34,14 @@ Keep it separate from Zain's personal website, TSUGI and other client projects. 
   opens WhatsApp with `photoquoteMessage` from config.
 - Images: `assets/img/home/` (still hero from the supplier brochure, two service photos), `assets/img/studio/` (Colour Studio),
   `assets/img/work/` for real job photos.
-- Gallery (`gallery.html`, from `work` in config): finished-job photo sets (tap to enlarge) and before & after sliders.
-  Job 1 (kitchen & bathroom) uses the 7 photos from Jacqueline S.'s Google review, cropped from Zain's phone screenshots.
-  Those photos are the customer's: Reface must confirm she's happy for them to be used before the site goes live
-  (or send their own photos of the job). Its bathroom photo is also on the home page "Fitted bathrooms" card.
-- Reviews: one real Google review so far (Jacqueline S., word for word). With fewer than 3, a "Read more on Google" card fills the row.
+- Gallery (`gallery.html`, from `work` in config): finished-job photo sets (tap to enlarge), each shown with its customer's
+  review, and before & after sliders when Reface sends pairs. Jobs 1–4 (kitchen & bathroom, bedroom, two kitchens) use photos
+  from customers' Google reviews, cropped from Zain's phone screenshots. Those photos are the customers': Reface must confirm
+  they're happy for them to be used before the site goes live (or send their own photos). Job 1's bathroom photo is also on
+  the home page "Fitted bathrooms" card.
+- Reviews: 8 real Google reviews (all 5 stars), word for word including the reviewers' own typos; surnames shortened.
+  The first three in `config.js` show on the home page (one kitchen, one bedroom, one kitchen & bathroom). Long ones get "Read more".
+  The overall Google rating and review count are still unknown, so no summary line shows yet.
 - `PREVIEW = True` in `tools/pages/parts.py` adds a noindex tag so search engines ignore the site until launch.
 
 ## Brand
@@ -53,7 +56,7 @@ Montserrat 800 for the "reface" wordmark. Mobile-first: most visitors are on pho
 - Before & after photos must be **real Reface jobs**. Never use brochure or AI images there. Any AI image elsewhere must be labelled.
 - Email (info@refacegroup.co.uk) and phone-line hours (Mon–Fri 9–5, Sat 10–3) come from their current website;
   opening hours (Mon–Thu 10–4, Fri 9–4, Sat 10–2) from Google. Both are shown, labelled. The WhatsApp number is still unconfirmed.
-- Before launch, confirm with Reface: WhatsApp number, form endpoint, permission to use the job 1 photos, and that they approve the site.
+- Before launch, confirm with Reface: WhatsApp number, form endpoint, permission to use the customers' job photos, and that they approve the site.
 - No API keys or secrets in the repo.
 - Zain is learning web development: explain changes simply, be direct about bad ideas, keep replies short.
 - Work on a branch and open a pull request; don't push to `main` directly. Get Zain's approval before adding

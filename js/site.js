@@ -8,6 +8,10 @@
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
+  // Review text with the reviewer's own paragraphs and line breaks
+  const reviewText = (t) => String(t || "").split(/\n\s*\n/).map((p) => `<p>${esc(p).replace(/\n/g, "<br>")}</p>`).join("");
+  const findReview = (key) => typeof key === "number" ? (CFG.reviews || [])[key] : (CFG.reviews || []).find((r) => r.name === key);
+
   /* ---------- Links built from config.js ---------- */
   const waLink = (text) => `https://wa.me/${BIZ.whatsapp}${text ? "?text=" + encodeURIComponent(text) : ""}`;
   const mailLink = (subject, body) => `mailto:${BIZ.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
@@ -127,16 +131,17 @@
 
     // Finished jobs: one big photo, the rest as a grid; tap any photo to see it bigger
     const jobHtml = jobs.map((w, j) => {
-      const r = Number.isInteger(w.review) ? (CFG.reviews || [])[w.review] : null;
+      const r = w.review != null ? findReview(w.review) : null;
+      const n = w.photos.length;
       const pics = w.photos.map((ph, k) => `
-        <button type="button" class="job-photo${k === 0 ? " big" : ""}" data-lb="${j}" data-k="${k}" aria-label="View photo ${k + 1} of ${w.photos.length}: ${esc(ph.alt)}">
-          <img src="${esc(ph.src)}-500.webp" srcset="${esc(ph.src)}-500.webp 500w, ${esc(ph.src)}-1000.webp 1000w" sizes="${k === 0 ? "(min-width: 900px) 560px, 100vw" : "(min-width: 900px) 260px, 33vw"}" alt="${esc(ph.alt)}" loading="lazy" width="500" height="665">
+        <button type="button" class="job-photo${k === 0 && n > 3 ? " big" : ""}" data-lb="${j}" data-k="${k}" aria-label="View photo ${k + 1} of ${w.photos.length}: ${esc(ph.alt)}">
+          <img src="${esc(ph.src)}-500.webp" srcset="${esc(ph.src)}-500.webp 500w, ${esc(ph.src)}-1000.webp 1000w" sizes="${n < 4 ? "(min-width: 900px) 40vw, 100vw" : k === 0 ? "(min-width: 900px) 560px, 100vw" : "(min-width: 900px) 260px, 33vw"}" alt="${esc(ph.alt)}" loading="lazy" width="500" height="665">
         </button>`).join("");
       return `
-        <article class="job" data-reveal>
+        <article class="job${n < 4 ? ` compact n${n}` : ""}" data-reveal>
           <header class="job-head"><p class="eyebrow">Recent job</p><h2>${esc(w.title)}</h2><p class="muted">${esc([w.place, w.note].filter(Boolean).join(" · "))}</p></header>
           <div class="job-photos">${pics}</div>
-          ${r ? `<figure class="job-review"><div class="stars" aria-label="${esc(r.rating)} out of 5 stars">${stars(r.rating)}</div><blockquote>“${esc(r.text)}”</blockquote><figcaption><b>${esc(r.name)}</b> · Google review</figcaption></figure>` : ""}
+          ${r ? `<figure class="job-review"><div class="stars" aria-label="${esc(r.rating)} out of 5 stars">${stars(r.rating)}</div><blockquote>${reviewText(r.text)}</blockquote><figcaption><b>${esc(r.name)}</b> · Google review</figcaption></figure>` : ""}
           ${w.credit ? `<p class="job-credit">${esc(w.credit)}</p>` : ""}
         </article>`;
     }).join("");
@@ -229,7 +234,8 @@
       }
       const stars = (n) => "★".repeat(Math.round(n)) + "☆".repeat(5 - Math.round(n));
       const summary = CFG.googleRating ? `<p class="center muted" style="margin-bottom:28px"><b style="color:var(--ink);font-size:1.2rem">${esc(CFG.googleRating)} ★</b> on Google${CFG.googleReviewCount ? ` from ${esc(CFG.googleReviewCount)} reviews` : ""} · <a class="text-link" data-google href="${esc(BIZ.googleReviewsUrl)}">Read them all</a></p>` : "";
-      const more = list.length < 3 ? `
+      const full = !box.dataset.reviews; // the reviews page shows them all
+      const more = list.length < 3 || full ? `
         <div class="review review-more" data-reveal data-delay="${list.length * 80}">
           <div class="big-stars" aria-hidden="true">★★★★★</div>
           <h3>Read more of our reviews on Google</h3>
@@ -238,9 +244,21 @@
       box.innerHTML = summary + `<div class="reviews-grid${list.length === 1 ? " one" : ""}">${list.map((r, k) => `
         <article class="review" data-reveal data-delay="${(k % 3) * 80}">
           <div class="stars" aria-label="${esc(r.rating)} out of 5 stars">${stars(r.rating || 5)}</div>
-          <blockquote>“${esc(r.text)}”</blockquote>
+          <blockquote>${reviewText(r.text)}</blockquote>
+          <button type="button" class="review-more-btn" hidden>Read more</button>
           <footer><b>${esc(r.name)}</b><span>${esc([r.room, r.date].filter(Boolean).join(" · "))}</span></footer>
         </article>`).join("")}${more}</div>`;
+      // Long reviews are cut to a few lines with a "Read more" button
+      $$(".review blockquote", box).forEach((q) => {
+        const btn = q.nextElementSibling;
+        if (q.scrollHeight > q.clientHeight + 4) {
+          q.classList.add("cut"); btn.hidden = false;
+          btn.addEventListener("click", () => {
+            const open = q.classList.toggle("open");
+            btn.textContent = open ? "Show less" : "Read more";
+          });
+        }
+      });
     });
   }
 

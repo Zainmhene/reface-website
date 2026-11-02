@@ -49,9 +49,24 @@ window.REFACE = {
      Example:
      { name: "Sarah M.", rating: 5, date: "October 2026", text: "Exact review text…", room: "Kitchen" } */
   reviews: [
-    // Google review, copied word for word (posted about August 2026). Surname shortened on the site.
+    // Real Google reviews, copied word for word from Zain's screenshots (November 2026). All 5 stars.
+    // Surnames are shortened to an initial. The first three show on the home page (one kitchen, one bedroom, one bathroom).
+    { name: "Kevin J.", rating: 5, date: "Google review, 2026", room: "Kitchen makeover",
+      text: "We’ve just had our kitchen updated by Reface in South Shields and we couldn’t be happier with the result. They fitted new Balmoral blue doors with brass handles which look absolutely awesome, along with a stunning white quartz worktop and an InSinkErator waste disposal unit — it genuinely feels like a brand-new kitchen.\n\nThe lads who fitted everything were spot on. Friendly, professional, tidy, and clearly proud of their work. Nothing felt rushed and the finish is bang on.\n\nOne of the main reasons we went for a kitchen makeover rather than a full replacement was to avoid unnecessary waste. There was nothing wrong with the original units, and it made no sense throwing a perfectly good kitchen away when it could be brought back to life with new doors and handles — and Reface absolutely nailed that.\n\nOn top of that, the cost came in at around a third of what a completely new kitchen would’ve been, which just makes it even better value. Communication and support from start to finish was excellent too — clear, honest, and hassle-free.\n\nBrilliant service, fantastic result, and a really smart way to upgrade your kitchen. Would 100% recommend." },
+    { name: "Robert", rating: 5, date: "Google review, 2026", room: "Bedroom",
+      text: "Reface replaced all of the doors and wardrobe surfaces in our bedroom. They arranged replastering of wall surfaces and the ceiling. The standard of work was exceptional and the team of experienced professional tradespeople worked closely together to minimise disruption and ensure our expectations were always met. We were kept informed and consulted at every stage. Everything went to plan. Everyone turned up and left on time. We are very pleased with the result. Andy, the fitter, was a credit to his trade. The plasterers were faultless. I have no reservations in recommending this company." },
     { name: "Jacqueline S.", rating: 5, date: "Google review, 2026", room: "Kitchen & bathroom",
-      text: "I can’t recommend Reface enough after the work on the design and installation of our kitchen and bathroom. Kev and Neil kept us informed of the whole process from start to finish. The lads who did the installation on both the kitchen and bathroom were excellent. Everything was tidied at the end of each day and all rubbish and materials taken away. Their attention to detail was brilliant. I absolutely love my new kitchen and bathroom." }
+      text: "I can’t recommend Reface enough after the work on the design and installation of our kitchen and bathroom. Kev and Neil kept us informed of the whole process from start to finish. The lads who did the installation on both the kitchen and bathroom were excellent. Everything was tidied at the end of each day and all rubbish and materials taken away. Their attention to detail was brilliant. I absolutely love my new kitchen and bathroom." },
+    { name: "Glynis B.", rating: 5, date: "Google review, 2026", room: "Kitchen",
+      text: "I can’t praise this company enough I had my kitchen renovated two weeks ago and I am delighted with the results. The whole process from start to finish was very easy the whole Reface team we’re professionals they offered advice and were friendly. Thank you for doing such a great job ." },
+    { name: "L.", rating: 5, date: "Google review, 2026", room: "Kitchen",
+      text: "I can't thank Kevs team enough for transforming my kitchen, from my regular messages and calls nothing has been a problem for them. The lads carried out the work quickly and to such a high standard, at the end of each day all mess was cleared up and I was told what was the plans for the following day. Don't spend money on a new kitchen get a Reface makeover you won't regret it" },
+    { name: "Christine F.", rating: 5, date: "Google review, 2026", room: "Kitchen",
+      text: "Very helpful team with excellent workmanship from the fitters, plasterers etc. with all waste removed promptly! Altered part of the kitchen layout to accommodate integrated fridge freezer and managed to match up units beautifully! No hard sell and cannot thank the team at Reface enough!" },
+    { name: "Jayn G.", rating: 5, date: "Google review, 2026", room: "Kitchen",
+      text: "Our experience of working with Reface has been absolutely outstanding. From the outset, their communication was clear, regular and very helpful. As we were on a fairly tight timeline, they did their very best to facilitate this, even fitting the kitchen a week early. The units are smart, good quality and have given the effect of a ‘new’ kitchen at a fraction of the cost. The fitters did an excellent job, with everything left clean and tidy. Based on our experience, I would definitely recommend using Reface - thanks to all the team for an excellent service." },
+    { name: "Judith H.", rating: 5, date: "Google review, 2025", room: "Kitchen",
+      text: "Love love love our new kitchen, such a great transformation it looks brighter with a modern look.\nThe service we received from Kev and Neil was excellent from start to finish, very professional but relaxed and nothing was a problem, kept us up to date with regular office WhatsApp messages.\nThe fitters did a fantastic job and only took two days to fit the new doors and worktops, great workmanship and very tidy.\nWe will definitely recommend Re-face to others." }
   ],
   googleRating: null,      // e.g. 4.9  (TODO: overall rating from the Google listing)
   googleReviewCount: null, // e.g. 87   (TODO: number of reviews from the Google listing)
@@ -60,12 +75,12 @@ window.REFACE = {
      1. Before & after: put both photos in assets/img/work/ (same size and angle works best), then add:
         { title: "Kitchen makeover", place: "South Shields", before: "assets/img/work/job2-before.jpg", after: "assets/img/work/job2-after.jpg", note: "New doors in Reed Green" }
      2. Finished photos only: a list of photos (each saved as name-1000.webp and name-500.webp), like job 1 below.
-        "review" is the number of a review in the list above (0 = the first) to show with the photos. */
+        "review" is the name of a review in the list above to show with the photos. */
   work: [
     { title: "Kitchen & bathroom", note: "Designed and installed by Reface",
-      // From the customer's Google review. TODO: Reface to confirm she's happy for us to use them.
+      // Job photos come from customers' Google reviews. TODO: Reface to confirm the customers are happy for us to use them.
       credit: "Photos from Jacqueline S.’s Google review",
-      review: 0,
+      review: "Jacqueline S.",
       photos: [
         { src: "assets/img/work/job1-1", alt: "Galley kitchen with white shaker doors, black bar handles and a dark worktop" },
         { src: "assets/img/work/job1-2", alt: "Looking down the new kitchen towards the new bathroom" },
@@ -74,6 +89,23 @@ window.REFACE = {
         { src: "assets/img/work/job1-5", alt: "Bathroom with a navy wall-hung vanity unit and grey wall panels" },
         { src: "assets/img/work/job1-6", alt: "Bath with a navy bath panel beside the navy vanity unit" },
         { src: "assets/img/work/job1-7", alt: "Bath with a glass shower screen, rainfall shower and chrome towel rail" }
+      ] },
+    { title: "Fitted bedroom", note: "New doors and wardrobe surfaces",
+      credit: "Photos from Robert’s Google review", review: "Robert",
+      photos: [
+        { src: "assets/img/work/job2-1", alt: "White fitted wardrobes and drawers around a dressing area with dark geometric wallpaper" },
+        { src: "assets/img/work/job2-2", alt: "White fitted wardrobes and overhead cupboards across a bedroom wall" }
+      ] },
+    { title: "Kitchen", note: "Part of the layout changed to fit an integrated fridge freezer",
+      credit: "Photos from Christine F.’s Google review", review: "Christine F.",
+      photos: [
+        { src: "assets/img/work/job3-1", alt: "Cream kitchen doors with black metro tiles, a gas hob and built-in oven" },
+        { src: "assets/img/work/job3-2", alt: "Cream kitchen units with chrome handles above a grey sink and black metro tiles" }
+      ] },
+    { title: "Kitchen", note: "New doors and worktops, fitted in two days",
+      credit: "Photo from Judith H.’s Google review", review: "Judith H.",
+      photos: [
+        { src: "assets/img/work/job4-1", alt: "Bright kitchen with white doors, glass-fronted wall cabinets and stone-effect worktops" }
       ] }
   ]
 };
