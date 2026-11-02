@@ -67,6 +67,8 @@ window.REFACE = {
       text: "Our experience of working with Reface has been absolutely outstanding. From the outset, their communication was clear, regular and very helpful. As we were on a fairly tight timeline, they did their very best to facilitate this, even fitting the kitchen a week early. The units are smart, good quality and have given the effect of a ‘new’ kitchen at a fraction of the cost. The fitters did an excellent job, with everything left clean and tidy. Based on our experience, I would definitely recommend using Reface - thanks to all the team for an excellent service." },
     { name: "Karen B.", rating: 5, date: "Google review, 2025", room: "Kitchen",
       text: "My husband and I decided we wanted a new kitchen, but didn't want to pay the prices for a brand new back to brick kitchen, so we visited reface in South Shields. We spoke with both Kev and Neil. They helped us choose benches, flooring, cupboards, colours etc. they were very helpful and patient with us. Our kitchen was finished today and we're absolutely over the moon with every single thing. The guys that came to do removal of cupboards, plasterer, electrician and the actual fitters were amazing, every one of them. Very polite and friendly. I would recommend Reface to anyone - you won't regret it" },
+    { name: "Ethan P.", rating: 5, date: "Google review, 2025", room: "Kitchen",
+      text: "I couldn’t recommend the guys at Reface enough. They’ve completely transformed our kitchen and they even came back to add a breakfast bar at a later date once we decided that’s what we wanted! Kev and Nick’s communication is second to none, they managed to squeeze us in during a hectic Christmas period and ensured everything ran smoothly. The lads who come out to fit are extremely friendly and efficient. Couldn’t be happier" },
     { name: "Judith H.", rating: 5, date: "Google review, 2025", room: "Kitchen",
       text: "Love love love our new kitchen, such a great transformation it looks brighter with a modern look.\nThe service we received from Kev and Neil was excellent from start to finish, very professional but relaxed and nothing was a problem, kept us up to date with regular office WhatsApp messages.\nThe fitters did a fantastic job and only took two days to fit the new doors and worktops, great workmanship and very tidy.\nWe will definitely recommend Re-face to others." }
   ],
@@ -101,6 +103,15 @@ window.REFACE = {
         { src: "assets/img/work/job1-5", alt: "Bathroom with a navy wall-hung vanity unit and grey wall panels" },
         { src: "assets/img/work/job1-6", alt: "Bath with a navy bath panel beside the navy vanity unit" },
         { src: "assets/img/work/job1-7", alt: "Bath with a glass shower screen, rainfall shower and chrome towel rail" }
+      ] },
+    { title: "Shaker kitchen with breakfast bar", note: "The breakfast bar was added later, when the customer decided they wanted one", wide: true,
+      credit: "Photos from Ethan P.’s Google review", review: "Ethan P.",
+      photos: [
+        { src: "assets/img/work/job6-1", alt: "Long run of dark shaker units with lights underneath and wood-effect worktops" },
+        { src: "assets/img/work/job6-2", alt: "The whole kitchen, from the dark shaker units to the front door" },
+        { src: "assets/img/work/job6-3", alt: "Dark shaker wall units, wood-effect worktop and a black cooker hood" },
+        { src: "assets/img/work/job6-4", alt: "L-shaped kitchen with dark shaker units and a sink under the window" },
+        { src: "assets/img/work/job6-5", alt: "The breakfast bar with two stools" }
       ] },
     { title: "Fitted bedroom", note: "New doors and wardrobe surfaces",
       credit: "Photos from Robert’s Google review", review: "Robert",
