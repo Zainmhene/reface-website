@@ -26,12 +26,11 @@ The email and phone-line hours come from refacegroup.co.uk; the opening hours an
 ## Before it goes live (checklist)
 
 1. **Reface approves the site.**
-2. **Google rating:** the overall star rating and number of reviews, for `googleRating` and `googleReviewCount` (11 reviews are in).
-3. **Permission for the job photos:** the gallery photos came from customers' Google reviews (Lynne J., Karen B.,
+2. **Permission for the job photos:** the gallery photos came from customers' Google reviews (Lynne J., Karen B.,
    Jacqueline S., Ethan P., Robert, Christine F., Judith H.). Reface should check they're happy for them to be used, or send their own photos of those jobs.
-4. **More before & after photos** of real Reface jobs (one job has them so far). Same angle, before and after.
-5. **Enquiries by email:** create a free form at formspree.io and paste its URL into `form.endpoint`. Without it, the form opens WhatsApp.
-6. **Let Google find it:** set `PREVIEW = False` in `tools/pages/parts.py` and run `python3 tools/pages/build.py`.
+3. **More before & after photos** of real Reface jobs (one job has them so far). Same angle, before and after.
+4. **Enquiries by email:** create a free form at formspree.io and paste its URL into `form.endpoint`. Without it, the form opens WhatsApp.
+5. **Let Google find it:** set `PREVIEW = False` in `tools/pages/parts.py` and run `python3 tools/pages/build.py`.
 
 ## Share a link (GitHub Pages)
 

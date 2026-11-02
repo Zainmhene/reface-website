@@ -74,8 +74,9 @@ window.REFACE = {
     { name: "Judith H.", rating: 5, date: "Google review, 2025", room: "Kitchen",
       text: "Love love love our new kitchen, such a great transformation it looks brighter with a modern look.\nThe service we received from Kev and Neil was excellent from start to finish, very professional but relaxed and nothing was a problem, kept us up to date with regular office WhatsApp messages.\nThe fitters did a fantastic job and only took two days to fit the new doors and worktops, great workmanship and very tidy.\nWe will definitely recommend Re-face to others." }
   ],
-  googleRating: null,      // e.g. 4.9  (TODO: overall rating from the Google listing)
-  googleReviewCount: null, // e.g. 87   (TODO: number of reviews from the Google listing)
+  // From the Google listing (checked 2 November 2026). Update the count now and then as new reviews come in.
+  googleRating: "5.0",
+  googleReviewCount: 173,
 
   /* OUR WORK (gallery page) — real Reface jobs only. Two kinds:
      1. Before & after: put both photos in assets/img/work/ (same size and angle works best), then add:

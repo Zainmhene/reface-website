@@ -15,7 +15,7 @@ body = f'''
       <a class="btn btn-whatsapp" data-wa href="https://wa.me/447457403407">{I["wa"]} Get a free Photoquote</a>
       <a class="btn btn-outline-light" href="contact.html">Contact us</a>
     </div>
-    <a class="hero-rating" data-google href="https://share.google/85vLoGir77iD04as1"><span class="stars" aria-hidden="true">★★★★★</span> <u>Read our Google reviews</u></a>
+    <a class="hero-rating" data-google href="https://share.google/85vLoGir77iD04as1"><span class="stars" aria-hidden="true">★★★★★</span> <u data-rating-text>Read our Google reviews</u></a>
   </div>
 </section>
 

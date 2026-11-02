@@ -43,7 +43,7 @@ Keep it separate from Zain's personal website, TSUGI and other client projects. 
   Jacqueline's bathroom photo is also on the home page "Fitted bathrooms" card.
 - Reviews: 11 real Google reviews (all 5 stars), word for word including the reviewers' own typos; surnames shortened.
   The first three in `config.js` show on the home page (one kitchen, one bedroom, one kitchen & bathroom). Long ones get "Read more".
-  The overall Google rating and review count are still unknown, so no summary line shows yet.
+  Google rating 5.0 from 173 reviews (2 Nov 2026) is in `config.js`; it shows in the home hero and above the reviews. Update the count now and then.
 - `PREVIEW = True` in `tools/pages/parts.py` adds a noindex tag so search engines ignore the site until launch.
 
 ## Brand
@@ -58,8 +58,8 @@ Montserrat 800 for the "reface" wordmark. Mobile-first: most visitors are on pho
   into `js/config.js`. Until then the site shows a "Read our Google reviews" card.
 - Before & after photos must be **real Reface jobs**. Never use brochure or AI images there. Any AI image elsewhere must be labelled.
 - Email (info@refacegroup.co.uk) and phone-line hours (Mon–Fri 9–5, Sat 10–3) come from their current website;
-  opening hours (Mon–Thu 10–4, Fri 9–4, Sat 10–2) from Google. Both are shown, labelled. (Their WhatsApp profile says Monday 9–4,
-  so the sources disagree on Mondays; ask Reface.)
+  opening hours (Mon–Thu 10–4, Fri 9–4, Sat 10–2) from Google (re-checked 2 Nov 2026). Both are shown, labelled.
+  (Their WhatsApp Business profile says Monday 9–4; the site follows Google.)
 - Phone (calls): the landline (0191) 456 3718. WhatsApp (every Photoquote button): 07457 403407, Reface's verified
   WhatsApp Business account. Don't mix them up.
 - Before launch, confirm with Reface: form endpoint, permission to use the customers' job photos, and that they approve the site.
