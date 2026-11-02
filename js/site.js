@@ -73,6 +73,22 @@
     document.addEventListener("keydown", (e) => { if (e.key === "Escape" && menu.classList.contains("open")) close(); });
   }
 
+  /* ---------- Home hero: the photo moves a little slower than the page ---------- */
+  function initParallax() {
+    const pic = $(".hero-still picture");
+    if (!pic || reduceMotion) return;
+    const hero = pic.parentElement;
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      const y = window.scrollY;
+      if (y > hero.offsetHeight) return;
+      pic.style.transform = `translate3d(0, ${(y * 0.3).toFixed(1)}px, 0)`;
+    };
+    window.addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    update();
+  }
+
   /* ---------- Fade sections in as you scroll ---------- */
   function initReveal() {
     const els = $$("[data-reveal]");
@@ -252,5 +268,6 @@
     initBeforeAfter();
     initForms();
     initReveal();
+    initParallax();
   });
 })();

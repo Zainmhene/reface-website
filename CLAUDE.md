@@ -13,8 +13,16 @@ Keep it separate from Zain's personal website, TSUGI and other client projects. 
 - The client asked for a **basic, budget-friendly site** to start: "a bit of information about what we offer with a link
   to Photoquote service and Google reviews, pages for before and after gallery, testimonials and contact page".
   So it is 4 pages: `index.html` (home), `gallery.html` (before & after), `reviews.html` (testimonials), `contact.html`.
-  Don't add pages or sections back without asking. Bigger features (colour tools, door designer, price guide, AI visualiser,
+  Zain didn't want it too basic, so the home page keeps some high-end touches: the **Colour Studio** and animation
+  (see below). Don't add pages or sections back without asking. Other features (door designer, price guide, AI visualiser,
   video hero) were built earlier and are in git history if the client wants to grow it.
+- Home: still photo hero (eases in, words rise in, gentle parallax), What we offer, Colour Studio, Photoquote, Reviews, CTA.
+- Colour Studio (`js/studio.js`, home only): Kitchen (Shaker / Handleless), Bedroom and Bathroom tabs, round colour dots on
+  the photo; tap or swipe to wipe in the new colour. The first time it scrolls into view it plays one slow wipe so people
+  see it changes. Its "Free Photoquote in this colour" button opens WhatsApp with the room and colour filled in.
+  Photos in `assets/img/studio/` are brochure photos recoloured with the real brochure colours (made by `tools/images/recolour.py`,
+  in git history). The bathroom photo is AI-made (no Reface bathroom photos yet) and is labelled as a visualisation;
+  swap in a real job photo when Reface sends one. Oak swatch tiles are in `assets/img/swatches/`.
 - Plain HTML, CSS and JavaScript. No build step needed to host it (GitHub Pages or any static host).
 - The HTML pages are **generated** by `python3 tools/pages/build.py` from `tools/pages/` (shared head/header/footer in
   `parts.py`, the page title band and enquiry block in `blocks.py`, one file per page in `tools/pages/pages/`).
@@ -24,8 +32,8 @@ Keep it separate from Zain's personal website, TSUGI and other client projects. 
 - Photoquote = customers send photos of their room on WhatsApp and get a price back (their site: "Do you use WhatsApp?
   Then ask about our absolutely FREE Photoquote Service"). Every "Free Photoquote" button
   opens WhatsApp with `photoquoteMessage` from config.
-- Images: `assets/img/home/` (still hero from the supplier brochure, two service photos), `assets/img/work/` for
-  before & after photos (empty until Reface sends real job photos). No AI images.
+- Images: `assets/img/home/` (still hero from the supplier brochure, two service photos), `assets/img/studio/` (Colour Studio),
+  `assets/img/work/` for before & after photos (empty until Reface sends real job photos).
 - `PREVIEW = True` in `tools/pages/parts.py` adds a noindex tag so search engines ignore the site until launch.
 
 ## Brand
@@ -37,7 +45,7 @@ Montserrat 800 for the "reface" wordmark. Mobile-first: most visitors are on pho
 
 - **Never invent reviews, prices, stats, awards or guarantees.** Reviews must be pasted word for word from Google
   into `js/config.js`. Until then the site shows a "Read our Google reviews" card.
-- Before & after photos must be **real Reface jobs**. Never use brochure or AI images there.
+- Before & after photos must be **real Reface jobs**. Never use brochure or AI images there. Any AI image elsewhere must be labelled.
 - Email (info@refacegroup.co.uk) and phone-line hours (Mon–Fri 9–5, Sat 10–3) come from their current website;
   opening hours (Mon–Thu 10–4, Fri 9–4, Sat 10–2) from Google. Both are shown, labelled. The WhatsApp number is still unconfirmed.
 - Before launch, confirm with Reface: WhatsApp number, form endpoint, and that they approve the site.

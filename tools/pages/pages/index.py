@@ -43,7 +43,41 @@ body = f'''
   </div>
 </section>
 
-<section class="section bg-navy" id="photoquote">
+<section class="section bg-navy" id="studio">
+  <div class="container">
+    <div class="section-head split">
+      <div><p class="eyebrow" data-reveal>Colour Studio</p><h2 data-reveal>Pick a room. <em>Tap a colour.</em></h2></div>
+      <p class="lead" data-reveal>Rooms from our range in our real colours. Tap a colour on the photo, or swipe across it, and watch the room change.</p>
+    </div>
+    <div class="cs" data-studio data-reveal>
+      <div class="cs-bar">
+        <div class="cs-tabs" role="tablist" aria-label="Choose a room">
+          <button type="button" role="tab" aria-selected="true" data-room="kitchen">Kitchen</button>
+          <button type="button" role="tab" aria-selected="false" data-room="bedroom">Bedroom</button>
+          <button type="button" role="tab" aria-selected="false" data-room="bathroom">Bathroom</button>
+        </div>
+        <div class="cs-styles" aria-label="Choose a style"></div>
+      </div>
+      <div class="cs-stage" tabindex="0" aria-label="Room preview. Swipe or use the arrow keys to change the colour">
+        <img class="cs-a" src="assets/img/studio/hero-parisian-blue-oak-1600.webp" alt="Kitchen in Parisian Blue Oak" width="1600" height="1002" loading="lazy">
+        <img class="cs-b" alt="" width="1600" height="1002" aria-hidden="true">
+        <div class="cs-line"></div>
+        <div class="cs-label"><span class="cs-range">Vinyl · Alnwick door</span><b class="cs-name">Parisian Blue Oak</b></div>
+        <div class="cs-dock">
+          <span class="cs-hint">Tap a colour</span>
+          <div class="cs-dots" role="radiogroup" aria-label="Colours"></div>
+        </div>
+      </div>
+      <div class="cs-foot">
+        <p class="cs-note"></p>
+        <a class="btn btn-whatsapp cs-cta" href="https://wa.me/441914563718" target="_blank" rel="noopener">{I["wa"]} Free Photoquote in this colour</a>
+      </div>
+      <p class="studio-disclaimer">Colours are applied digitally to brochure photography to give you an idea of the finish. Screens vary, so ask to see real samples.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="photoquote">
   <div class="container pq">
     <div>
       <p class="eyebrow" data-reveal>Free Photoquote</p>
@@ -93,4 +127,4 @@ LD = '''<script type="application/ld+json">{"@context":"https://schema.org","@ty
 
 def build():
     return head("Reface | Kitchen Makeovers, Fitted Bedrooms & Bathrooms in South Shields",
-                "Kitchen makeovers, fitted bedrooms and fitted bathrooms in South Shields. Send a photo on WhatsApp for a free Photoquote.", LD) + header("index.html") + body + footer()
+                "Kitchen makeovers, fitted bedrooms and fitted bathrooms in South Shields. Send a photo on WhatsApp for a free Photoquote.", LD) + header("index.html") + body + footer('<script src="js/studio.js"></script>')

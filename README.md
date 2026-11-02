@@ -7,7 +7,7 @@ Plain HTML, CSS and JavaScript, so it can be hosted for free (GitHub Pages).
 
 | Page | What it shows |
 | --- | --- |
-| `index.html` | Home: still photo hero, what we offer, how a free Photoquote works, Google reviews, contact links. |
+| `index.html` | Home: animated still photo hero, what we offer, **Colour Studio** (tap a colour and the room changes), how a free Photoquote works, Google reviews, contact links. |
 | `gallery.html` | Before & after photos with a drag slider on each. |
 | `reviews.html` | Testimonials (real Google reviews) and a link to all reviews on Google. |
 | `contact.html` | Phone, WhatsApp, address, opening hours and an enquiry form. |
