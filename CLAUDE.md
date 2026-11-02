@@ -23,6 +23,12 @@ Keep it separate from Zain's personal website, TSUGI and other client projects. 
   Photos in `assets/img/studio/` are brochure photos recoloured with the real brochure colours (made by `tools/images/recolour.py`,
   in git history). The bathroom photo is AI-made and labelled as a visualisation; it
   could be swapped for a real one (Reface now has real bathroom jobs, see the gallery). Oak swatch tiles are in `assets/img/swatches/`.
+  Speed (it used to lag): a tap shows the small 900px photo at once and swaps in the 1600px one when it arrives; other colours
+  download one at a time in the background (small ones first), starting about two screens before the section, and a tap
+  cancels the background download so it gets the whole connection. Taps during a wipe are queued (last one wins). The wipe
+  moves with transforms (Web Animations), not clip-path, so phones animate it smoothly.
+- `build.py` adds a version stamp to every CSS/JS link (`site.css?v=…`, from the file's contents), so after an update phones
+  fetch the new files at once instead of a saved copy (GitHub Pages lets browsers keep files for 10 minutes).
 - Plain HTML, CSS and JavaScript. No build step needed to host it (GitHub Pages or any static host).
 - The HTML pages are **generated** by `python3 tools/pages/build.py` from `tools/pages/` (shared head/header/footer in
   `parts.py`, the page title band and enquiry block in `blocks.py`, one file per page in `tools/pages/pages/`).

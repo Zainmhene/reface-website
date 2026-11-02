@@ -416,10 +416,14 @@ div.service-card { cursor: default; }
 .cs-stage { position: relative; border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 4 / 5; background: #1b2846; touch-action: pan-y; user-select: none; -webkit-user-select: none; box-shadow: var(--shadow-lg); }
 @media (min-width: 700px) { .cs-stage { aspect-ratio: 16 / 9.6; } }
 .cs-stage img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: var(--pos, 70% 50%); pointer-events: none; -webkit-user-drag: none; transition: opacity .35s var(--ease); }
-.cs-stage .cs-b { clip-path: inset(0 0 0 100%); }
-.cs-stage .cs-b:not([src]) { visibility: hidden; }
+.cs-wipe { position: absolute; inset: 0; overflow: hidden; visibility: hidden; pointer-events: none; }
+.cs-wipe.on { visibility: visible; }
+.cs-wipe, .cs-wipe .cs-b { will-change: transform; }
 .cs-stage.switching img { opacity: .2; }
-.cs-line { position: absolute; top: 0; bottom: 0; left: 0; width: 2px; margin-left: -1px; background: #fff; box-shadow: 0 0 18px rgba(0, 0, 0, .35); opacity: 0; pointer-events: none; }
+.cs-line { position: absolute; top: 0; bottom: 0; left: 0; width: 2px; background: #fff; box-shadow: 0 0 18px rgba(0, 0, 0, .35); opacity: 0; pointer-events: none; }
+.cs-wipe.from-left .cs-line { left: auto; right: 0; }
+.cs-dot.loading { animation: cs-pulse .9s ease-in-out infinite; }
+@keyframes cs-pulse { 50% { box-shadow: 0 0 0 3px rgba(10, 20, 44, .65), 0 0 0 7px rgba(217, 187, 135, .55); } }
 .cs-label { position: absolute; left: 14px; top: 14px; z-index: 2; display: grid; gap: 2px; padding: 9px 16px; border-radius: 16px; color: #fff; background: rgba(10, 20, 44, .55); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, .18); }
 .cs-range { font-size: .66rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--brass-light); }
 .cs-name { font-family: var(--font-display); font-weight: 400; font-size: 1.35rem; line-height: 1.1; }

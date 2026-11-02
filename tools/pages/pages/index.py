@@ -60,9 +60,8 @@ body = f'''
         <div class="cs-styles" aria-label="Choose a style"></div>
       </div>
       <div class="cs-stage" tabindex="0" aria-label="Room preview. Swipe or use the arrow keys to change the colour">
-        <img class="cs-a" src="assets/img/studio/hero-parisian-blue-oak-1600.webp" alt="Kitchen in Parisian Blue Oak" width="1600" height="1002" loading="lazy">
-        <img class="cs-b" alt="" width="1600" height="1002" aria-hidden="true">
-        <div class="cs-line"></div>
+        <img class="cs-a" src="assets/img/studio/hero-parisian-blue-oak-900.webp" alt="Kitchen in Parisian Blue Oak" width="1600" height="1002" loading="lazy">
+        <div class="cs-wipe" aria-hidden="true"><img class="cs-b" alt="" width="1600" height="1002"><div class="cs-line"></div></div>
         <div class="cs-label"><span class="cs-range">Vinyl · Alnwick door</span><b class="cs-name">Parisian Blue Oak</b></div>
         <div class="cs-dock">
           <span class="cs-hint">Tap a colour</span>
