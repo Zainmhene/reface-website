@@ -23,9 +23,12 @@ Keep it separate from Zain's personal website, TSUGI and other client projects. 
   Photos in `assets/img/studio/` are brochure photos recoloured with the real brochure colours (made by `tools/images/recolour.py`,
   in git history). The bathroom photo is AI-made and labelled as a visualisation; it
   could be swapped for a real one (Reface now has real bathroom jobs, see the gallery). Oak swatch tiles are in `assets/img/swatches/`.
-  Speed (it used to lag): a tap shows the small 900px photo at once and swaps in the 1600px one when it arrives; other colours
-  download one at a time in the background (small ones first), starting about two screens before the section, and a tap
-  cancels the background download so it gets the whole connection. Taps during a wipe are queued (last one wins). The wipe
+  Handleless photos (`kitchen-*`) were remade from the brochure photo (Kitchen.pdf page 8) upscaled to 2K in Higgsfield, then
+  recoloured with `recolour.py` (oven glass, sink and sockets excluded from the mask); the old ones were blurry and blocky.
+  On phones the studio photo is square (1:1). No backdrop blur on the labels over the photo (it made the slide stutter on iPhones).
+  Speed (it used to lag): a tap shows the small 900px photo at once and swaps in the 1600px one when it arrives; then the other
+  colours download one at a time in the background (small ones, then the first photo of each other room/style, then sharp ones),
+  starting about two screens before the section, and a tap cancels the background download so it gets the whole connection. Taps during a wipe are queued (last one wins). The wipe
   moves with transforms (Web Animations), not clip-path, so phones animate it smoothly.
 - `build.py` adds a version stamp to every CSS/JS link (`site.css?v=…`, from the file's contents), so after an update phones
   fetch the new files at once instead of a saved copy (GitHub Pages lets browsers keep files for 10 minutes).

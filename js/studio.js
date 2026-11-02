@@ -118,11 +118,13 @@
     function preloadAround() {
       const s = style(), n = s.colours.length, order = [];
       for (let d = 1; d < n; d++) order.push((idx + d) % n, (idx - d + n) % n);
-      const sharp = sharpNeeded();
+      const sharp = sharpNeeded(), near = [...new Set(order)];
+      const firstOfOthers = Object.keys(STUDIO).flatMap((r) => STUDIO[r]).filter((st) => st !== s).map((st) => url(st, st.colours[0], sharp ? 1600 : 900));
       queue = [
-        ...[...new Set(order)].map((k) => url(s, s.colours[k], 900)), // every other colour, small (so taps are quick)
-        ...(sharp ? [url(s, s.colours[idx], 1600)] : []),       // then the photo on screen, sharp
-        ...(sharp ? [1, -1, 2, -2].map((d) => url(s, s.colours[(idx + d + n) % n], 1600)) : []) // then its neighbours, sharp
+        ...(sharp ? [url(s, s.colours[idx], 1600)] : []),                       // the photo on screen, sharp (first, so it looks crisp)
+        ...near.map((k) => url(s, s.colours[k], 900)),                          // every other colour, small (so any tap is quick)
+        ...firstOfOthers,                                                       // the other rooms/styles, so switching is instant
+        ...(sharp ? near.map((k) => url(s, s.colours[k], 1600)) : [])          // then every colour, sharp, nearest first
       ];
       pump(); swapSharp();
     }
@@ -168,8 +170,9 @@
       stage.style.setProperty("--pos", s.pos);
       const src = best(s, c);
       busy = true;
-      if (!ready.has(src)) stage.classList.add("switching");
+      const dim = setTimeout(() => stage.classList.add("switching"), 150); // only if it takes a moment
       await fgLoad(src);
+      clearTimeout(dim);
       a.src = src; setAlt(a, c);
       try { await a.decode(); } catch (e) { /* ignore */ }
       stage.classList.remove("switching");

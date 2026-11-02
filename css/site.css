@@ -241,7 +241,7 @@ body.menu-open { overflow: hidden; }
   background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2316306a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 6l-6 6 6 6M15 6l6 6-6 6'/%3E%3C/svg%3E") center / 22px no-repeat;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
-.ba-label { position: absolute; bottom: 14px; padding: 6px 12px; border-radius: 999px; background: rgba(10, 20, 44, 0.6); color: #fff; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; backdrop-filter: blur(8px); }
+.ba-label { position: absolute; bottom: 14px; padding: 6px 12px; border-radius: 999px; background: rgba(10, 20, 44, 0.72); color: #fff; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
 .ba-label.l { left: 14px; } .ba-label.r { right: 14px; }
 .ba input[type="range"] { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; margin: 0; cursor: ew-resize; touch-action: pan-y; }
 
@@ -413,7 +413,7 @@ div.service-card { cursor: default; }
 .cs-styles button { min-height: 36px; padding: 0 14px; font-size: .88rem; }
 .cs-tabs button[aria-selected="true"], .cs-styles button[aria-pressed="true"] { background: #fff; color: var(--navy-deep); }
 .cs-styles:empty { display: none; }
-.cs-stage { position: relative; border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 4 / 5; background: #1b2846; touch-action: pan-y; user-select: none; -webkit-user-select: none; box-shadow: var(--shadow-lg); }
+.cs-stage { position: relative; border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 1 / 1; background: #1b2846; touch-action: pan-y; user-select: none; -webkit-user-select: none; box-shadow: var(--shadow-lg); }
 @media (min-width: 700px) { .cs-stage { aspect-ratio: 16 / 9.6; } }
 .cs-stage img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: var(--pos, 70% 50%); pointer-events: none; -webkit-user-drag: none; transition: opacity .35s var(--ease); }
 .cs-wipe { position: absolute; inset: 0; overflow: hidden; visibility: hidden; pointer-events: none; }
@@ -424,14 +424,14 @@ div.service-card { cursor: default; }
 .cs-wipe.from-left .cs-line { left: auto; right: 0; }
 .cs-dot.loading { animation: cs-pulse .9s ease-in-out infinite; }
 @keyframes cs-pulse { 50% { box-shadow: 0 0 0 3px rgba(10, 20, 44, .65), 0 0 0 7px rgba(217, 187, 135, .55); } }
-.cs-label { position: absolute; left: 14px; top: 14px; z-index: 2; display: grid; gap: 2px; padding: 9px 16px; border-radius: 16px; color: #fff; background: rgba(10, 20, 44, .55); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, .18); }
+.cs-label { position: absolute; left: 14px; top: 14px; z-index: 2; display: grid; gap: 2px; padding: 9px 16px; border-radius: 16px; color: #fff; background: rgba(10, 20, 44, .72); border: 1px solid rgba(255, 255, 255, .18); }
 .cs-range { font-size: .66rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--brass-light); }
 .cs-name { font-family: var(--font-display); font-weight: 400; font-size: 1.35rem; line-height: 1.1; }
 .cs-dock { position: absolute; left: 12px; right: 12px; bottom: 12px; z-index: 2; display: grid; justify-items: center; gap: 8px; pointer-events: none; }
 .cs-hint { padding: 5px 12px; border-radius: 999px; background: rgba(255, 255, 255, .92); color: var(--navy-deep); font-size: .74rem; font-weight: 800; letter-spacing: .04em; transition: opacity .4s; animation: cs-bob 2.4s var(--ease) infinite; }
 .cs-hint.gone { opacity: 0; animation: none; }
 @keyframes cs-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
-.cs-dots { pointer-events: auto; display: flex; gap: 10px; max-width: 100%; overflow-x: auto; padding: 10px 14px; border-radius: 999px; background: rgba(10, 20, 44, .58); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, .16); scrollbar-width: none; scroll-snap-type: x proximity; }
+.cs-dots { pointer-events: auto; display: flex; gap: 10px; max-width: 100%; overflow-x: auto; padding: 10px 14px; border-radius: 999px; background: rgba(10, 20, 44, .74); border: 1px solid rgba(255, 255, 255, .16); scrollbar-width: none; scroll-snap-type: x proximity; }
 .cs-dots::-webkit-scrollbar { display: none; }
 .cs-dot { flex: none; width: 34px; height: 34px; padding: 0; border-radius: 50%; border: 2px solid rgba(255, 255, 255, .8); background: var(--c) center / cover; box-shadow: inset 0 -5px 10px rgba(0, 0, 0, .18); scroll-snap-align: center; cursor: pointer; transition: transform .25s var(--ease), box-shadow .25s; }
 .cs-dot.gloss { background-image: linear-gradient(135deg, rgba(255, 255, 255, .55), rgba(255, 255, 255, 0) 45%); }
