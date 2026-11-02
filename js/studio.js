@@ -7,7 +7,6 @@
   "use strict";
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => Array.from(el.querySelectorAll(s));
-  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const CFG = window.REFACE || {};
@@ -55,20 +54,89 @@
   function initStudio() {
     const root = $("[data-studio]");
     if (!root) return;
-    const stage = $(".cs-stage", root), a = $(".cs-a", stage), b = $(".cs-b", stage), line = $(".cs-line", stage);
+    const stage = $(".cs-stage", root), a = $(".cs-a", stage), wrap = $(".cs-wipe", stage), b = $(".cs-b", stage), line = $(".cs-line", stage);
     const dots = $(".cs-dots", root), stylesEl = $(".cs-styles", root), hint = $(".cs-hint", root);
     const tabs = $$(".cs-tabs button", root);
-    let room = "kitchen", idx = 0, busy = false, touched = false;
+    let room = "kitchen", idx = 0, busy = false, touched = false, next = null, started = false;
     const styleIdx = { kitchen: 0, bedroom: 0, bathroom: 0 };
     const style = () => STUDIO[room][styleIdx[room]];
     const url = (s, c, w) => `${s.base}${c.id}-${w}.webp`;
-    const srcset = (s, c) => `${url(s, c, 900)} 900w, ${url(s, c, 1600)} 1600w`;
-    const SIZES = "(min-width: 1240px) 1240px, 100vw";
-    const setImg = (img, s, c) => {
-      img.sizes = SIZES; img.srcset = srcset(s, c); img.src = url(s, c, 1600);
-      img.alt = `${ROOM[room][0].toUpperCase() + ROOM[room].slice(1)} in ${c.name}`;
-    };
-    const preload = (s) => s.colours.forEach((c) => { const im = new Image(); im.sizes = SIZES; im.srcset = srcset(s, c); im.src = url(s, c, 1600); });
+    const setAlt = (img, c) => (img.alt = `${ROOM[room][0].toUpperCase() + ROOM[room].slice(1)} in ${c.name}`);
+    const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+
+    /* ---- Loading photos (the reason it used to lag) ----
+       Each colour has a small photo (900px, ~20–50 KB) and a sharp one (1600px, ~50–120 KB).
+       - A tap shows the small one straight away (it downloads in a blink), then the sharp one
+         is swapped in quietly once it has arrived.
+       - Other colours download one at a time in the background, nearest colours first,
+         and pause whenever the visitor taps, so a tap never waits in a queue.
+       - Nothing downloads until the section is close to the screen. */
+    const ready = new Set();
+    const load = (src) => new Promise((res) => {
+      if (ready.has(src)) return res(src);
+      const im = new Image();
+      im.onload = () => { ready.add(src); res(src); };
+      im.onerror = () => res(src);
+      im.src = src;
+    });
+    const sharpNeeded = () => Math.max(stage.clientWidth, stage.clientHeight * 1.6) * (window.devicePixelRatio || 1) > 1000;
+    const best = (s, c) => (ready.has(url(s, c, 1600)) ? url(s, c, 1600) : url(s, c, 900));
+    const same = (s, c) => style() === s && s.colours[idx] === c;
+
+    // Background downloads: one at a time. A tap cancels the one in progress (it's put back in the
+    // queue) so the photo the visitor asked for gets the whole connection.
+    let queue = [], pumping = false, bg = null, fg = 0;
+    function bgLoad(src) {
+      return new Promise((res) => {
+        const im = new Image();
+        bg = { im, src, res };
+        im.onload = () => { ready.add(src); bg = null; res(); };
+        im.onerror = () => { bg = null; res(); };
+        im.src = src;
+      });
+    }
+    function pauseBg(keep) {
+      if (!bg || bg.src === keep) return;
+      const { im, src, res } = bg; bg = null;
+      im.onload = im.onerror = null; im.src = ""; // stops the download
+      queue.unshift(src); res();
+    }
+    async function fgLoad(src) {
+      fg++; pauseBg(src);
+      await load(src);
+      fg--; if (!fg) pump();
+      return src;
+    }
+    // Once the sharp version of the photo on screen has arrived, swap it in quietly
+    async function swapSharp() {
+      const s = style(), c = s.colours[idx], big = url(s, c, 1600);
+      if (busy || !ready.has(big) || a.getAttribute("src") === big) return;
+      const im = new Image(); im.src = big;
+      try { await im.decode(); } catch (e) { /* ignore */ }
+      if (same(s, c) && !busy) a.src = big;
+    }
+    function preloadAround() {
+      const s = style(), n = s.colours.length, order = [];
+      for (let d = 1; d < n; d++) order.push((idx + d) % n, (idx - d + n) % n);
+      const sharp = sharpNeeded();
+      queue = [
+        ...[...new Set(order)].map((k) => url(s, s.colours[k], 900)), // every other colour, small (so taps are quick)
+        ...(sharp ? [url(s, s.colours[idx], 1600)] : []),       // then the photo on screen, sharp
+        ...(sharp ? [1, -1, 2, -2].map((d) => url(s, s.colours[(idx + d + n) % n], 1600)) : []) // then its neighbours, sharp
+      ];
+      pump(); swapSharp();
+    }
+    async function pump() {
+      if (pumping) return;
+      pumping = true;
+      while (queue.length && !fg) {
+        const src = queue.shift();
+        if (!ready.has(src)) { await bgLoad(src); swapSharp(); }
+      }
+      pumping = false;
+    }
+    // Taps that arrive mid-wipe are remembered and played straight after (the last one wins)
+    const runNext = () => { const f = next; next = null; if (f) f(); };
 
     function renderChrome() {
       const s = style();
@@ -93,55 +161,70 @@
       const on = dots.children[idx];
       if (on) dots.scrollTo({ left: on.offsetLeft - dots.clientWidth / 2 + on.clientWidth / 2, behavior: reduceMotion ? "auto" : "smooth" });
     }
-    function showScene() {
-      const s = style();
+
+    // New room or style: show its first colour (small photo first if the sharp one isn't here yet)
+    async function showScene() {
+      const s = style(), c = s.colours[idx];
       stage.style.setProperty("--pos", s.pos);
-      stage.classList.add("switching");
-      setImg(a, s, s.colours[idx]);
-      b.style.clipPath = "inset(0 0 0 100%)";
-      const done = () => stage.classList.remove("switching");
-      a.complete && a.naturalWidth ? done() : a.addEventListener("load", done, { once: true });
-      preload(s);
-    }
-    // The wipe: the new photo is revealed from one side, with a thin light line on its edge
-    const paint = (t, dir) => {
-      if (dir > 0) { b.style.clipPath = `inset(0 0 0 ${((1 - t) * 100).toFixed(2)}%)`; line.style.left = `${(1 - t) * 100}%`; }
-      else { b.style.clipPath = `inset(0 ${((1 - t) * 100).toFixed(2)}% 0 0)`; line.style.left = `${t * 100}%`; }
-      line.style.opacity = t > 0.001 && t < 0.999 ? 1 : 0;
-    };
-    function goTo(k, auto) {
-      const s = style(), n = s.colours.length;
-      k = (k + n) % n;
-      if (busy || k === idx) return;
-      if (!auto && !touched) { touched = true; hint.classList.add("gone"); }
-      const dir = k > idx ? 1 : -1;
-      idx = k; updateLabel();
+      const src = best(s, c);
       busy = true;
-      setImg(b, s, s.colours[k]); paint(0, dir);
-      const finish = async () => {
-        setImg(a, s, s.colours[k]);
-        try { await a.decode(); } catch (e) { /* ignore */ }
-        b.style.clipPath = "inset(0 0 0 100%)"; line.style.opacity = 0; busy = false;
-      };
-      const run = () => {
-        if (reduceMotion) { finish(); return; }
-        const t0 = performance.now(), dur = auto ? 1100 : 650;
-        const tick = (now) => { const p = clamp((now - t0) / dur, 0, 1); paint(1 - Math.pow(1 - p, 3), dir); p < 1 ? requestAnimationFrame(tick) : finish(); };
-        requestAnimationFrame(tick);
-      };
-      b.complete && b.naturalWidth ? run() : b.addEventListener("load", run, { once: true });
+      if (!ready.has(src)) stage.classList.add("switching");
+      await fgLoad(src);
+      a.src = src; setAlt(a, c);
+      try { await a.decode(); } catch (e) { /* ignore */ }
+      stage.classList.remove("switching");
+      busy = false;
+      if (next) return runNext();
+      preloadAround();
     }
 
-    tabs.forEach((t) => t.addEventListener("click", () => {
-      if (t.dataset.room === room || busy) return;
+    // The wipe: the new photo slides in from one side behind a thin light line.
+    // It moves with transforms, which phones animate smoothly on the graphics chip.
+    function wipe(dir, dur) {
+      wrap.classList.toggle("from-left", dir < 0);
+      wrap.classList.add("on");
+      if (reduceMotion || !wrap.animate) return Promise.resolve();
+      const opts = { duration: dur, easing: "cubic-bezier(.22,1,.36,1)", fill: "both" };
+      const w = wrap.animate([{ transform: `translateX(${dir > 0 ? 100 : -100}%)` }, { transform: "translateX(0)" }], opts);
+      const i = b.animate([{ transform: `translateX(${dir > 0 ? -100 : 100}%)` }, { transform: "translateX(0)" }], opts);
+      const l = line.animate([{ opacity: 1 }, { opacity: 1, offset: 0.8 }, { opacity: 0 }], opts);
+      return w.finished.then(() => { w.cancel(); i.cancel(); l.cancel(); }, () => {});
+    }
+
+    async function goTo(k, auto) {
+      const s = style(), n = s.colours.length;
+      k = (k + n) % n;
+      if (busy) { next = () => goTo(k); return; }
+      if (k === idx) return;
+      if (!auto && !touched) { touched = true; hint.classList.add("gone"); }
+      const dir = k > idx ? 1 : -1, c = s.colours[k];
+      idx = k; updateLabel();
+      busy = true;
+      const dot = dots.children[k];
+      const spin = setTimeout(() => dot && dot.classList.add("loading"), 150); // only if it takes a moment
+      const src = await fgLoad(best(s, c));
+      clearTimeout(spin); dot && dot.classList.remove("loading");
+      b.src = src; setAlt(b, c);
+      try { await b.decode(); } catch (e) { /* ignore */ }
+      await wipe(dir, auto ? 1000 : 500);
+      a.src = src; setAlt(a, c);
+      try { await a.decode(); } catch (e) { /* ignore */ }
+      wrap.classList.remove("on");
+      busy = false;
+      if (next) return runNext();
+      preloadAround();
+    }
+
+    const switchTo = (r, k) => {
+      if (busy) { next = () => switchTo(r, k); return; }
       touched = true; hint.classList.add("gone");
-      room = t.dataset.room; idx = 0; renderChrome(); showScene();
-    }));
+      room = r; if (k != null) styleIdx[room] = k;
+      idx = 0; renderChrome(); showScene();
+    };
+    tabs.forEach((t) => t.addEventListener("click", () => { if (t.dataset.room !== room) switchTo(t.dataset.room); }));
     stylesEl.addEventListener("click", (e) => {
-      const btn = e.target.closest("button"); if (!btn || busy) return;
-      const k = +btn.dataset.k; if (k === styleIdx[room]) return;
-      touched = true;
-      styleIdx[room] = k; idx = 0; renderChrome(); showScene();
+      const btn = e.target.closest("button"); if (!btn) return;
+      const k = +btn.dataset.k; if (k !== styleIdx[room]) switchTo(room, k);
     });
     dots.addEventListener("click", (e) => { const d = e.target.closest(".cs-dot"); if (d) goTo(+d.dataset.k); });
     stage.addEventListener("keydown", (e) => { if (e.key === "ArrowRight") goTo(idx + 1); if (e.key === "ArrowLeft") goTo(idx - 1); });
@@ -157,18 +240,26 @@
     ["pointerup", "pointercancel"].forEach((ev) => stage.addEventListener(ev, () => (down = false)));
     stage.addEventListener("dragstart", (e) => e.preventDefault());
 
-    renderChrome(); showScene();
+    renderChrome();
+    stage.style.setProperty("--pos", style().pos);
+    setAlt(a, style().colours[0]);
+    ready.add(a.getAttribute("src")); // the first photo is in the page already (it loads as the section nears)
 
-    // When the studio first comes into view: load the other colours, then play one slow wipe
-    // to show visitors the photo changes. Only once, and never after they've touched it.
-    const io = new IntersectionObserver((en) => {
+    // When the visitor is about two screens away: start the quiet background loading.
+    // When it's properly in view: play one slow wipe to show visitors the photo changes
+    // (only once, and never after they've touched it).
+    const near = new IntersectionObserver((en) => {
+      if (!en[0].isIntersecting || started) return;
+      started = true; near.disconnect();
+      preloadAround();
+    }, { rootMargin: "1500px 0px" }); // about two screens before it
+    near.observe(stage);
+    const seen = new IntersectionObserver((en) => {
       if (!en[0].isIntersecting) return;
-      io.disconnect();
-      STUDIO.kitchen.forEach(preload);
-      setTimeout(() => STUDIO.bedroom.forEach(preload), 2000);
+      seen.disconnect();
       if (!reduceMotion) setTimeout(() => { if (!touched && room === "kitchen" && idx === 0) goTo(3, true); }, 1400);
     }, { threshold: 0.55 });
-    io.observe(stage);
+    seen.observe(stage);
   }
 
   document.addEventListener("DOMContentLoaded", initStudio);
