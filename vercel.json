@@ -1,5 +1,0 @@
-{
-  "functions": {
-    "api/visualise.js": { "maxDuration": 60 }
-  }
-}

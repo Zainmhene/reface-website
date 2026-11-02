@@ -16,7 +16,7 @@ def head(title, desc, extra=""):
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
 <meta property="og:type" content="website">
-<meta property="og:image" content="assets/img/hero/navy-kitchen-1600.webp">
+<meta property="og:image" content="assets/img/home/hero-1600.webp">
 <link rel="icon" href="assets/img/brand/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,13 +32,13 @@ if ("scrollRestoration" in history) history.scrollRestoration = "manual";
 {extra}
 </head>'''
 
-NAV = [("kitchens.html","Kitchens","01"),("bedrooms.html","Bedrooms","02"),("bathrooms.html","Bathrooms","03"),("estimate.html","Price guide","")]
+NAV = [("index.html","Home"),("gallery.html","Before & After"),("reviews.html","Reviews"),("contact.html","Contact")]
 
 BACK = '<a class="back-btn" href="index.html" data-back aria-label="Go back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg><span>Back</span></a>'
 
 def header(active=""):
-    nav = "".join(f'<a href="{h}"{CUR if h==active else ""}>{t}</a>' for h,t,_ in NAV)
-    mnav = "".join(f'<a href="{h}">{t}<span>{n}</span></a>' for h,t,n in NAV) + '<a href="index.html#contact">Contact<span></span></a>'
+    nav = "".join(f'<a href="{h}"{CUR if h==active else ""}>{t}</a>' for h,t in NAV)
+    mnav = "".join(f'<a href="{h}"{CUR if h==active else ""}>{t}</a>' for h,t in NAV)
     return f'''
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -52,7 +52,7 @@ def header(active=""):
     <nav class="nav" aria-label="Main">{nav}</nav>
     <div class="header-actions">
       <a class="icon-btn" data-tel href="tel:+441914563718" aria-label="Call Reface">{I["phone"]}</a>
-      <a class="btn btn-sm header-cta" href="estimate.html">Get a free quote</a>
+      <a class="btn btn-sm btn-whatsapp header-cta" data-wa href="https://wa.me/441914563718">{I["wa"]} Free Photoquote</a>
       <button class="icon-btn menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">{I["menu"]}</button>
     </div>
   </div>
@@ -79,30 +79,28 @@ def footer(scripts=""):
         <div class="btn-row" style="margin-top:18px"><a class="btn btn-sm btn-whatsapp" data-wa href="https://wa.me/441914563718">{I["wa"]} Photoquote</a></div>
       </div>
       <div><h4>Explore</h4><ul>
-        <li><a href="kitchens.html">Kitchen makeovers</a></li><li><a href="bedrooms.html">Fitted bedrooms</a></li><li><a href="bathrooms.html">Fitted bathrooms</a></li>
-        <li><a href="index.html#studio">Colour Studio</a></li><li><a href="visualiser.html">AI Visualiser</a></li><li><a href="estimate.html">Price guide</a></li></ul></div>
+        <li><a href="index.html">Home</a></li><li><a href="gallery.html">Before &amp; After</a></li><li><a href="reviews.html">Reviews</a></li><li><a href="contact.html">Contact</a></li></ul></div>
       <div><h4>Contact</h4><ul>
         <li><a data-tel="text" href="tel:+441914563718">(0191) 456 3718</a></li>
-        <li><a data-mail="text" href="mailto:info@refacegroup.co.uk">info@refacegroup.co.uk</a></li>
+        <li data-mail-row><a data-mail="text" href="#">Email us</a></li>
         <li><a data-wa href="https://wa.me/441914563718">WhatsApp Photoquote</a></li>
-        <li><a href="index.html#contact">Send an enquiry</a></li>
+        <li><a href="contact.html">Send an enquiry</a></li>
         <li><a data-maps href="https://www.google.com/maps/search/?api=1&amp;query=Reface+85+Westoe+Rd+South+Shields+NE33+4LU">Get directions</a></li></ul></div>
       <div><h4>Opening hours</h4><ul class="hours" data-hours>
         <li><span>Monday – Thursday</span><b>10am – 4pm</b></li><li><span>Friday</span><b>9am – 4pm</b></li><li><span>Saturday</span><b>10am – 2pm</b></li><li><span>Sunday</span><b>Closed</b></li></ul></div>
     </div>
     <div class="footer-bottom">
       <span>© <span data-year>2026</span> Reface Group · 85 Westoe Rd, South Shields NE33 4LU</span>
-      <span>Photos show doors from our Classic &amp; Contemporary range. Colours on screen are a guide; ask to see real samples.</span>
+      <span>Kitchen and bedroom photos show doors from our Classic &amp; Contemporary range.</span>
     </div>
   </div>
 </footer>
 <nav class="action-bar" aria-label="Quick contact">
   <a data-tel href="tel:+441914563718">{I["phone"]} Call</a>
   <a class="ab-wa" data-wa href="https://wa.me/441914563718">{I["wa"]} WhatsApp</a>
-  <a class="ab-quote" href="estimate.html">Free quote</a>
+  <a class="ab-quote" href="contact.html">Contact</a>
 </nav>
 <script src="js/config.js"></script>
-<script src="js/catalogue.js"></script>
 <script src="js/site.js"></script>
 {scripts}
 </body>
