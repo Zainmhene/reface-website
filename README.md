@@ -31,6 +31,7 @@ The address, hours and area come from the Reface Google Business listing.
 
 ## Before it goes live (checklist)
 
+0. **Let Google find it.** While Reface reviews it, the site tells search engines to ignore it. At launch, set `PREVIEW = False` in `tools/pages/parts.py` and run `python3 tools/pages/build.py`.
 1. **Reface approves the site.** It's their brand, photos and details.
 2. **WhatsApp number.** `config.js` uses the landline as a placeholder. Get the real WhatsApp number.
 3. **Prices.** The numbers in `config.js` are *placeholders* based on typical UK prices, not Reface's.
@@ -40,6 +41,12 @@ The address, hours and area come from the Reface Google Business listing.
    For proper email delivery, create a free form at formspree.io (or web3forms.com) and paste the endpoint into `form.endpoint`.
 6. **Opening hours.** The site uses the Google listing (Mon–Thu 10–4, Fri 9–4, Sat 10–2). Their old website said Mon–Fri 9–5, Sat 10–3. Confirm which is right.
 7. **Bathroom photos.** Real photos of Reface bathroom jobs would replace the illustration well.
+
+## Share a preview link (GitHub Pages)
+
+Settings → Pages → Source "Deploy from a branch" → Branch `main`, folder `/ (root)` → Save.
+The link is https://zaindstyles.github.io/reface-website/ (ready a minute or two after each change to `main`).
+The AI visualiser needs Vercel; on GitHub Pages it falls back to "send us your photo on WhatsApp".
 
 ## Put it online (Vercel)
 
