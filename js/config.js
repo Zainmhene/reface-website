@@ -69,6 +69,8 @@ window.REFACE = {
       text: "My husband and I decided we wanted a new kitchen, but didn't want to pay the prices for a brand new back to brick kitchen, so we visited reface in South Shields. We spoke with both Kev and Neil. They helped us choose benches, flooring, cupboards, colours etc. they were very helpful and patient with us. Our kitchen was finished today and we're absolutely over the moon with every single thing. The guys that came to do removal of cupboards, plasterer, electrician and the actual fitters were amazing, every one of them. Very polite and friendly. I would recommend Reface to anyone - you won't regret it" },
     { name: "Ethan P.", rating: 5, date: "Google review, 2025", room: "Kitchen",
       text: "I couldn’t recommend the guys at Reface enough. They’ve completely transformed our kitchen and they even came back to add a breakfast bar at a later date once we decided that’s what we wanted! Kev and Nick’s communication is second to none, they managed to squeeze us in during a hectic Christmas period and ensured everything ran smoothly. The lads who come out to fit are extremely friendly and efficient. Couldn’t be happier" },
+    { name: "Lynne J.", rating: 5, date: "Google review, 2025", room: "Quartz worktops",
+      text: "I contacted Reface about replacing my old brown worktops with quartz worktops.\nFrom start to finish I can't fault the experience. Discussing quotes with Neil and the organisation of selecting my new worktops to on the day removal of my old worktops and installation of the new Reface were truly excellent. On the day the old worktops were removed and new ones installed within 3 hours. This was down to Kev who co-ordinated all the necessary sub-contractors and Reface staff and was fantastic throughout. A minor hiccup with an old U-bend that failed on reconnection and the plumber didn't have another in his van was solved by Kev as another Reface employee arrived with a replacement in 20 minutes and the sink was reconnected immediately.\nIn short I wouldn't hesitate in recommending Reface. The experience was everything it should be - but rarely is these days!\nI'm left drooling over my fabulous new quartz worktops which have transformed my kitchen. I just hope I can keep it as decluttered as it is now.\nI've attached photos before (brown worktops) and new (white Calacutta) quartz worktops." },
     { name: "Judith H.", rating: 5, date: "Google review, 2025", room: "Kitchen",
       text: "Love love love our new kitchen, such a great transformation it looks brighter with a modern look.\nThe service we received from Kev and Neil was excellent from start to finish, very professional but relaxed and nothing was a problem, kept us up to date with regular office WhatsApp messages.\nThe fitters did a fantastic job and only took two days to fit the new doors and worktops, great workmanship and very tidy.\nWe will definitely recommend Re-face to others." }
   ],
@@ -80,8 +82,16 @@ window.REFACE = {
         { title: "Kitchen makeover", place: "South Shields", before: "assets/img/work/job2-before.jpg", after: "assets/img/work/job2-after.jpg", note: "New doors in Reed Green" }
      2. Finished photos only: a list of photos (each saved as name-1000.webp and name-500.webp), like the jobs below.
         Add wide: true when the photos are landscape.
+     3. A job with before & after sliders: "pairs", each with before/after names (saved as name-1000.webp and name-500.webp,
+        same size, lined up so the room matches), like the quartz worktops job below. These show first on the page.
         "review" is the name of a review in the list above to show with the photos. */
   work: [
+    { title: "Quartz worktops", note: "Brown worktops replaced with white Calacatta quartz, fitted in 3 hours",
+      credit: "Photos from Lynne J.’s Google review, lined up so you can compare", review: "Lynne J.",
+      pairs: [
+        { before: "assets/img/work/job7-1-before", after: "assets/img/work/job7-1-after", alt: "Cream shaker kitchen with a peninsula" },
+        { before: "assets/img/work/job7-2-before", after: "assets/img/work/job7-2-after", alt: "U-shaped cream shaker kitchen under the window" }
+      ] },
     { title: "Dark grey shaker kitchen", note: "Cupboards, worktops and flooring chosen with Kev and Neil", wide: true,
       credit: "Photos from Karen B.’s Google review", review: "Karen B.",
       photos: [

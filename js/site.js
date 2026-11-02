@@ -129,6 +129,29 @@
     const stars = (n) => "★".repeat(Math.round(n || 5));
     const pairs = list.filter((w) => w.before && w.after);
     const jobs = list.filter((w) => w.photos && w.photos.length);
+    const baJobs = list.filter((w) => w.pairs && w.pairs.length);
+    const reviewHtml = (w) => {
+      const r = w.review != null ? findReview(w.review) : null;
+      return r ? `<figure class="job-review"><div class="stars" aria-label="${esc(r.rating)} out of 5 stars">${stars(r.rating)}</div><blockquote>${reviewText(r.text)}</blockquote><figcaption><b>${esc(r.name)}</b> · Google review</figcaption></figure>` : "";
+    };
+    const slider = (before, after, alt, sizes) => `
+        <div class="ba">
+          <img src="${esc(before)}-1000.webp" srcset="${esc(before)}-500.webp 500w, ${esc(before)}-1000.webp 1000w" sizes="${sizes}" alt="${esc(alt)}, before" loading="lazy" width="1000" height="750">
+          <img class="ba-after" src="${esc(after)}-1000.webp" srcset="${esc(after)}-500.webp 500w, ${esc(after)}-1000.webp 1000w" sizes="${sizes}" alt="${esc(alt)}, after" loading="lazy" width="1000" height="750">
+          <div class="ba-handle"></div>
+          <span class="ba-label l">Before</span><span class="ba-label r">After</span>
+          <input type="range" min="0" max="100" value="50" aria-label="Drag to compare before and after: ${esc(alt)}">
+        </div>`;
+
+    // Before & after jobs: drag the line on each photo to compare
+    const baHtml = baJobs.map((w) => `
+        <article class="job ba-job" data-reveal>
+          <header class="job-head"><p class="eyebrow">Before &amp; after</p><h2>${esc(w.title)}</h2><p class="muted">${esc([w.place, w.note].filter(Boolean).join(" · "))}</p></header>
+          <p class="ba-hint">Drag the line across each photo to see before and after.</p>
+          <div class="ba-pairs">${w.pairs.map((pr) => slider(pr.before, pr.after, pr.alt || w.title, "(min-width: 900px) 600px, 100vw")).join("")}</div>
+          ${reviewHtml(w)}
+          ${w.credit ? `<p class="job-credit">${esc(w.credit)}</p>` : ""}
+        </article>`).join("");
 
     // Finished jobs: one big photo, the rest as a grid; tap any photo to see it bigger
     const jobHtml = jobs.map((w, j) => {
@@ -159,12 +182,12 @@
         <figcaption><b>${esc(w.title)}</b><span>${esc([w.place, w.note].filter(Boolean).join(" · "))}</span></figcaption>
       </figure>`).join("")}</div>` : "";
 
-    const more = pairs.length ? "" : `
+    const more = pairs.length || baJobs.length ? "" : `
       <div class="more-card" data-reveal>
         <div><h3>More before &amp; after photos on the way</h3><p>We're adding photos of recent jobs. You can also see customers' photos on Google.</p></div>
         <div class="btn-row">${google}</div>
       </div>`;
-    box.innerHTML = jobHtml + pairHtml + more;
+    box.innerHTML = baHtml + pairHtml + jobHtml + more;
     initLightbox(jobs);
   }
 
@@ -211,8 +234,28 @@
     $$(".ba").forEach((ba) => {
       const input = $("input[type=range]", ba);
       if (!input) return;
+      let touched = false;
       const set = () => ba.style.setProperty("--x", input.value + "%");
-      input.addEventListener("input", set); set();
+      input.addEventListener("input", () => { touched = true; set(); });
+      ["pointerdown", "keydown", "touchstart"].forEach((ev) => input.addEventListener(ev, () => (touched = true), { passive: true }));
+      set();
+      if (reduceMotion || !("IntersectionObserver" in window)) return;
+      const io = new IntersectionObserver((en) => {
+        if (!en[0].isIntersecting) return;
+        io.disconnect();
+        // 50 → 22 → 78 → 50 over about two seconds
+        const keys = [50, 22, 78, 50], t0 = performance.now() + 500, seg = 700;
+        const ease = (t) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+        const tick = (now) => {
+          if (touched) return;
+          const t = Math.max(0, now - t0), i = Math.min(keys.length - 2, Math.floor(t / seg));
+          const p = Math.min(1, (t - i * seg) / seg);
+          input.value = keys[i] + (keys[i + 1] - keys[i]) * ease(p); set();
+          if (t < seg * (keys.length - 1)) requestAnimationFrame(tick); else { input.value = 50; set(); }
+        };
+        requestAnimationFrame(tick);
+      }, { threshold: 0.6 });
+      io.observe(ba);
     });
   }
 

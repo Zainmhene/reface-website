@@ -549,3 +549,10 @@ div.service-card { cursor: default; }
 .logo-word::after { content: ""; display: inline-block; width: .2em; height: .2em; margin-left: .05em; border-radius: 50%; background: var(--logo-yellow); }
 .site-header .logo-word::after, .mobile-menu .logo-word::after { box-shadow: 0 0 0 1px rgba(0, 32, 125, .12); }
 .logo-tag { text-transform: none; letter-spacing: .06em; font-size: .68rem; }
+
+/* Before & after jobs (gallery): two sliders side by side on bigger screens */
+.ba-pairs { display: grid; gap: 14px; }
+@media (min-width: 860px) { .ba-pairs { grid-template-columns: 1fr 1fr; gap: 18px; } }
+.ba-pairs .ba { aspect-ratio: 4 / 3; }
+.ba-pairs .ba img { object-position: 50% 50%; }
+.ba-hint { margin: -8px 0 0; color: var(--muted); font-size: .92rem; }

@@ -34,13 +34,14 @@ Keep it separate from Zain's personal website, TSUGI and other client projects. 
   opens WhatsApp with `photoquoteMessage` from config.
 - Images: `assets/img/home/` (still hero from the supplier brochure, two service photos), `assets/img/studio/` (Colour Studio),
   `assets/img/work/` for real job photos.
-- Gallery (`gallery.html`, from `work` in config): finished-job photo sets (tap to enlarge), each shown with its customer's
-  review, and before & after sliders when Reface sends pairs. The 6 jobs (dark grey kitchen, kitchen & bathroom, shaker kitchen
-  with breakfast bar, bedroom, cream kitchen, white kitchen) use photos
-  from customers' Google reviews, cropped from Zain's phone screenshots. Those photos are the customers': Reface must confirm
-  they're happy for them to be used before the site goes live (or send their own photos). Jacqueline's bathroom photo is also on
-  the home page "Fitted bathrooms" card.
-- Reviews: 10 real Google reviews (all 5 stars), word for word including the reviewers' own typos; surnames shortened.
+- Gallery (`gallery.html`, from `work` in config): before & after jobs first (sliders that sweep once when they come into view),
+  then finished-job photo sets (tap to enlarge), each shown with its customer's review. Job 1 is a real before & after:
+  Lynne J.'s brown-to-quartz worktops, two pairs lined up by scale/shift so the room matches (one photo was stitched from two
+  screenshots). The other 6 jobs (dark grey kitchen, kitchen & bathroom, shaker kitchen with breakfast bar, bedroom, cream
+  kitchen, white kitchen) use photos from customers' Google reviews, cropped from Zain's phone screenshots. All these photos
+  are the customers': Reface must confirm they're happy for them to be used before the site goes live (or send their own).
+  Jacqueline's bathroom photo is also on the home page "Fitted bathrooms" card.
+- Reviews: 11 real Google reviews (all 5 stars), word for word including the reviewers' own typos; surnames shortened.
   The first three in `config.js` show on the home page (one kitchen, one bedroom, one kitchen & bathroom). Long ones get "Read more".
   The overall Google rating and review count are still unknown, so no summary line shows yet.
 - `PREVIEW = True` in `tools/pages/parts.py` adds a noindex tag so search engines ignore the site until launch.
