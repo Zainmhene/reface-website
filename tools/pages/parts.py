@@ -1,6 +1,9 @@
 from icons import ICONS as I
 CUR = ' aria-current="page"'
 
+# While Reface is reviewing the site, keep it out of Google. Set to False when it goes live.
+PREVIEW = True
+
 def head(title, desc, extra=""):
     return f'''<!doctype html>
 <html lang="en-GB">
@@ -9,7 +12,7 @@ def head(title, desc, extra=""):
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{title}</title>
 <meta name="description" content="{desc}">
-<meta name="theme-color" content="#0c1c40">
+<meta name="theme-color" content="#0c1c40">{'\n<meta name="robots" content="noindex, nofollow">' if PREVIEW else ''}
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
 <meta property="og:type" content="website">
