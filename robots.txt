@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.refacegroup.co.uk/sitemap.xml
