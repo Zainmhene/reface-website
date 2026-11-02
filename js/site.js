@@ -135,10 +135,10 @@
       const n = w.photos.length;
       const pics = w.photos.map((ph, k) => `
         <button type="button" class="job-photo${k === 0 && n > 3 ? " big" : ""}" data-lb="${j}" data-k="${k}" aria-label="View photo ${k + 1} of ${w.photos.length}: ${esc(ph.alt)}">
-          <img src="${esc(ph.src)}-500.webp" srcset="${esc(ph.src)}-500.webp 500w, ${esc(ph.src)}-1000.webp 1000w" sizes="${n < 4 ? "(min-width: 900px) 40vw, 100vw" : k === 0 ? "(min-width: 900px) 560px, 100vw" : "(min-width: 900px) 260px, 33vw"}" alt="${esc(ph.alt)}" loading="lazy" width="500" height="665">
+          <img src="${esc(ph.src)}-500.webp" srcset="${esc(ph.src)}-500.webp 500w, ${esc(ph.src)}-1000.webp 1000w" sizes="${n < 4 ? "(min-width: 900px) 40vw, 100vw" : k === 0 ? "(min-width: 900px) 620px, 100vw" : w.wide ? "(min-width: 900px) 300px, 50vw" : "(min-width: 900px) 260px, 33vw"}" alt="${esc(ph.alt)}" loading="lazy" width="500" height="665">
         </button>`).join("");
       return `
-        <article class="job${n < 4 ? ` compact n${n}` : ""}" data-reveal>
+        <article class="job${n < 4 ? ` compact n${n}` : ""}${w.wide ? " wide" : ""}" data-reveal>
           <header class="job-head"><p class="eyebrow">Recent job</p><h2>${esc(w.title)}</h2><p class="muted">${esc([w.place, w.note].filter(Boolean).join(" · "))}</p></header>
           <div class="job-photos">${pics}</div>
           ${r ? `<figure class="job-review"><div class="stars" aria-label="${esc(r.rating)} out of 5 stars">${stars(r.rating)}</div><blockquote>${reviewText(r.text)}</blockquote><figcaption><b>${esc(r.name)}</b> · Google review</figcaption></figure>` : ""}

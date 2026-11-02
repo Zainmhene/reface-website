@@ -533,3 +533,12 @@ div.service-card { cursor: default; }
 }
 .review footer { flex-wrap: wrap; gap: 4px 14px; }
 .review footer b { white-space: nowrap; }
+
+/* Jobs with landscape photos: one big photo, the rest in a 2-column grid beside it */
+.job.wide .job-photos { grid-template-columns: 1fr 1fr; }
+.job.wide .job-photo { aspect-ratio: 4 / 3; }
+.job.wide .job-photo.big { grid-column: 1 / -1; aspect-ratio: 4 / 3; }
+@media (min-width: 900px) {
+  .job.wide .job-photos { grid-template-columns: repeat(4, 1fr); grid-template-rows: auto; }
+  .job.wide .job-photo.big { grid-column: 1 / span 2; grid-row: 1 / span 2; aspect-ratio: auto; height: 100%; }
+}

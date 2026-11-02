@@ -35,11 +35,12 @@ Keep it separate from Zain's personal website, TSUGI and other client projects. 
 - Images: `assets/img/home/` (still hero from the supplier brochure, two service photos), `assets/img/studio/` (Colour Studio),
   `assets/img/work/` for real job photos.
 - Gallery (`gallery.html`, from `work` in config): finished-job photo sets (tap to enlarge), each shown with its customer's
-  review, and before & after sliders when Reface sends pairs. Jobs 1–4 (kitchen & bathroom, bedroom, two kitchens) use photos
+  review, and before & after sliders when Reface sends pairs. The 5 jobs (dark grey kitchen, kitchen & bathroom, bedroom,
+  cream kitchen, white kitchen) use photos
   from customers' Google reviews, cropped from Zain's phone screenshots. Those photos are the customers': Reface must confirm
-  they're happy for them to be used before the site goes live (or send their own photos). Job 1's bathroom photo is also on
+  they're happy for them to be used before the site goes live (or send their own photos). Jacqueline's bathroom photo is also on
   the home page "Fitted bathrooms" card.
-- Reviews: 8 real Google reviews (all 5 stars), word for word including the reviewers' own typos; surnames shortened.
+- Reviews: 9 real Google reviews (all 5 stars), word for word including the reviewers' own typos; surnames shortened.
   The first three in `config.js` show on the home page (one kitchen, one bedroom, one kitchen & bathroom). Long ones get "Read more".
   The overall Google rating and review count are still unknown, so no summary line shows yet.
 - `PREVIEW = True` in `tools/pages/parts.py` adds a noindex tag so search engines ignore the site until launch.

@@ -65,6 +65,8 @@ window.REFACE = {
       text: "Very helpful team with excellent workmanship from the fitters, plasterers etc. with all waste removed promptly! Altered part of the kitchen layout to accommodate integrated fridge freezer and managed to match up units beautifully! No hard sell and cannot thank the team at Reface enough!" },
     { name: "Jayn G.", rating: 5, date: "Google review, 2026", room: "Kitchen",
       text: "Our experience of working with Reface has been absolutely outstanding. From the outset, their communication was clear, regular and very helpful. As we were on a fairly tight timeline, they did their very best to facilitate this, even fitting the kitchen a week early. The units are smart, good quality and have given the effect of a ‘new’ kitchen at a fraction of the cost. The fitters did an excellent job, with everything left clean and tidy. Based on our experience, I would definitely recommend using Reface - thanks to all the team for an excellent service." },
+    { name: "Karen B.", rating: 5, date: "Google review, 2025", room: "Kitchen",
+      text: "My husband and I decided we wanted a new kitchen, but didn't want to pay the prices for a brand new back to brick kitchen, so we visited reface in South Shields. We spoke with both Kev and Neil. They helped us choose benches, flooring, cupboards, colours etc. they were very helpful and patient with us. Our kitchen was finished today and we're absolutely over the moon with every single thing. The guys that came to do removal of cupboards, plasterer, electrician and the actual fitters were amazing, every one of them. Very polite and friendly. I would recommend Reface to anyone - you won't regret it" },
     { name: "Judith H.", rating: 5, date: "Google review, 2025", room: "Kitchen",
       text: "Love love love our new kitchen, such a great transformation it looks brighter with a modern look.\nThe service we received from Kev and Neil was excellent from start to finish, very professional but relaxed and nothing was a problem, kept us up to date with regular office WhatsApp messages.\nThe fitters did a fantastic job and only took two days to fit the new doors and worktops, great workmanship and very tidy.\nWe will definitely recommend Re-face to others." }
   ],
@@ -74,9 +76,19 @@ window.REFACE = {
   /* OUR WORK (gallery page) — real Reface jobs only. Two kinds:
      1. Before & after: put both photos in assets/img/work/ (same size and angle works best), then add:
         { title: "Kitchen makeover", place: "South Shields", before: "assets/img/work/job2-before.jpg", after: "assets/img/work/job2-after.jpg", note: "New doors in Reed Green" }
-     2. Finished photos only: a list of photos (each saved as name-1000.webp and name-500.webp), like job 1 below.
+     2. Finished photos only: a list of photos (each saved as name-1000.webp and name-500.webp), like the jobs below.
+        Add wide: true when the photos are landscape.
         "review" is the name of a review in the list above to show with the photos. */
   work: [
+    { title: "Dark grey shaker kitchen", note: "Cupboards, worktops and flooring chosen with Kev and Neil", wide: true,
+      credit: "Photos from Karen B.’s Google review", review: "Karen B.",
+      photos: [
+        { src: "assets/img/work/job5-1", alt: "Dark grey shaker kitchen with marble-effect worktops, an L-shaped run and a built-in oven" },
+        { src: "assets/img/work/job5-2", alt: "Dark grey shaker units and marble-effect worktop under the window, with a grey sink" },
+        { src: "assets/img/work/job5-3", alt: "Corner of the kitchen with dark grey wall units, open shelving and marble-effect worktops" },
+        { src: "assets/img/work/job5-4", alt: "The whole kitchen, with a breakfast bar and grey wood-effect flooring" },
+        { src: "assets/img/work/job5-5", alt: "Another view of the kitchen and breakfast bar" }
+      ] },
     { title: "Kitchen & bathroom", note: "Designed and installed by Reface",
       // Job photos come from customers' Google reviews. TODO: Reface to confirm the customers are happy for us to use them.
       credit: "Photos from Jacqueline S.’s Google review",
@@ -96,13 +108,13 @@ window.REFACE = {
         { src: "assets/img/work/job2-1", alt: "White fitted wardrobes and drawers around a dressing area with dark geometric wallpaper" },
         { src: "assets/img/work/job2-2", alt: "White fitted wardrobes and overhead cupboards across a bedroom wall" }
       ] },
-    { title: "Kitchen", note: "Part of the layout changed to fit an integrated fridge freezer",
+    { title: "Cream kitchen", note: "Part of the layout changed to fit an integrated fridge freezer",
       credit: "Photos from Christine F.’s Google review", review: "Christine F.",
       photos: [
         { src: "assets/img/work/job3-1", alt: "Cream kitchen doors with black metro tiles, a gas hob and built-in oven" },
         { src: "assets/img/work/job3-2", alt: "Cream kitchen units with chrome handles above a grey sink and black metro tiles" }
       ] },
-    { title: "Kitchen", note: "New doors and worktops, fitted in two days",
+    { title: "White kitchen", note: "New doors and worktops, fitted in two days",
       credit: "Photo from Judith H.’s Google review", review: "Judith H.",
       photos: [
         { src: "assets/img/work/job4-1", alt: "Bright kitchen with white doors, glass-fronted wall cabinets and stone-effect worktops" }
