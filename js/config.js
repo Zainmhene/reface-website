@@ -9,22 +9,23 @@ window.REFACE = {
     phoneDisplay: "(0191) 456 3718",
     phoneLink: "+441914563718",
 
-    // TODO (confirm with Reface): their email address. Left empty until confirmed,
-    // so enquiries never go to a wrong address. While empty, email links are hidden.
-    email: "",
+    // From their current website (refacegroup.co.uk). If this is ever emptied, email links are hidden.
+    email: "info@refacegroup.co.uk",
 
     // TODO (confirm with Reface): the WhatsApp number for the Photoquote service.
     // Their Google listing has a WhatsApp button; ask which number it uses.
     // International format, digits only, no + or spaces. e.g. 447700900123
     whatsapp: "441914563718",
 
-    // From the Google Business listing. TODO: confirm (their old website said Mon–Fri 9–5, Sat 10–3).
+    // Opening hours: from the Google Business listing.
     hours: [
       { days: "Monday – Thursday", time: "10am – 4pm" },
       { days: "Friday", time: "9am – 4pm" },
       { days: "Saturday", time: "10am – 2pm" },
       { days: "Sunday", time: "Closed" }
     ],
+    // Phone lines: from their current website ("Lines Open Mon-Fri 9am-5pm, Sat 10am-3pm").
+    phoneLines: "Mon–Fri 9am–5pm, Sat 10am–3pm",
     address: "85 Westoe Rd, South Shields NE33 4LU",
     mapsUrl: "https://www.google.com/maps/search/?api=1&query=Reface+85+Westoe+Rd+South+Shields+NE33+4LU",
     area: "South Shields and nearby areas",

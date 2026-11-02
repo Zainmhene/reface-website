@@ -31,6 +31,7 @@
       ul.innerHTML = (BIZ.hours || []).map((h) => `<li><span>${esc(h.days)}</span><b>${esc(h.time)}</b></li>`).join("");
     });
     $$("[data-address]").forEach((el) => (el.textContent = BIZ.address));
+    $$("[data-lines]").forEach((el) => (el.textContent = BIZ.phoneLines));
     $$("[data-area]").forEach((el) => (el.textContent = BIZ.area));
     $$("[data-maps]").forEach((a) => { a.href = BIZ.mapsUrl; a.target = "_blank"; a.rel = "noopener"; });
     $$("[data-google]").forEach((a) => { a.href = BIZ.googleReviewsUrl; a.target = "_blank"; a.rel = "noopener"; });

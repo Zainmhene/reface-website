@@ -34,10 +34,10 @@ def enquiry(source, room="kitchen"):
       <h2 data-reveal>Let's make your room <em>feel new.</em></h2>
       <p class="lead" style="margin-top:16px" data-reveal>Call, WhatsApp or send us a message. We'll get back to you during opening hours.</p>
       <div class="contact-lines">
-        <a class="contact-line" data-tel href="tel:+441914563718" data-reveal><span class="cl-icon">{I["phone"]}</span><span><small>Call us</small><b>(0191) 456 3718</b></span></a>
+        <a class="contact-line" data-tel href="tel:+441914563718" data-reveal><span class="cl-icon">{I["phone"]}</span><span><small>Call us · lines open <span data-lines>Mon–Fri 9am–5pm, Sat 10am–3pm</span></small><b>(0191) 456 3718</b></span></a>
         <a class="contact-line" data-wa href="https://wa.me/441914563718" data-reveal><span class="cl-icon">{I["wa"]}</span><span><small>Free Photoquote</small><b>Send photos on WhatsApp</b></span></a>
         <a class="contact-line" data-maps href="https://www.google.com/maps/search/?api=1&amp;query=Reface+85+Westoe+Rd+South+Shields+NE33+4LU" data-reveal><span class="cl-icon">{I["pin"]}</span><span><small>Find us</small><b>85 Westoe Rd, South Shields NE33 4LU</b></span></a>
-        <a class="contact-line" data-mail href="#" data-reveal><span class="cl-icon">{I["mail"]}</span><span><small>Email</small><b data-mail="text">Email us</b></span></a>
+        <a class="contact-line" data-mail href="#" data-reveal><span class="cl-icon">{I["mail"]}</span><span><small>Email</small><b data-mail="text">info@refacegroup.co.uk</b></span></a>
       </div>
       <div data-reveal><p class="eyebrow" style="margin-bottom:10px">Opening hours</p><ul class="hours" data-hours><li><span>Monday – Thursday</span><b>10am – 4pm</b></li><li><span>Friday</span><b>9am – 4pm</b></li><li><span>Saturday</span><b>10am – 2pm</b></li><li><span>Sunday</span><b>Closed</b></li></ul></div>
     </div>

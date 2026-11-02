@@ -28,18 +28,18 @@ body = f'''
     <div class="services">
       <div class="service-card" data-reveal>
         <img src="assets/img/home/kitchens-800.webp" loading="lazy" alt="Shaker kitchen in a soft cashmere colour with a white island">
-        <div class="svc-body"><h3>Kitchen makeovers</h3><p>New doors, drawer fronts, worktops, handles and splashbacks on your existing units. Complete new kitchens too.</p></div>
+        <div class="svc-body"><h3>Kitchen makeovers</h3><p>Replacement doors, drawer fronts, worktops and handles on your existing units, from a budget makeover to a complete renovation.</p></div>
       </div>
       <div class="service-card" data-reveal data-delay="100">
         <img src="assets/img/home/bedrooms-800.webp" loading="lazy" alt="Fitted bedroom furniture in dark green">
-        <div class="svc-body"><h3>Fitted bedrooms</h3><p>Fitted wardrobes, drawers and storage built around your room, alcoves and slopes included.</p></div>
+        <div class="svc-body"><h3>Fitted bedrooms</h3><p>Fully fitted bedrooms: wardrobes, drawers and storage built around your room.</p></div>
       </div>
       <div class="service-card no-photo" data-reveal data-delay="200">
         <span class="svc-icon">{I["spark"]}</span>
-        <div class="svc-body"><h3>Fitted bathrooms</h3><p>Bathroom installation and renovation, with vanity units and storage to match.</p></div>
+        <div class="svc-body"><h3>Fitted bathrooms</h3><p>Fitted bathrooms designed, supplied and installed by our team.</p></div>
       </div>
     </div>
-    <p class="offer-extras" data-reveal>Also: quartz, granite and laminate worktops · glass splashbacks · sinks and taps · landlord and pre-sale upgrades.</p>
+    <p class="offer-extras" data-reveal>We also do kitchen design, bespoke and fully fitted kitchens, complete kitchen renovations, custom and replacement kitchen doors, cabinet installation, and granite, quartz and laminate worktops.</p>
   </div>
 </section>
 
@@ -48,7 +48,7 @@ body = f'''
     <div>
       <p class="eyebrow" data-reveal>Free Photoquote</p>
       <h2 data-reveal>Send a photo. <em>Get a price.</em></h2>
-      <p class="lead" style="margin-top:16px" data-reveal>The quickest way to find out what your makeover would cost. No home visit needed to get started.</p>
+      <p class="lead" style="margin-top:16px" data-reveal>Looking for a kitchen makeover? Do you use WhatsApp? Then ask about our absolutely FREE Photoquote service. It's the quickest way to find out what your makeover would cost, with no home visit needed to get started.</p>
       <div class="btn-row" style="margin-top:24px" data-reveal>
         <a class="btn btn-whatsapp" data-wa href="https://wa.me/441914563718">{I["wa"]} Start my Photoquote</a>
       </div>
@@ -89,7 +89,7 @@ body = f'''
 </section>
 '''
 
-LD = '''<script type="application/ld+json">{"@context":"https://schema.org","@type":"HomeAndConstructionBusiness","name":"Reface","url":"https://www.refacegroup.co.uk","telephone":"+44 191 456 3718","description":"Kitchen makeovers, fitted bedrooms and fitted bathrooms in South Shields.","address":{"@type":"PostalAddress","streetAddress":"85 Westoe Rd","addressLocality":"South Shields","postalCode":"NE33 4LU","addressCountry":"GB"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday"],"opens":"10:00","closes":"16:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":"Friday","opens":"09:00","closes":"16:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":"Saturday","opens":"10:00","closes":"14:00"}],"areaServed":"South Shields and nearby areas"}</script>'''
+LD = '''<script type="application/ld+json">{"@context":"https://schema.org","@type":"HomeAndConstructionBusiness","name":"Reface","url":"https://www.refacegroup.co.uk","telephone":"+44 191 456 3718","email":"info@refacegroup.co.uk","description":"Kitchen makeovers, fitted bedrooms and fitted bathrooms in South Shields.","address":{"@type":"PostalAddress","streetAddress":"85 Westoe Rd","addressLocality":"South Shields","postalCode":"NE33 4LU","addressCountry":"GB"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday"],"opens":"10:00","closes":"16:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":"Friday","opens":"09:00","closes":"16:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":"Saturday","opens":"10:00","closes":"14:00"}],"areaServed":"South Shields and nearby areas"}</script>'''
 
 def build():
     return head("Reface | Kitchen Makeovers, Fitted Bedrooms & Bathrooms in South Shields",

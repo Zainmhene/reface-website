@@ -44,7 +44,7 @@ def header(active=""):
 <a class="skip-link" href="#main">Skip to content</a>
 <div class="topbar"><div class="container">
   <span><b>FREE</b> WhatsApp Photoquote · <a data-wa href="https://wa.me/441914563718">Send a photo →</a></span>
-  <span class="tb-hours">85 Westoe Rd, South Shields · Open Mon–Sat · <a data-tel="text" href="tel:+441914563718">(0191) 456 3718</a></span>
+  <span class="tb-hours">Lines open <span data-lines>Mon–Fri 9am–5pm, Sat 10am–3pm</span> · <a data-tel="text" href="tel:+441914563718">(0191) 456 3718</a></span>
 </div></div>
 <header class="site-header">
   <div class="container">
@@ -82,7 +82,7 @@ def footer(scripts=""):
         <li><a href="index.html">Home</a></li><li><a href="gallery.html">Before &amp; After</a></li><li><a href="reviews.html">Reviews</a></li><li><a href="contact.html">Contact</a></li></ul></div>
       <div><h4>Contact</h4><ul>
         <li><a data-tel="text" href="tel:+441914563718">(0191) 456 3718</a></li>
-        <li data-mail-row><a data-mail="text" href="#">Email us</a></li>
+        <li data-mail-row><a data-mail="text" href="mailto:info@refacegroup.co.uk">info@refacegroup.co.uk</a></li>
         <li><a data-wa href="https://wa.me/441914563718">WhatsApp Photoquote</a></li>
         <li><a href="contact.html">Send an enquiry</a></li>
         <li><a data-maps href="https://www.google.com/maps/search/?api=1&amp;query=Reface+85+Westoe+Rd+South+Shields+NE33+4LU">Get directions</a></li></ul></div>
