@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://www.refacegroup.co.uk/</loc></url>
-  <url><loc>https://www.refacegroup.co.uk/kitchens.html</loc></url>
-  <url><loc>https://www.refacegroup.co.uk/bedrooms.html</loc></url>
-  <url><loc>https://www.refacegroup.co.uk/bathrooms.html</loc></url>
-  <url><loc>https://www.refacegroup.co.uk/estimate.html</loc></url>
-  <url><loc>https://www.refacegroup.co.uk/visualiser.html</loc></url>
+  <url><loc>https://www.refacegroup.co.uk/gallery.html</loc></url>
+  <url><loc>https://www.refacegroup.co.uk/reviews.html</loc></url>
+  <url><loc>https://www.refacegroup.co.uk/contact.html</loc></url>
 </urlset>

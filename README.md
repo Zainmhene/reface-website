@@ -1,71 +1,47 @@
 # Reface website
 
-A premium, mobile-first website for **Reface**: kitchen makeovers, fitted bedrooms and fitted bathrooms.
-Plain HTML, CSS and JavaScript, so it can be hosted anywhere (Vercel recommended).
+A simple, mobile-first website for **Reface**: kitchen makeovers, fitted bedrooms and fitted bathrooms in South Shields.
+Plain HTML, CSS and JavaScript, so it can be hosted for free (GitHub Pages).
 
 ## Pages
 
-| Page | What it does |
+| Page | What it shows |
 | --- | --- |
-| `index.html` | Home. Scroll the hero and the kitchen changes colour. Swipe the **Colour Studio** to recolour a real kitchen or bedroom. Services, how it works, reviews, FAQ, enquiry form. |
-| `kitchens.html` / `bedrooms.html` | Ranges and colours, **door designer** (any of the 20 styles in any colour), gallery, handles, splashbacks. |
-| `bathrooms.html` | Fitted bathroom furniture with a colour-changing illustration. |
-| `estimate.html` | **Price guide.** A few questions, then a live guide price, sent with the enquiry. |
-| `visualiser.html` | **AI visualiser.** The customer uploads a photo of their room and gets 3 AI designs. Until AI is switched on, it sends their photo to Reface on WhatsApp instead. |
+| `index.html` | Home: animated still photo hero, what we offer, **Colour Studio** (tap a colour and the room changes), how a free Photoquote works, Google reviews, contact links. |
+| `gallery.html` | Before & after photos with a drag slider on each. |
+| `reviews.html` | Testimonials (real Google reviews) and a link to all reviews on Google. |
+| `contact.html` | Phone, WhatsApp, address, opening hours and an enquiry form. |
 
-## See it on your computer
+**Photoquote** means a customer sends photos of their room on WhatsApp and Reface replies with a price.
+Every "Free Photoquote" button opens WhatsApp with a ready-written message.
 
-Open `index.html` in a browser, or for everything to work (fonts, forms) run this in the folder:
+## Change details, reviews or photos
 
-```
-python3 -m http.server 8000
-```
+Everything is in **`js/config.js`**. Change the text between the quotes and save.
+The email and phone-line hours come from refacegroup.co.uk; the opening hours and address from the Google listing.
 
-then go to http://localhost:8000.
-
-## Change business details, prices or reviews
-
-Everything is in **`js/config.js`**: phone, WhatsApp number, email, hours, area, Google reviews link,
-reviews, prices and where enquiries go. Change the text between the quotes and save.
-The address, hours and area come from the Reface Google Business listing.
+- **Testimonials:** copy real Google reviews word for word into `reviews`, and fill in `googleRating` and `googleReviewCount`.
+- **Before & after:** put each pair of photos in `assets/img/work/` and add a line to `work` (there's an example in the file).
 
 ## Before it goes live (checklist)
 
-1. **Reface approves the site.** It's their brand, photos and details.
-2. **WhatsApp number.** `config.js` uses the landline as a placeholder. Get the real WhatsApp number.
-3. **Prices.** The numbers in `config.js` are *placeholders* based on typical UK prices, not Reface's.
-   Replace them with Reface's price list, then set `pricesConfirmed: true` (this removes the "example prices" notice).
-4. **Reviews.** Copy real Google reviews word for word into `reviews` in `config.js`. Never write or edit reviews.
-5. **Enquiries.** Without a form service, enquiries open in WhatsApp or email on the customer's phone.
-   For proper email delivery, create a free form at formspree.io (or web3forms.com) and paste the endpoint into `form.endpoint`.
-6. **Opening hours.** The site uses the Google listing (Mon–Thu 10–4, Fri 9–4, Sat 10–2). Their old website said Mon–Fri 9–5, Sat 10–3. Confirm which is right.
-7. **Bathroom photos.** Real photos of Reface bathroom jobs would replace the illustration well.
+1. **Reface approves the site.**
+2. **Permission for the job photos:** the gallery photos came from customers' Google reviews (Lynne J., Karen B.,
+   Jacqueline S., Ethan P., Robert, Christine F., Judith H.). Reface should check they're happy for them to be used, or send their own photos of those jobs.
+3. **More before & after photos** of real Reface jobs (one job has them so far). Same angle, before and after.
+4. **Enquiries by email:** create a free form at formspree.io and paste its URL into `form.endpoint`. Without it, the form opens WhatsApp.
+5. **Let Google find it:** set `PREVIEW = False` in `tools/pages/parts.py` and run `python3 tools/pages/build.py`.
 
-## Put it online (Vercel)
+## Share a link (GitHub Pages)
 
-1. vercel.com → Add New → Project → import this GitHub repo. No build settings needed.
-2. Add the domain (e.g. refacegroup.co.uk) in Project → Settings → Domains.
+Settings → Pages → Source "Deploy from a branch" → Branch `main`, folder `/ (root)` → Save.
+The link is https://zaindstyles.github.io/reface-website/ and updates a minute or two after each change to `main`.
 
-## Switch on the AI visualiser
+## See it on your computer
 
-In Vercel → Project → Settings → Environment Variables:
-
-- `GEMINI_API_KEY`: from Google AI Studio (aistudio.google.com). **Required.**
-- `ALLOWED_ORIGIN`: e.g. `https://www.refacegroup.co.uk`, so other sites can't use your key. **Recommended.**
-- `GEMINI_IMAGE_MODEL`: optional, defaults to `gemini-2.5-flash-image`.
-
-Cost is roughly a few pence per image (3 images per customer). Check Google's current pricing and set a spending limit.
-
-## The home page hero and Colour Studio
-
-- **Hero:** as you scroll, an empty plasterboard room builds into a navy, gold-veined marble and brass kitchen.
-  It's an AI video made in Higgsfield, with separate versions for computers (`assets/img/hero/wide`) and phones
-  (`assets/img/hero/tall`), so the page shows a small "Visualisation" label.
-- **Colour Studio:** pick Kitchen, Bedroom or Bathroom, then tap the round colour dots on the photo (or swipe it)
-  to see the room in each colour. The colours come from the brochures and were applied with `tools/images/recolour.py`.
+Run `python3 -m http.server 8000` in this folder and open http://localhost:8000.
 
 ## Editing pages
 
-The HTML pages are generated from templates in `tools/pages/` (shared header/footer in `parts.py`).
-Change a template, then run `python3 tools/pages/build.py`. Styles are in `css/site.css`.
-`tools/images/` has the scripts that made the recoloured photos.
+The HTML pages are generated from templates in `tools/pages/`. Change a template, then run `python3 tools/pages/build.py`.
+Styles are in `css/site.css`.
