@@ -110,20 +110,38 @@
     const box = $("[data-work]");
     if (!box) return;
     const list = CFG.work || [];
+    const google = `<a class="btn" data-google href="${esc(BIZ.googleReviewsUrl)}">See our work on Google</a>`;
     if (!list.length) {
       box.innerHTML = `
         <div class="empty-card" data-reveal>
           <p class="eyebrow">Coming soon</p>
           <h2>Our before &amp; after photos are on their way.</h2>
           <p>We're putting together photos of recent kitchens, bedrooms and bathrooms we've transformed. In the meantime, you can see our work and read what customers say on Google.</p>
-          <div class="btn-row">
-            <a class="btn" data-google href="${esc(BIZ.googleReviewsUrl)}">See our work on Google</a>
-            <a class="btn btn-ghost" data-wa href="#">Get a free Photoquote</a>
-          </div>
+          <div class="btn-row">${google}<a class="btn btn-ghost" data-wa href="#">Get a free Photoquote</a></div>
         </div>`;
       return;
     }
-    box.innerHTML = `<div class="work-grid">${list.map((w, k) => `
+    const stars = (n) => "★".repeat(Math.round(n || 5));
+    const pairs = list.filter((w) => w.before && w.after);
+    const jobs = list.filter((w) => w.photos && w.photos.length);
+
+    // Finished jobs: one big photo, the rest as a grid; tap any photo to see it bigger
+    const jobHtml = jobs.map((w, j) => {
+      const r = Number.isInteger(w.review) ? (CFG.reviews || [])[w.review] : null;
+      const pics = w.photos.map((ph, k) => `
+        <button type="button" class="job-photo${k === 0 ? " big" : ""}" data-lb="${j}" data-k="${k}" aria-label="View photo ${k + 1} of ${w.photos.length}: ${esc(ph.alt)}">
+          <img src="${esc(ph.src)}-500.webp" srcset="${esc(ph.src)}-500.webp 500w, ${esc(ph.src)}-1000.webp 1000w" sizes="${k === 0 ? "(min-width: 900px) 560px, 100vw" : "(min-width: 900px) 260px, 33vw"}" alt="${esc(ph.alt)}" loading="lazy" width="500" height="665">
+        </button>`).join("");
+      return `
+        <article class="job" data-reveal>
+          <header class="job-head"><p class="eyebrow">Recent job</p><h2>${esc(w.title)}</h2><p class="muted">${esc([w.place, w.note].filter(Boolean).join(" · "))}</p></header>
+          <div class="job-photos">${pics}</div>
+          ${r ? `<figure class="job-review"><div class="stars" aria-label="${esc(r.rating)} out of 5 stars">${stars(r.rating)}</div><blockquote>“${esc(r.text)}”</blockquote><figcaption><b>${esc(r.name)}</b> · Google review</figcaption></figure>` : ""}
+          ${w.credit ? `<p class="job-credit">${esc(w.credit)}</p>` : ""}
+        </article>`;
+    }).join("");
+
+    const pairHtml = pairs.length ? `<div class="work-grid">${pairs.map((w, k) => `
       <figure class="work-card" data-reveal data-delay="${(k % 2) * 80}">
         <div class="ba">
           <img src="${esc(w.before)}" alt="${esc(w.title)} before" loading="lazy">
@@ -133,7 +151,54 @@
           <input type="range" min="0" max="100" value="50" aria-label="Drag to compare before and after: ${esc(w.title)}">
         </div>
         <figcaption><b>${esc(w.title)}</b><span>${esc([w.place, w.note].filter(Boolean).join(" · "))}</span></figcaption>
-      </figure>`).join("")}</div>`;
+      </figure>`).join("")}</div>` : "";
+
+    const more = pairs.length ? "" : `
+      <div class="more-card" data-reveal>
+        <div><h3>More before &amp; after photos on the way</h3><p>We're adding photos of recent jobs. You can also see customers' photos on Google.</p></div>
+        <div class="btn-row">${google}</div>
+      </div>`;
+    box.innerHTML = jobHtml + pairHtml + more;
+    initLightbox(jobs);
+  }
+
+  /* ---------- Photo viewer: tap a job photo to see it full size ---------- */
+  function initLightbox(jobs) {
+    if (!jobs.length) return;
+    const dlg = document.createElement("dialog");
+    dlg.className = "lightbox";
+    dlg.innerHTML = `
+      <img alt="">
+      <p class="lb-cap"><span class="lb-n"></span><span class="lb-alt"></span></p>
+      <button type="button" class="lb-btn lb-close" aria-label="Close">✕</button>
+      <button type="button" class="lb-btn lb-prev" aria-label="Previous photo">‹</button>
+      <button type="button" class="lb-btn lb-next" aria-label="Next photo">›</button>`;
+    document.body.appendChild(dlg);
+    const img = $("img", dlg);
+    let job = 0, k = 0;
+    const show = (j, n) => {
+      const ph = jobs[j].photos; job = j; k = (n + ph.length) % ph.length;
+      img.src = `${ph[k].src}-1000.webp`; img.alt = ph[k].alt;
+      $(".lb-n", dlg).textContent = `${k + 1} / ${ph.length}`;
+      $(".lb-alt", dlg).textContent = ph[k].alt;
+    };
+    $$("[data-lb]").forEach((b) => b.addEventListener("click", () => {
+      show(+b.dataset.lb, +b.dataset.k);
+      dlg.showModal(); document.body.classList.add("menu-open");
+    }));
+    dlg.addEventListener("close", () => document.body.classList.remove("menu-open"));
+    $(".lb-close", dlg).addEventListener("click", () => dlg.close());
+    $(".lb-prev", dlg).addEventListener("click", () => show(job, k - 1));
+    $(".lb-next", dlg).addEventListener("click", () => show(job, k + 1));
+    dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); });
+    dlg.addEventListener("keydown", (e) => { if (e.key === "ArrowRight") show(job, k + 1); if (e.key === "ArrowLeft") show(job, k - 1); });
+    let sx = null;
+    dlg.addEventListener("pointerdown", (e) => (sx = e.clientX));
+    dlg.addEventListener("pointerup", (e) => {
+      if (sx === null) return;
+      const dx = e.clientX - sx; sx = null;
+      if (Math.abs(dx) > 50) show(job, k + (dx < 0 ? 1 : -1));
+    });
   }
 
   function initBeforeAfter() {
@@ -164,12 +229,18 @@
       }
       const stars = (n) => "★".repeat(Math.round(n)) + "☆".repeat(5 - Math.round(n));
       const summary = CFG.googleRating ? `<p class="center muted" style="margin-bottom:28px"><b style="color:var(--ink);font-size:1.2rem">${esc(CFG.googleRating)} ★</b> on Google${CFG.googleReviewCount ? ` from ${esc(CFG.googleReviewCount)} reviews` : ""} · <a class="text-link" data-google href="${esc(BIZ.googleReviewsUrl)}">Read them all</a></p>` : "";
-      box.innerHTML = summary + `<div class="reviews-grid">${list.map((r, k) => `
+      const more = list.length < 3 ? `
+        <div class="review review-more" data-reveal data-delay="${list.length * 80}">
+          <div class="big-stars" aria-hidden="true">★★★★★</div>
+          <h3>Read more of our reviews on Google</h3>
+          <a class="btn" data-google href="${esc(BIZ.googleReviewsUrl)}">Google reviews</a>
+        </div>` : "";
+      box.innerHTML = summary + `<div class="reviews-grid${list.length === 1 ? " one" : ""}">${list.map((r, k) => `
         <article class="review" data-reveal data-delay="${(k % 3) * 80}">
           <div class="stars" aria-label="${esc(r.rating)} out of 5 stars">${stars(r.rating || 5)}</div>
           <blockquote>“${esc(r.text)}”</blockquote>
           <footer><b>${esc(r.name)}</b><span>${esc([r.room, r.date].filter(Boolean).join(" · "))}</span></footer>
-        </article>`).join("")}</div>`;
+        </article>`).join("")}${more}</div>`;
     });
   }
 

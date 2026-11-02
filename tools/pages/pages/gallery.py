@@ -2,7 +2,7 @@ from parts import head, header, footer
 from blocks import page_head
 
 body = page_head("Before &amp; After", "Our work", "Before <em>&amp; after.</em>",
-                 "Real kitchens, bedrooms and bathrooms we've transformed. Drag the slider on each photo to compare.") + '''
+                 "Real kitchens, bedrooms and bathrooms by our team. Tap any photo to see it bigger.") + '''
 <section class="section">
   <div class="container">
     <div data-work></div>

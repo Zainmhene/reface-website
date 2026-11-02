@@ -34,10 +34,11 @@ body = f'''
         <img src="assets/img/home/bedrooms-800.webp" loading="lazy" alt="Fitted bedroom furniture in dark green">
         <div class="svc-body"><h3>Fitted bedrooms</h3><p>Fully fitted bedrooms: wardrobes, drawers and storage built around your room.</p></div>
       </div>
-      <div class="service-card no-photo" data-reveal data-delay="200">
-        <span class="svc-icon">{I["spark"]}</span>
-        <div class="svc-body"><h3>Fitted bathrooms</h3><p>Fitted bathrooms designed, supplied and installed by our team.</p></div>
-      </div>
+      <a class="service-card" href="gallery.html" data-reveal data-delay="200">
+        <img src="assets/img/work/job1-6-500.webp" srcset="assets/img/work/job1-6-500.webp 500w, assets/img/work/job1-6-1000.webp 1000w" sizes="(min-width: 900px) 33vw, 100vw" loading="lazy" alt="Bathroom fitted by Reface, with a navy vanity unit and bath panel" style="object-position:50% 60%">
+        <span class="svc-tag">Real Reface job</span>
+        <div class="svc-body"><h3>Fitted bathrooms</h3><p>Fitted bathrooms designed, supplied and installed by our team.</p><span class="svc-link">See this job {I["arrow"]}</span></div>
+      </a>
     </div>
     <p class="offer-extras" data-reveal>We also do kitchen design, bespoke and fully fitted kitchens, complete kitchen renovations, custom and replacement kitchen doors, cabinet installation, and granite, quartz and laminate worktops.</p>
   </div>

@@ -459,3 +459,46 @@ div.service-card { cursor: default; }
 .service-card[data-reveal].in img { transform: scale(1); }
 .service-card[data-reveal].in:hover img { transform: scale(1.05); }
 @media (prefers-reduced-motion: reduce) { .service-card[data-reveal] img { transform: none; } }
+
+/* ---------- Our work: finished jobs (gallery page) ---------- */
+.job { display: grid; gap: 22px; margin-bottom: clamp(40px, 7vw, 72px); }
+.job-head h2 { margin: 4px 0 6px; }
+.job-head .muted { margin: 0; }
+.job-photos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.job-photo { padding: 0; border: 0; background: var(--stone); border-radius: 14px; overflow: hidden; cursor: zoom-in; aspect-ratio: 3 / 4; display: block; }
+.job-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--ease); }
+.job-photo:hover img { transform: scale(1.04); }
+.job-photo.big { grid-column: 1 / -1; aspect-ratio: 4 / 4.4; border-radius: var(--radius-lg); }
+@media (min-width: 900px) {
+  .job-photos { grid-template-columns: 1.6fr repeat(3, 1fr); grid-template-rows: repeat(2, auto); gap: 12px; }
+  .job-photo.big { grid-column: 1; grid-row: 1 / span 2; aspect-ratio: auto; height: 100%; }
+}
+.job-review { margin: 0; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(22px, 4vw, 34px); display: grid; gap: 12px; }
+.job-review .stars { color: #e3a73a; letter-spacing: 2px; }
+.job-review blockquote { margin: 0; font-family: var(--font-display); font-size: clamp(1.15rem, 2.6vw, 1.45rem); line-height: 1.5; }
+.job-review figcaption { color: var(--muted); font-size: .9rem; }
+.job-review figcaption b { color: var(--ink); }
+.job-credit { margin: -8px 0 0; font-size: .8rem; color: var(--muted); }
+.more-card { display: grid; gap: 16px; align-items: center; background: var(--stone); border-radius: var(--radius-lg); padding: clamp(24px, 4vw, 36px); }
+.more-card h3 { margin: 0 0 6px; }
+.more-card p { margin: 0; color: var(--muted); }
+@media (min-width: 860px) { .more-card { grid-template-columns: 1fr auto; } }
+
+/* Photo viewer */
+.lightbox { width: 100vw; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: #060c1c; color: #fff; }
+.lightbox[open] { display: grid; place-items: center; }
+.lightbox::backdrop { background: rgba(6, 12, 28, .9); }
+.lightbox img { max-width: min(94vw, 900px); max-height: calc(100dvh - 140px); object-fit: contain; border-radius: 12px; user-select: none; -webkit-user-drag: none; }
+.lb-cap { position: absolute; left: 16px; right: 16px; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); margin: 0; display: flex; gap: 12px; justify-content: center; font-size: .88rem; color: rgba(255, 255, 255, .8); text-align: center; }
+.lb-n { font-weight: 800; color: var(--brass-light); flex: none; }
+.lb-btn { position: absolute; width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(255, 255, 255, .25); background: rgba(255, 255, 255, .1); color: #fff; font-size: 1.6rem; line-height: 1; display: grid; place-items: center; cursor: pointer; }
+.lb-close { top: calc(14px + env(safe-area-inset-top, 0px)); right: 14px; font-size: 1.1rem; }
+.lb-prev { left: 12px; top: 50%; transform: translateY(-50%); }
+.lb-next { right: 12px; top: 50%; transform: translateY(-50%); }
+
+/* Reviews: with only one review, it takes two columns next to the Google card */
+@media (min-width: 860px) { .reviews-grid.one { grid-template-columns: 2fr 1fr; } }
+.review-more { justify-content: center; align-items: flex-start; background: var(--stone); }
+.review-more .big-stars { font-size: 1.6rem; color: #e3a73a; letter-spacing: 3px; }
+.review-more h3 { margin: 0; }
+.service-card .svc-tag { position: absolute; top: 18px; left: 18px; padding: 6px 12px; border-radius: 999px; background: rgba(255, 255, 255, .92); color: var(--navy-deep); font-size: .72rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
