@@ -10,9 +10,9 @@ body = f'''
   <div class="container">
     <p class="eyebrow">Reface · South Shields</p>
     <h1>Same kitchen. <em>Whole new look.</em></h1>
-    <p class="lead">Kitchen makeovers, fitted bedrooms and fitted bathrooms, made to measure and fitted by our own team.</p>
+    <p class="lead">Transform your existing kitchen for a fraction of the price of a new one. Plus fitted bedrooms and bathrooms, made to measure and fitted by our own team.</p>
     <div class="btn-row">
-      <a class="btn btn-whatsapp" data-wa href="https://wa.me/441914563718">{I["wa"]} Get a free Photoquote</a>
+      <a class="btn btn-whatsapp" data-wa href="https://wa.me/447457403407">{I["wa"]} Get a free Photoquote</a>
       <a class="btn btn-outline-light" href="contact.html">Contact us</a>
     </div>
     <a class="hero-rating" data-google href="https://share.google/85vLoGir77iD04as1"><span class="stars" aria-hidden="true">★★★★★</span> <u>Read our Google reviews</u></a>
@@ -40,7 +40,7 @@ body = f'''
         <div class="svc-body"><h3>Fitted bathrooms</h3><p>Fitted bathrooms designed, supplied and installed by our team.</p><span class="svc-link">See this job {I["arrow"]}</span></div>
       </a>
     </div>
-    <p class="offer-extras" data-reveal>We also do kitchen design, bespoke and fully fitted kitchens, complete kitchen renovations, custom and replacement kitchen doors, cabinet installation, and granite, quartz and laminate worktops.</p>
+    <p class="offer-extras" data-reveal>We also do kitchen design, bespoke and fully fitted kitchens, complete kitchen renovations, custom and replacement kitchen doors, cabinet installation, granite, quartz and laminate worktops, and appliances.</p>
   </div>
 </section>
 
@@ -71,7 +71,7 @@ body = f'''
       </div>
       <div class="cs-foot">
         <p class="cs-note"></p>
-        <a class="btn btn-whatsapp cs-cta" href="https://wa.me/441914563718" target="_blank" rel="noopener">{I["wa"]} Free Photoquote in this colour</a>
+        <a class="btn btn-whatsapp cs-cta" href="https://wa.me/447457403407" target="_blank" rel="noopener">{I["wa"]} Free Photoquote in this colour</a>
       </div>
       <p class="studio-disclaimer">Colours are applied digitally to brochure photography to give you an idea of the finish. Screens vary, so ask to see real samples.</p>
     </div>
@@ -85,7 +85,7 @@ body = f'''
       <h2 data-reveal>Send a photo. <em>Get a price.</em></h2>
       <p class="lead" style="margin-top:16px" data-reveal>Looking for a kitchen makeover? Do you use WhatsApp? Then ask about our absolutely FREE Photoquote service. It's the quickest way to find out what your makeover would cost, with no home visit needed to get started.</p>
       <div class="btn-row" style="margin-top:24px" data-reveal>
-        <a class="btn btn-whatsapp" data-wa href="https://wa.me/441914563718">{I["wa"]} Start my Photoquote</a>
+        <a class="btn btn-whatsapp" data-wa href="https://wa.me/447457403407">{I["wa"]} Start my Photoquote</a>
       </div>
     </div>
     <div class="steps">

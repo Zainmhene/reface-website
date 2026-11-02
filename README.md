@@ -26,13 +26,12 @@ The email and phone-line hours come from refacegroup.co.uk; the opening hours an
 ## Before it goes live (checklist)
 
 1. **Reface approves the site.**
-2. **WhatsApp number** for Photoquotes (config uses the landline as a placeholder).
-3. **Google rating:** the overall star rating and number of reviews, for `googleRating` and `googleReviewCount` (9 reviews are in).
-4. **Permission for the job photos:** the gallery photos came from customers' Google reviews (Karen B., Jacqueline S.,
+2. **Google rating:** the overall star rating and number of reviews, for `googleRating` and `googleReviewCount` (9 reviews are in).
+3. **Permission for the job photos:** the gallery photos came from customers' Google reviews (Karen B., Jacqueline S.,
    Robert, Christine F., Judith H.). Reface should check they're happy for them to be used, or send their own photos of those jobs.
-5. **Before & after photos** of real Reface jobs.
-6. **Enquiries by email:** create a free form at formspree.io and paste its URL into `form.endpoint`. Without it, the form opens WhatsApp.
-7. **Let Google find it:** set `PREVIEW = False` in `tools/pages/parts.py` and run `python3 tools/pages/build.py`.
+4. **Before & after photos** of real Reface jobs.
+5. **Enquiries by email:** create a free form at formspree.io and paste its URL into `form.endpoint`. Without it, the form opens WhatsApp.
+6. **Let Google find it:** set `PREVIEW = False` in `tools/pages/parts.py` and run `python3 tools/pages/build.py`.
 
 ## Share a link (GitHub Pages)
 

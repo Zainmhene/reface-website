@@ -34,6 +34,7 @@
     $$("[data-hours]").forEach((ul) => {
       ul.innerHTML = (BIZ.hours || []).map((h) => `<li><span>${esc(h.days)}</span><b>${esc(h.time)}</b></li>`).join("");
     });
+    $$("[data-wa-text]").forEach((el) => (el.textContent = BIZ.whatsappDisplay));
     $$("[data-address]").forEach((el) => (el.textContent = BIZ.address));
     $$("[data-lines]").forEach((el) => (el.textContent = BIZ.phoneLines));
     $$("[data-area]").forEach((el) => (el.textContent = BIZ.area));

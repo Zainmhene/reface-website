@@ -47,7 +47,8 @@ Keep it separate from Zain's personal website, TSUGI and other client projects. 
 
 ## Brand
 
-Navy from the Reface logo (`#16306a`), warm ivory, brushed brass accents. Fraunces for headings, Manrope for text,
+Navy (`#16306a`) for the site, warm ivory, brushed brass accents. The header logo uses Reface's exact logo colours:
+royal navy `#00207d` and a yellow full stop `#f9fe00` ("reface."), with the lowercase tagline "kitchens | bedrooms | bathrooms". Fraunces for headings, Manrope for text,
 Montserrat 800 for the "reface" wordmark. Mobile-first: most visitors are on phones. Premium, big readable text.
 
 ## Rules
@@ -56,8 +57,11 @@ Montserrat 800 for the "reface" wordmark. Mobile-first: most visitors are on pho
   into `js/config.js`. Until then the site shows a "Read our Google reviews" card.
 - Before & after photos must be **real Reface jobs**. Never use brochure or AI images there. Any AI image elsewhere must be labelled.
 - Email (info@refacegroup.co.uk) and phone-line hours (Mon–Fri 9–5, Sat 10–3) come from their current website;
-  opening hours (Mon–Thu 10–4, Fri 9–4, Sat 10–2) from Google. Both are shown, labelled. The WhatsApp number is still unconfirmed.
-- Before launch, confirm with Reface: WhatsApp number, form endpoint, permission to use the customers' job photos, and that they approve the site.
+  opening hours (Mon–Thu 10–4, Fri 9–4, Sat 10–2) from Google. Both are shown, labelled. (Their WhatsApp profile says Monday 9–4,
+  so the sources disagree on Mondays; ask Reface.)
+- Phone (calls): the landline (0191) 456 3718. WhatsApp (every Photoquote button): 07457 403407, Reface's verified
+  WhatsApp Business account. Don't mix them up.
+- Before launch, confirm with Reface: form endpoint, permission to use the customers' job photos, and that they approve the site.
 - No API keys or secrets in the repo.
 - Zain is learning web development: explain changes simply, be direct about bad ideas, keep replies short.
 - Work on a branch and open a pull request; don't push to `main` directly. Get Zain's approval before adding

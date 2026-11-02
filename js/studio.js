@@ -88,7 +88,7 @@
       $(".cs-note", root).textContent = s.note;
       // "Photoquote in this colour": opens WhatsApp with the room, style and colour filled in
       const msg = `Hi Reface, I'd like a free Photoquote. I like the ${ROOM[room]} in ${c.name} (${s.range}). Here are some photos of my room:`;
-      $(".cs-cta", root).href = `https://wa.me/${BIZ.whatsapp || "441914563718"}?text=${encodeURIComponent(msg)}`;
+      $(".cs-cta", root).href = `https://wa.me/${BIZ.whatsapp || "447457403407"}?text=${encodeURIComponent(msg)}`;
       $$(".cs-dot", dots).forEach((d, k) => d.setAttribute("aria-checked", String(k === idx)));
       const on = dots.children[idx];
       if (on) dots.scrollTo({ left: on.offsetLeft - dots.clientWidth / 2 + on.clientWidth / 2, behavior: reduceMotion ? "auto" : "smooth" });

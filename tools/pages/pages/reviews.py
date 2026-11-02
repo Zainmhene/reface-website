@@ -8,7 +8,7 @@ body = page_head("Reviews", "Testimonials", "What our <em>customers say.</em>",
   <div class="container">
     <div data-reviews></div>
     <div class="btn-row" style="justify-content:center;margin-top:32px">
-      <a class="btn btn-whatsapp" data-wa href="https://wa.me/441914563718">{I["wa"]} Get a free Photoquote</a>
+      <a class="btn btn-whatsapp" data-wa href="https://wa.me/447457403407">{I["wa"]} Get a free Photoquote</a>
       <a class="btn btn-ghost" href="contact.html">Contact us</a>
     </div>
   </div>

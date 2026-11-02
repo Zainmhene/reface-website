@@ -12,10 +12,10 @@ window.REFACE = {
     // From their current website (refacegroup.co.uk). If this is ever emptied, email links are hidden.
     email: "info@refacegroup.co.uk",
 
-    // TODO (confirm with Reface): the WhatsApp number for the Photoquote service.
-    // Their Google listing has a WhatsApp button; ask which number it uses.
-    // International format, digits only, no + or spaces. e.g. 447700900123
-    whatsapp: "441914563718",
+    // WhatsApp for the Photoquote service: Reface's verified WhatsApp Business account (from its profile).
+    // International format, digits only, no + or spaces.
+    whatsapp: "447457403407",
+    whatsappDisplay: "07457 403407",
 
     // Opening hours: from the Google Business listing.
     hours: [

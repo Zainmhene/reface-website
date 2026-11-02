@@ -43,16 +43,16 @@ def header(active=""):
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 <div class="topbar"><div class="container">
-  <span><b>FREE</b> WhatsApp Photoquote · <a data-wa href="https://wa.me/441914563718">Send a photo →</a></span>
+  <span><b>FREE</b> WhatsApp Photoquote · <a data-wa href="https://wa.me/447457403407">Send a photo →</a></span>
   <span class="tb-hours">Lines open <span data-lines>Mon–Fri 9am–5pm, Sat 10am–3pm</span> · <a data-tel="text" href="tel:+441914563718">(0191) 456 3718</a></span>
 </div></div>
 <header class="site-header">
   <div class="container">
-    {BACK if active != "index.html" else ""}<a class="logo" href="index.html" aria-label="Reface home"><span class="logo-word">reface</span><span class="logo-tag">Kitchens · Bedrooms · Bathrooms</span></a>
+    {BACK if active != "index.html" else ""}<a class="logo" href="index.html" aria-label="Reface home"><span class="logo-word">reface</span><span class="logo-tag">kitchens | bedrooms | bathrooms</span></a>
     <nav class="nav" aria-label="Main">{nav}</nav>
     <div class="header-actions">
       <a class="icon-btn" data-tel href="tel:+441914563718" aria-label="Call Reface">{I["phone"]}</a>
-      <a class="btn btn-sm btn-whatsapp header-cta" data-wa href="https://wa.me/441914563718">{I["wa"]} Free Photoquote</a>
+      <a class="btn btn-sm btn-whatsapp header-cta" data-wa href="https://wa.me/447457403407">{I["wa"]} Free Photoquote</a>
       <button class="icon-btn menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">{I["menu"]}</button>
     </div>
   </div>
@@ -62,7 +62,7 @@ def header(active=""):
   <nav aria-label="Mobile">{mnav}</nav>
   <div class="mm-foot">
     <a class="btn btn-light btn-block" data-tel href="tel:+441914563718">{I["phone"]} Call (0191) 456 3718</a>
-    <a class="btn btn-whatsapp btn-block" data-wa href="https://wa.me/441914563718">{I["wa"]} Free WhatsApp Photoquote</a>
+    <a class="btn btn-whatsapp btn-block" data-wa href="https://wa.me/447457403407">{I["wa"]} Free WhatsApp Photoquote</a>
   </div>
 </div>
 <main id="main">'''
@@ -73,17 +73,17 @@ def footer(scripts=""):
   <div class="container">
     <div class="footer-grid">
       <div>
-        <a class="logo" href="index.html"><span class="logo-word">reface</span><span class="logo-tag" style="color:rgba(255,255,255,.5)">Kitchens · Bedrooms · Bathrooms</span></a>
+        <a class="logo" href="index.html"><span class="logo-word">reface</span><span class="logo-tag" style="color:rgba(255,255,255,.55)">kitchens | bedrooms | bathrooms</span></a>
         <p style="margin-top:18px;max-width:30ch">Made-to-measure kitchen makeovers, fitted bedrooms and fitted bathrooms for <span data-area>South Shields and nearby areas</span>.</p>
         <p style="margin:0"><a data-maps href="https://www.google.com/maps/search/?api=1&amp;query=Reface+85+Westoe+Rd+South+Shields+NE33+4LU">85 Westoe Rd, South Shields NE33 4LU</a></p>
-        <div class="btn-row" style="margin-top:18px"><a class="btn btn-sm btn-whatsapp" data-wa href="https://wa.me/441914563718">{I["wa"]} Photoquote</a></div>
+        <div class="btn-row" style="margin-top:18px"><a class="btn btn-sm btn-whatsapp" data-wa href="https://wa.me/447457403407">{I["wa"]} Photoquote</a></div>
       </div>
       <div><h4>Explore</h4><ul>
         <li><a href="index.html">Home</a></li><li><a href="gallery.html">Before &amp; After</a></li><li><a href="reviews.html">Reviews</a></li><li><a href="contact.html">Contact</a></li></ul></div>
       <div><h4>Contact</h4><ul>
         <li><a data-tel="text" href="tel:+441914563718">(0191) 456 3718</a></li>
         <li data-mail-row><a data-mail="text" href="mailto:info@refacegroup.co.uk">info@refacegroup.co.uk</a></li>
-        <li><a data-wa href="https://wa.me/441914563718">WhatsApp Photoquote</a></li>
+        <li><a data-wa href="https://wa.me/447457403407">WhatsApp <span data-wa-text>07457 403407</span></a></li>
         <li><a href="contact.html">Send an enquiry</a></li>
         <li><a data-maps href="https://www.google.com/maps/search/?api=1&amp;query=Reface+85+Westoe+Rd+South+Shields+NE33+4LU">Get directions</a></li></ul></div>
       <div><h4>Opening hours</h4><ul class="hours" data-hours>
@@ -97,7 +97,7 @@ def footer(scripts=""):
 </footer>
 <nav class="action-bar" aria-label="Quick contact">
   <a data-tel href="tel:+441914563718">{I["phone"]} Call</a>
-  <a class="ab-wa" data-wa href="https://wa.me/441914563718">{I["wa"]} WhatsApp</a>
+  <a class="ab-wa" data-wa href="https://wa.me/447457403407">{I["wa"]} WhatsApp</a>
   <a class="ab-quote" href="contact.html">Contact</a>
 </nav>
 <script src="js/config.js"></script>

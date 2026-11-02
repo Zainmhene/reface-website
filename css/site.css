@@ -542,3 +542,10 @@ div.service-card { cursor: default; }
   .job.wide .job-photos { grid-template-columns: repeat(4, 1fr); grid-template-rows: auto; }
   .job.wide .job-photo.big { grid-column: 1 / span 2; grid-row: 1 / span 2; aspect-ratio: auto; height: 100%; }
 }
+
+/* Logo: matches Reface's own logo (royal navy "reface" with a yellow full stop, lowercase tagline) */
+:root { --logo-navy: #00207d; --logo-yellow: #f9fe00; }
+.site-header .logo-word, .mobile-menu .logo-word { color: var(--logo-navy); }
+.logo-word::after { content: ""; display: inline-block; width: .2em; height: .2em; margin-left: .05em; border-radius: 50%; background: var(--logo-yellow); }
+.site-header .logo-word::after, .mobile-menu .logo-word::after { box-shadow: 0 0 0 1px rgba(0, 32, 125, .12); }
+.logo-tag { text-transform: none; letter-spacing: .06em; font-size: .68rem; }
