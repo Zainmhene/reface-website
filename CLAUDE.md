@@ -69,6 +69,11 @@ Keep it separate from Zain's personal website, TSUGI and other client projects. 
   The first three in `config.js` show on the home page (one kitchen, one bedroom, one kitchen & bathroom). Long ones get "Read more".
   Google rating 5.0 from 173 reviews (2 Nov 2026) is in `config.js`; it shows in the home hero and above the reviews. Update the count now and then.
 - `PREVIEW = True` in `tools/pages/parts.py` adds a noindex tag so search engines ignore the site until launch.
+  `SITE_URL` there is the full site address, used for the link-preview picture `assets/img/share.jpg` (WhatsApp/Facebook).
+  At launch: `PREVIEW = False`, `SITE_URL = "https://www.refacegroup.co.uk/"`, add a `CNAME` file. Steps in `project/GO-LIVE.md`.
+- `project/`: the project guide (`README.md`) and the go-live checklist (`GO-LIVE.md`). Keep them up to date.
+- `tools/tests/`: browser checks (Playwright) to run before every update; `check-phone.js` first. `tools/images/make_studio.py`
+  remakes the Colour Studio photos from the sharpened sources in the "Reface project files" zip (kept outside the public repo).
 
 ## Brand
 

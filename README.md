@@ -7,10 +7,10 @@ Plain HTML, CSS and JavaScript, so it can be hosted for free (GitHub Pages).
 
 | Page | What it shows |
 | --- | --- |
-| `index.html` | Home: animated still photo hero, what we offer, **Colour Studio** (tap a colour and the room changes), how a free Photoquote works, Google reviews, contact links. |
-| `gallery.html` | Before & after photos with a drag slider on each. |
-| `reviews.html` | Testimonials (real Google reviews) and a link to all reviews on Google. |
-| `contact.html` | Phone, WhatsApp, address, opening hours and an enquiry form. |
+| `index.html` | Home: still photo hero, what we offer, **Colour Studio** (tap a colour and the room changes), how a free Photoquote works, Google reviews, contact links. |
+| `gallery.html` | A before & after slider and real job photos, each with the customer's Google review. |
+| `reviews.html` | The Google rating and 11 real Google reviews, word for word. |
+| `contact.html` | Phone, WhatsApp, email, address, opening hours and an enquiry form. |
 
 **Photoquote** means a customer sends photos of their room on WhatsApp and Reface replies with a price.
 Every "Free Photoquote" button opens WhatsApp with a ready-written message.
@@ -23,14 +23,11 @@ The email and phone-line hours come from refacegroup.co.uk; the opening hours an
 - **Testimonials:** copy real Google reviews word for word into `reviews`, and fill in `googleRating` and `googleReviewCount`.
 - **Before & after:** put each pair of photos in `assets/img/work/` and add a line to `work` (there's an example in the file).
 
-## Before it goes live (checklist)
+## Project guide and going live
 
-1. **Reface approves the site.**
-2. **Permission for the job photos:** the gallery photos came from customers' Google reviews (Lynne J., Karen B.,
-   Jacqueline S., Ethan P., Robert, Christine F., Judith H.). Reface should check they're happy for them to be used, or send their own photos of those jobs.
-3. **More before & after photos** of real Reface jobs (one job has them so far). Same angle, before and after.
-4. **Enquiries by email:** create a free form at formspree.io and paste its URL into `form.endpoint`. Without it, the form opens WhatsApp.
-5. **Let Google find it:** set `PREVIEW = False` in `tools/pages/parts.py` and run `python3 tools/pages/build.py`.
+- **[project/README.md](project/README.md)**: everything about the project (client details, decisions, how to change things).
+- **[project/GO-LIVE.md](project/GO-LIVE.md)**: what's needed from Reface, and the launch steps.
+- **`tools/tests/`**: the checks to run before every update. **`tools/images/`**: how the Colour Studio photos are made.
 
 ## Share a link (GitHub Pages)
 
