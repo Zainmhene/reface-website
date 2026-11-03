@@ -79,10 +79,116 @@
     document.addEventListener("keydown", (e) => { if (e.key === "Escape" && menu.classList.contains("open")) close(); });
   }
 
+  /* ---------- Home hero on computers: "bare board to brand new" scroll video ----------
+     61 frames of an AI video (a bare room building into the finished navy kitchen) play on a canvas
+     as you scroll, and the caption changes at each stage. Only runs on wide screens: phones and
+     portrait tablets show the still photo hero instead and never download these frames. */
+  const DESK = window.matchMedia("(min-width: 900px) and (min-aspect-ratio: 9/10)");
+  function initHero() {
+    const hero = $("[data-hero]");
+    if (!hero) return;
+    if (!DESK.matches) { // e.g. a tablet turned sideways later: start then
+      const later = () => { if (DESK.matches) { DESK.onchange = null; initHero(); } };
+      DESK.onchange = later;
+      return;
+    }
+    const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+    const track = $(".hero-track", hero), canvas = $(".hero-canvas", hero);
+    const ctx = canvas.getContext && canvas.getContext("2d");
+    const caps = $$(".hero-cap", hero), rail = $$(".hero-rail li", hero);
+    const hint = $(".scroll-hint", hero), bar = $(".hero-progress", hero), header = $(".site-header");
+    const pattern = hero.dataset.framesWide, count = +hero.dataset.countWide || 0;
+    if (!ctx || !pattern || !count) { hero.classList.add("no-canvas"); return; }
+    const frames = new Array(count), finalImg = new Image();
+    let p = reduceMotion ? 1 : 0, current = -1, ticking = false;
+
+    // Load the first and last frames first, then fill in the gaps (every 16th, 8th, 4th...),
+    // so scrolling looks right straight away and gets smoother as the rest arrive.
+    function loadFrames() {
+      const order = [], seen = new Set();
+      const push = (i) => { if (i >= 0 && i < count && !seen.has(i)) { seen.add(i); order.push(i); } };
+      push(0); push(count - 1);
+      for (let step = 16; step >= 1; step = Math.floor(step / 2)) { for (let i = 0; i < count; i += step) push(i); if (step === 1) break; }
+      let active = 0, k = 0;
+      const next = () => {
+        while (active < 6 && k < order.length) {
+          const i = order[k++]; active++;
+          const im = new Image(); im.decoding = "async";
+          im.onload = () => { frames[i] = im; active--; if (i === 0) resize(); onScroll(); next(); };
+          im.onerror = () => { active--; if (i === 0) hero.classList.add("no-canvas"); next(); };
+          im.src = pattern.replace("{n}", String(i).padStart(3, "0"));
+        }
+        if (k >= order.length && hero.dataset.finalWide && !finalImg.src) finalImg.src = hero.dataset.finalWide;
+      };
+      next();
+    }
+
+    function resize() {
+      const r = canvas.getBoundingClientRect(), dpr = Math.min(2, window.devicePixelRatio || 1);
+      canvas.width = Math.max(1, Math.round(r.width * dpr));
+      canvas.height = Math.max(1, Math.round(r.height * dpr));
+      draw();
+    }
+    function coverDraw(img, alpha) {
+      const cw = canvas.width, ch = canvas.height, iw = img.naturalWidth, ih = img.naturalHeight;
+      const sc = Math.max(cw / iw, ch / ih);
+      ctx.globalAlpha = alpha;
+      ctx.drawImage(img, (cw - iw * sc) / 2, (ch - ih * sc) / 2, iw * sc, ih * sc);
+      ctx.globalAlpha = 1;
+    }
+    function draw() {
+      const f = clamp((p - 0.02) / 0.84, 0, 1) * (count - 1), i = Math.round(f);
+      let img = frames[i];
+      for (let d = 1; !img && d < count; d++) img = frames[i - d] || frames[i + d];
+      if (!img) return;
+      coverDraw(img, 1);
+      // At the end, fade into the sharp photo of the finished kitchen
+      const fa = clamp((p - 0.84) / 0.1, 0, 1);
+      if (fa > 0 && finalImg.complete && finalImg.naturalWidth) coverDraw(finalImg, fa);
+    }
+    function setStage() {
+      let k = 0;
+      caps.forEach((c, i) => { if (p >= parseFloat(c.dataset.at)) k = i; });
+      if (reduceMotion) k = 0;
+      if (k !== current) {
+        current = k;
+        caps.forEach((c, i) => { c.classList.toggle("is-on", i === k); c.setAttribute("aria-hidden", String(i !== k)); });
+        rail.forEach((li, i) => { li.classList.toggle("on", i <= k); li.classList.toggle("now", i === k); });
+      }
+      // Dark text on the light, bare room; light text once the navy kitchen builds
+      hero.classList.toggle("tone-light", p < 0.27);
+      if (header) {
+        const over = track.getBoundingClientRect().bottom > header.offsetHeight + 4;
+        header.classList.toggle("on-hero", over);
+        header.classList.toggle("on-dark", over && p >= 0.27);
+      }
+      if (bar) bar.style.transform = `scaleX(${p.toFixed(4)})`;
+      if (hint) hint.style.opacity = p > 0.03 ? 0 : 1;
+    }
+    function update() {
+      ticking = false;
+      if (!reduceMotion) {
+        const r = track.getBoundingClientRect();
+        p = clamp(-r.top / Math.max(1, r.height - window.innerHeight), 0, 1);
+      }
+      setStage(); draw();
+    }
+    const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", () => { resize(); onScroll(); });
+    // Click a stage name on the right to jump to it
+    rail.forEach((li, i) => li.addEventListener("click", () => {
+      const r = track.getBoundingClientRect();
+      window.scrollTo({ top: window.scrollY + r.top + (r.height - window.innerHeight) * parseFloat(caps[i].dataset.at) + 2, behavior: "smooth" });
+    }));
+    loadFrames();
+    resize(); update();
+  }
+
   /* ---------- Home hero: the photo moves a little slower than the page ---------- */
   function initParallax() {
     const pic = $(".hero-still picture");
-    if (!pic || reduceMotion) return;
+    if (!pic || reduceMotion || DESK.matches) return;
     const hero = pic.parentElement;
     let ticking = false;
     const update = () => {
@@ -403,5 +509,6 @@
     initForms();
     initReveal();
     initParallax();
+    initHero();
   });
 })();

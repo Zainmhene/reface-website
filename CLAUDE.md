@@ -16,16 +16,26 @@ Keep it separate from Zain's personal website, TSUGI and other client projects. 
   Zain didn't want it too basic, so the home page keeps some high-end touches: the **Colour Studio** and animation
   (see below). Don't add pages or sections back without asking. Other features (door designer, price guide, AI visualiser,
   video hero) were built earlier and are in git history if the client wants to grow it.
-- Home: still photo hero (eases in, words rise in, gentle parallax), What we offer, Colour Studio, Photoquote, Reviews, CTA.
+- Home: hero, What we offer, Colour Studio, Photoquote, Reviews, CTA.
+- Hero (Zain's choice, Nov 2026): **computers** get the "Bare board to brand new" scroll video (61 AI video frames in
+  `assets/img/hero/wide/`, played on a canvas as you scroll, 6 caption stages, header see-through and white over the dark
+  kitchen, labelled "Visualisation"; `initHero` in `js/site.js`). **Phones and portrait tablets** get the still photo hero
+  (eases in, words rise in, gentle parallax; `assets/img/home/hero-tall-720/1080.webp`) and never download the video frames
+  (the hero is `display: none` there and the still photo's `<picture>` gives computers an empty 1px image).
+  The switch is `(min-width: 900px) and (min-aspect-ratio: 9/10)`, used in both the CSS and `DESK` in site.js.
 - Colour Studio (`js/studio.js`, home only): Kitchen (Shaker / Handleless), Bedroom and Bathroom tabs, round colour dots on
   the photo; tap or swipe to wipe in the new colour. The first time it scrolls into view it plays one slow wipe so people
   see it changes. Its "Free Photoquote in this colour" button opens WhatsApp with the room and colour filled in.
   Photos in `assets/img/studio/` are brochure photos recoloured with the real brochure colours (made by `tools/images/recolour.py`,
   in git history). The bathroom photo is AI-made and labelled as a visualisation; it
   could be swapped for a real one (Reface now has real bathroom jobs, see the gallery). Oak swatch tiles are in `assets/img/swatches/`.
-  Handleless photos (`kitchen-*`) were remade from the brochure photo (Kitchen.pdf page 8) upscaled to 2K in Higgsfield, then
-  recoloured with `recolour.py` (oven glass, sink and sockets excluded from the mask); the old ones were blurry and blocky.
+  All studio photos were remade (Nov 2026) from sources upscaled to 2K in Higgsfield: Shaker = Kitchen.pdf p18, Handleless =
+  Kitchen.pdf p8, Bedroom = Bedroom.pdf p15, Bathroom = its own Parisian Blue photo. Recoloured with `recolour.py`'s masks;
+  brass/gold (handles, knobs, taps) is protected from tinting; Handleless excludes oven glass, sink and sockets.
+  Each colour has wide 1600/900 (computers, tablets) and square `-sq-1080`/`-sq-600` cut for phones (sharper and smaller).
   On phones the studio photo is square (1:1). No backdrop blur on the labels over the photo (it made the slide stutter on iPhones).
+  The page has no built-in studio photo: `studio.js` picks the first one (square on phones) so phones don't download it twice.
+  On data saver, nothing is loaded ahead.
   Speed (it used to lag): a tap shows the small 900px photo at once and swaps in the 1600px one when it arrives; then the other
   colours download one at a time in the background (small ones, then the first photo of each other room/style, then sharp ones),
   starting about two screens before the section, and a tap cancels the background download so it gets the whole connection. Taps during a wipe are queued (last one wins). The wipe
@@ -41,7 +51,8 @@ Keep it separate from Zain's personal website, TSUGI and other client projects. 
 - Photoquote = customers send photos of their room on WhatsApp and get a price back (their site: "Do you use WhatsApp?
   Then ask about our absolutely FREE Photoquote Service"). Every "Free Photoquote" button
   opens WhatsApp with `photoquoteMessage` from config.
-- Images: `assets/img/home/` (still hero from the supplier brochure, two service photos), `assets/img/studio/` (Colour Studio),
+- Images: `assets/img/home/` (still hero from the supplier brochure, sharpened; two service photos at 800/1200 from the
+  brochures), `assets/img/hero/` (computer video hero), `assets/img/studio/` (Colour Studio),
   `assets/img/work/` for real job photos.
 - Gallery (`gallery.html`, from `work` in config): before & after jobs first (sliders that sweep once when they come into view),
   then finished-job photo sets (tap to enlarge), each shown with its customer's review. Job 1 is a real before & after:
