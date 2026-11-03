@@ -18,7 +18,8 @@ Keep it separate from Zain's personal website, TSUGI and other client projects. 
   video hero) were built earlier and are in git history if the client wants to grow it.
 - Home: hero, What we offer, Colour Studio, Photoquote, Reviews, CTA.
 - Hero (Zain's choice, Nov 2026): **computers** get the "Bare board to brand new" scroll video (61 AI video frames in
-  `assets/img/hero/wide/`, played on a canvas as you scroll, 6 caption stages, header see-through and white over the dark
+  `assets/img/hero/wide/`, cut from the original 2560x1440 Higgsfield video at 1920px (frame 0 at 2560px), about 6 MB in all,
+  ending on the sharp finished-kitchen still `navy-kitchen-2560.webp`; played on a canvas as you scroll, 6 caption stages, header see-through and white over the dark
   kitchen, labelled "Visualisation"; `initHero` in `js/site.js`). **Phones and portrait tablets** get the still photo hero
   (eases in, words rise in, gentle parallax; `assets/img/home/hero-tall-720/1080.webp`) and never download the video frames
   (the hero is `display: none` there and the still photo's `<picture>` gives computers an empty 1px image).
@@ -32,6 +33,9 @@ Keep it separate from Zain's personal website, TSUGI and other client projects. 
   All studio photos were remade (Nov 2026) from sources upscaled to 2K in Higgsfield: Shaker = Kitchen.pdf p18, Handleless =
   Kitchen.pdf p8, Bedroom = Bedroom.pdf p15, Bathroom = its own Parisian Blue photo. Recoloured with `recolour.py`'s masks;
   brass/gold (handles, knobs, taps) is protected from tinting; Handleless excludes oven glass, sink and sockets.
+  The recolour keeps the photo's light and shade, but the lighter the new colour, the more it softens the shading and
+  especially the grain/noise of the dark original (copied 1:1, whites and creams looked dirty and blotchy). Small gaps in
+  the door area are filled so kickboards don't show dark specks.
   Each colour has wide 1600/900 (computers, tablets) and square `-sq-1080`/`-sq-600` cut for phones (sharper and smaller).
   On phones the studio photo is square (1:1). No backdrop blur on the labels over the photo (it made the slide stutter on iPhones).
   The page has no built-in studio photo: `studio.js` picks the first one (square on phones) so phones don't download it twice.
