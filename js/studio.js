@@ -61,11 +61,19 @@
     const styleIdx = { kitchen: 0, bedroom: 0, bathroom: 0 };
     const style = () => STUDIO[room][styleIdx[room]];
     const url = (s, c, w) => `${s.base}${c.id}-${w}.webp`;
+    // Phones show the photo square, so they get square photos cut to fit (sharper and smaller);
+    // computers and tablets get the wide ones.
+    const square = () => stage.clientWidth / Math.max(1, stage.clientHeight) < 1.25;
+    const SMALL = () => (square() ? "sq-600" : 900);
+    const BIG = () => (square() ? "sq-1080" : 1600);
+    // Phones on data saver only get what they tap, nothing ahead
+    const saveData = !!(navigator.connection && navigator.connection.saveData);
     const setAlt = (img, c) => (img.alt = `${ROOM[room][0].toUpperCase() + ROOM[room].slice(1)} in ${c.name}`);
     const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 
     /* ---- Loading photos (the reason it used to lag) ----
-       Each colour has a small photo (900px, ~20–50 KB) and a sharp one (1600px, ~50–120 KB).
+       Each colour has a small photo and a sharp one: on phones square ones (600px ~23 KB, 1080px ~60 KB),
+       on computers wide ones (900px ~35 KB, 1600px ~100 KB).
        - A tap shows the small one straight away (it downloads in a blink), then the sharp one
          is swapped in quietly once it has arrived.
        - Other colours download one at a time in the background, nearest colours first,
@@ -79,8 +87,10 @@
       im.onerror = () => res(src);
       im.src = src;
     });
-    const sharpNeeded = () => Math.max(stage.clientWidth, stage.clientHeight * 1.6) * (window.devicePixelRatio || 1) > 1000;
-    const best = (s, c) => (ready.has(url(s, c, 1600)) ? url(s, c, 1600) : url(s, c, 900));
+    const sharpNeeded = () => square()
+      ? stage.clientWidth * (window.devicePixelRatio || 1) > 640
+      : Math.max(stage.clientWidth, stage.clientHeight * 1.6) * (window.devicePixelRatio || 1) > 1000;
+    const best = (s, c) => (ready.has(url(s, c, BIG())) ? url(s, c, BIG()) : url(s, c, SMALL()));
     const same = (s, c) => style() === s && s.colours[idx] === c;
 
     // Background downloads: one at a time. A tap cancels the one in progress (it's put back in the
@@ -109,7 +119,7 @@
     }
     // Once the sharp version of the photo on screen has arrived, swap it in quietly
     async function swapSharp() {
-      const s = style(), c = s.colours[idx], big = url(s, c, 1600);
+      const s = style(), c = s.colours[idx], big = url(s, c, BIG());
       if (busy || !ready.has(big) || a.getAttribute("src") === big) return;
       const im = new Image(); im.src = big;
       try { await im.decode(); } catch (e) { /* ignore */ }
@@ -118,12 +128,15 @@
     function preloadAround() {
       const s = style(), n = s.colours.length, order = [];
       for (let d = 1; d < n; d++) order.push((idx + d) % n, (idx - d + n) % n);
-      const sharp = sharpNeeded();
-      queue = [
-        ...[...new Set(order)].map((k) => url(s, s.colours[k], 900)), // every other colour, small (so taps are quick)
-        ...(sharp ? [url(s, s.colours[idx], 1600)] : []),       // then the photo on screen, sharp
-        ...(sharp ? [1, -1, 2, -2].map((d) => url(s, s.colours[(idx + d + n) % n], 1600)) : []) // then its neighbours, sharp
+      const sharp = sharpNeeded(), near = [...new Set(order)];
+      const big = BIG(), small = SMALL();
+      const firstOfOthers = Object.keys(STUDIO).flatMap((r) => STUDIO[r]).filter((st) => st !== s).map((st) => url(st, st.colours[0], small));
+      queue = saveData ? [] : [
+        ...near.map((k) => url(s, s.colours[k], small)),                        // every other colour, small (so any tap is quick)
+        ...firstOfOthers,                                                       // the other rooms/styles, small, so switching is instant
+        ...(sharp ? near.slice(0, 4).map((k) => url(s, s.colours[k], big)) : []) // the 4 nearest colours, sharp
       ];
+      if (sharp) queue.unshift(url(s, s.colours[idx], big));                    // the photo on screen, sharp (first, so it looks crisp)
       pump(); swapSharp();
     }
     async function pump() {
@@ -168,8 +181,9 @@
       stage.style.setProperty("--pos", s.pos);
       const src = best(s, c);
       busy = true;
-      if (!ready.has(src)) stage.classList.add("switching");
+      const dim = setTimeout(() => stage.classList.add("switching"), 150); // only if it takes a moment
       await fgLoad(src);
+      clearTimeout(dim);
       a.src = src; setAlt(a, c);
       try { await a.decode(); } catch (e) { /* ignore */ }
       stage.classList.remove("switching");
@@ -243,7 +257,8 @@
     renderChrome();
     stage.style.setProperty("--pos", style().pos);
     setAlt(a, style().colours[0]);
-    ready.add(a.getAttribute("src")); // the first photo is in the page already (it loads as the section nears)
+    a.src = url(style(), style().colours[0], SMALL()); // square on phones (set before the lazy photo starts loading)
+    ready.add(a.getAttribute("src"));
 
     // When the visitor is about two screens away: start the quiet background loading.
     // When it's properly in view: play one slow wipe to show visitors the photo changes

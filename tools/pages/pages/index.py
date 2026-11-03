@@ -2,9 +2,42 @@ from parts import head, header, footer
 from icons import ICONS as I
 
 body = f'''
+<section class="hero tone-light" data-hero aria-label="Watch a kitchen come together" data-frames-wide="assets/img/hero/wide/f-{{n}}.webp" data-count-wide="61" data-final-wide="assets/img/hero/navy-kitchen-1600.webp">
+  <div class="hero-track">
+    <div class="hero-sticky">
+      <canvas class="hero-canvas" aria-hidden="true"></canvas>
+      <img class="hero-fallback" src="assets/img/hero/navy-kitchen-1600.webp" srcset="assets/img/hero/navy-kitchen-900.webp 900w, assets/img/hero/navy-kitchen-1600.webp 1600w" sizes="100vw" alt="Finished navy kitchen with a gold-veined marble alcove, brass hood and brass pendant lights" loading="lazy">
+      <div class="hero-shade"></div><div class="hero-shade-light"></div>
+      <div class="hero-progress"></div>
+      <div class="hero-captions">
+        <div class="hero-cap is-on" data-at="0">
+          <p class="eyebrow">Reface · South Shields</p>
+          <h1>Bare board <em>to brand new.</em></h1>
+          <p>Kitchens designed, supplied and fitted across South Shields, or a new look for the one you have. Scroll to watch the room come together.</p>
+          <div class="btn-row">
+            <a class="btn btn-whatsapp" data-wa href="https://wa.me/447457403407">{I["wa"]} Get a free Photoquote</a>
+            <a class="btn btn-outline-light" href="contact.html">Contact us</a>
+          </div>
+          <a class="hero-rating" data-google href="https://share.google/85vLoGir77iD04as1"><span class="stars" aria-hidden="true">★★★★★</span> <u data-rating-text>Read our Google reviews</u></a>
+        </div>
+        <div class="hero-cap" data-at="0.23" aria-hidden="true"><p class="eyebrow">01 · Units</p><h2>Made to measure, <em>fitted to the inch.</em></h2><p>Cabinets, doors and drawers built around your room, or new doors on the units you already have.</p></div>
+        <div class="hero-cap" data-at="0.36" aria-hidden="true"><p class="eyebrow">02 · Stone</p><h2>Stone, <em>floor to ceiling.</em></h2><p>Quartz, granite and laminate worktops and splashbacks, made to measure.</p></div>
+        <div class="hero-cap" data-at="0.57" aria-hidden="true"><p class="eyebrow">03 · Brass</p><h2>Deep navy, <em>warm brass.</em></h2><p>52 door colours in our range, from soft creams to deep navy.</p></div>
+        <div class="hero-cap" data-at="0.69" aria-hidden="true"><p class="eyebrow">04 · Light</p><h2>Lit <em>from within.</em></h2><p>Under-cabinet and shelf lighting to finish the room.</p></div>
+        <div class="hero-cap" data-at="0.82" aria-hidden="true"><p class="eyebrow">05 · Done</p><h2>Ready for the first <em>Sunday roast.</em></h2><p>Designed, supplied and fitted by Reface, South Shields.</p>
+          <div class="btn-row"><a class="btn btn-whatsapp" data-wa href="https://wa.me/447457403407">{I["wa"]} Get a free Photoquote</a><a class="btn btn-outline-light" href="#studio">Try our colours</a></div></div>
+      </div>
+      <ol class="hero-rail" aria-hidden="true"><li><span>Bare</span></li><li><span>Units</span></li><li><span>Stone</span></li><li><span>Brass</span></li><li><span>Light</span></li><li><span>Done</span></li></ol>
+      <div class="scroll-hint"><i></i>Scroll to watch the room come together</div>
+      <span class="hero-note" title="AI visualisation of a kitchen being built, in Reface navy, marble and brass.">Visualisation</span>
+    </div>
+  </div>
+</section>
+
 <section class="hero-still" aria-label="Reface kitchen makeovers">
   <picture>
-    <source media="(max-aspect-ratio: 9/10)" srcset="assets/img/home/hero-tall.webp">
+    <source media="(min-width: 900px) and (min-aspect-ratio: 9/10)" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+    <source media="(max-aspect-ratio: 9/10)" srcset="assets/img/home/hero-tall-720.webp 720w, assets/img/home/hero-tall-1080.webp 1080w" sizes="100vw">
     <img class="hs-img" src="assets/img/home/hero-1600.webp" srcset="assets/img/home/hero-900.webp 900w, assets/img/home/hero-1600.webp 1600w" sizes="100vw" width="1600" height="1003" alt="Kitchen with Alnwick shaker doors in Parisian Blue Oak and brass handles" fetchpriority="high">
   </picture>
   <div class="container">
@@ -27,11 +60,11 @@ body = f'''
     </div>
     <div class="services">
       <div class="service-card" data-reveal>
-        <img src="assets/img/home/kitchens-800.webp" loading="lazy" alt="Shaker kitchen in a soft cashmere colour with a white island">
+        <img src="assets/img/home/kitchens-800.webp" srcset="assets/img/home/kitchens-800.webp 800w, assets/img/home/kitchens-1200.webp 1200w" sizes="(min-width: 900px) 33vw, 100vw" loading="lazy" alt="Shaker kitchen in a soft cashmere colour with a white island">
         <div class="svc-body"><h3>Kitchen makeovers</h3><p>Replacement doors, drawer fronts, worktops and handles on your existing units, from a budget makeover to a complete renovation.</p></div>
       </div>
       <div class="service-card" data-reveal data-delay="100">
-        <img src="assets/img/home/bedrooms-800.webp" loading="lazy" alt="Fitted bedroom furniture in dark green">
+        <img src="assets/img/home/bedrooms-800.webp" srcset="assets/img/home/bedrooms-800.webp 800w, assets/img/home/bedrooms-1200.webp 1200w" sizes="(min-width: 900px) 33vw, 100vw" loading="lazy" alt="Fitted bedroom furniture in dark green">
         <div class="svc-body"><h3>Fitted bedrooms</h3><p>Fully fitted bedrooms: wardrobes, drawers and storage built around your room.</p></div>
       </div>
       <a class="service-card" href="gallery.html" data-reveal data-delay="200">
@@ -60,7 +93,7 @@ body = f'''
         <div class="cs-styles" aria-label="Choose a style"></div>
       </div>
       <div class="cs-stage" tabindex="0" aria-label="Room preview. Swipe or use the arrow keys to change the colour">
-        <img class="cs-a" src="assets/img/studio/hero-parisian-blue-oak-900.webp" alt="Kitchen in Parisian Blue Oak" width="1600" height="1002" loading="lazy">
+        <img class="cs-a" alt="Kitchen in Parisian Blue Oak" width="1600" height="1002" loading="lazy">
         <div class="cs-wipe" aria-hidden="true"><img class="cs-b" alt="" width="1600" height="1002"><div class="cs-line"></div></div>
         <div class="cs-label"><span class="cs-range">Vinyl · Alnwick door</span><b class="cs-name">Parisian Blue Oak</b></div>
         <div class="cs-dock">
