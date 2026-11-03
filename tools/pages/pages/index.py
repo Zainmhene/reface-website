@@ -2,11 +2,11 @@ from parts import head, header, footer
 from icons import ICONS as I
 
 body = f'''
-<section class="hero tone-light" data-hero aria-label="Watch a kitchen come together" data-frames-wide="assets/img/hero/wide/f-{{n}}.webp" data-count-wide="61" data-final-wide="assets/img/hero/navy-kitchen-1600.webp">
+<section class="hero tone-light" data-hero aria-label="Watch a kitchen come together" data-frames-wide="assets/img/hero/wide/f-{{n}}.webp" data-count-wide="61" data-final-wide="assets/img/hero/navy-kitchen-2560.webp">
   <div class="hero-track">
     <div class="hero-sticky">
       <canvas class="hero-canvas" aria-hidden="true"></canvas>
-      <img class="hero-fallback" src="assets/img/hero/navy-kitchen-1600.webp" srcset="assets/img/hero/navy-kitchen-900.webp 900w, assets/img/hero/navy-kitchen-1600.webp 1600w" sizes="100vw" alt="Finished navy kitchen with a gold-veined marble alcove, brass hood and brass pendant lights" loading="lazy">
+      <img class="hero-fallback" src="assets/img/hero/navy-kitchen-1600.webp" srcset="assets/img/hero/navy-kitchen-900.webp 900w, assets/img/hero/navy-kitchen-1600.webp 1600w, assets/img/hero/navy-kitchen-2560.webp 2560w" sizes="100vw" alt="Finished navy kitchen with a gold-veined marble alcove, brass hood and brass pendant lights" loading="lazy">
       <div class="hero-shade"></div><div class="hero-shade-light"></div>
       <div class="hero-progress"></div>
       <div class="hero-captions">
