@@ -17,13 +17,13 @@ Keep it separate from Zain's personal website, TSUGI and other client projects. 
   (see below). Don't add pages or sections back without asking. Other features (door designer, price guide, AI visualiser,
   video hero) were built earlier and are in git history if the client wants to grow it.
 - Home: hero, What we offer, Colour Studio, Photoquote, Reviews, CTA.
-- Hero (Zain's choice, Nov 2026): **computers** get the "Bare board to brand new" scroll video (61 AI video frames in
-  `assets/img/hero/wide/`, cut from the original 2560x1440 Higgsfield video at 1920px (frame 0 at 2560px), about 6 MB in all,
-  ending on the sharp finished-kitchen still `navy-kitchen-2560.webp`; played on a canvas as you scroll, 6 caption stages, header see-through and white over the dark
-  kitchen, labelled "Visualisation"; `initHero` in `js/site.js`). **Phones and portrait tablets** get the still photo hero
-  (eases in, words rise in, gentle parallax; `assets/img/home/hero-tall-720/1080.webp`) and never download the video frames
-  (the hero is `display: none` there and the still photo's `<picture>` gives computers an empty 1px image).
-  The switch is `(min-width: 900px) and (min-aspect-ratio: 9/10)`, used in both the CSS and `DESK` in site.js.
+- Hero: one still photo, no video (the client wants a basic site; Zain's call, 3 Nov 2026). Same words on all screens
+  ("Same kitchen. Whole new look.", Photoquote + Contact buttons, Google rating); eases in, words rise in, gentle parallax.
+  **Computers** (`(min-width: 900px) and (min-aspect-ratio: 9/10)`) show the finished navy/marble/brass kitchen
+  `assets/img/hero/navy-kitchen-1600/2560.webp` (an AI image from Higgsfield, so it's labelled "Visualisation").
+  **Phones and portrait tablets** show the brochure Alnwick shaker photo `assets/img/home/hero-tall-720/1080.webp`
+  with a deeper shade behind the words. The `<picture>` gives each screen only its own photo.
+  The scroll-video hero is in git history (removed in the still-hero PR) if it's ever wanted back.
 - Colour Studio (`js/studio.js`, home only): Kitchen (Shaker / Handleless), Bedroom and Bathroom tabs, round colour dots on
   the photo; tap or swipe to wipe in the new colour. The first time it scrolls into view it plays one slow wipe so people
   see it changes. Its "Free Photoquote in this colour" button opens WhatsApp with the room and colour filled in.
@@ -56,7 +56,7 @@ Keep it separate from Zain's personal website, TSUGI and other client projects. 
   Then ask about our absolutely FREE Photoquote Service"). Every "Free Photoquote" button
   opens WhatsApp with `photoquoteMessage` from config.
 - Images: `assets/img/home/` (still hero from the supplier brochure, sharpened; two service photos at 800/1200 from the
-  brochures), `assets/img/hero/` (computer video hero), `assets/img/studio/` (Colour Studio),
+  brochures), `assets/img/hero/` (computer hero photo), `assets/img/studio/` (Colour Studio),
   `assets/img/work/` for real job photos.
 - Gallery (`gallery.html`, from `work` in config): before & after jobs first (sliders that sweep once when they come into view),
   then finished-job photo sets (tap to enlarge), each shown with its customer's review. Job 1 is a real before & after:
