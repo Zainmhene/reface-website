@@ -3,6 +3,9 @@ CUR = ' aria-current="page"'
 
 # While Reface is reviewing the site, keep it out of Google. Set to False when it goes live.
 PREVIEW = True
+# The site's full address. Link previews (WhatsApp, Facebook) need it for the preview picture.
+# At launch change it to "https://www.refacegroup.co.uk/".
+SITE_URL = "https://zaindstyles.github.io/reface-website/"
 
 def head(title, desc, extra=""):
     return f'''<!doctype html>
@@ -16,7 +19,11 @@ def head(title, desc, extra=""):
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
 <meta property="og:type" content="website">
-<meta property="og:image" content="assets/img/home/hero-1600.webp">
+<meta property="og:image" content="{SITE_URL}assets/img/share.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="Reface">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/img/brand/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
