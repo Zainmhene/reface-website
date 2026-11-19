@@ -39,21 +39,20 @@ const PAGES = ['index.html', 'gallery.html', 'reviews.html', 'contact.html'];
   let missing = [];
   for (const h of internal) { const r = await p.request.get(B + h); if (r.status() !== 200) missing.push(h); }
   ok(!missing.length, `all ${internal.size} internal links and files exist ${missing.join(' ')}`);
-  // sharp photo arrives after a tap (phone, 4G)
+  // the room designer reacts quickly on a phone (4G)
   const pc = await b.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 3, isMobile: true, hasTouch: true });
   const pp = await pc.newPage(); const cdp = await pc.newCDPSession(pp);
   await cdp.send('Network.enable'); await cdp.send('Network.emulateNetworkConditions', { offline: false, latency: 120, downloadThroughput: 4e6 / 8, uploadThroughput: 1e6 / 8 });
   await pp.goto(B + 'index.html', { waitUntil: 'load' }); await pp.waitForTimeout(3300);
-  await pp.evaluate(() => document.querySelector('#offer').scrollIntoView()); await pp.waitForTimeout(2000);
-  await pp.evaluate(() => document.querySelector('.cs-stage').scrollIntoView({ block: 'center' })); await pp.waitForTimeout(300);
-  await pp.evaluate(() => document.querySelector('.cs-styles button:nth-child(2)').click()); await pp.waitForTimeout(800);
-  const t0 = Date.now(); await pp.evaluate(() => document.querySelector('.cs-dot:nth-child(7)').click());
-  await pp.waitForFunction(() => /kitchen-reed-green-(1600|sq-1080)\.webp/.test(document.querySelector('.cs-a').getAttribute('src')), null, { timeout: 20000, polling: 50 }).catch(() => {});
-  const sharpAt = (Date.now() - t0) / 1000;
-  ok(sharpAt < 3, `Handleless colour on a 4G phone: sharp photo showing ${sharpAt.toFixed(1)}s after the tap`);
-  await pp.locator('.cs-stage').screenshot({ path: `${SP}/final-handleless.png` });
+  await pp.evaluate(() => document.querySelector('#design').scrollIntoView()); await pp.waitForTimeout(5000);
+  const t0 = Date.now(); await pp.evaluate(() => document.querySelector('#dz-row-colour [data-c="ultra-matt-reed-green"]').click());
+  await pp.waitForFunction(() => /shaker-ultra-matt-reed-green\.webp/.test(document.querySelector('#dz-base-a').getAttribute('src') + document.querySelector('#dz-base-b').getAttribute('src')), null, { timeout: 20000, polling: 50 }).catch(() => {});
+  const shownAt = (Date.now() - t0) / 1000;
+  ok(shownAt < 1, `Designer colour on a 4G phone: new room showing ${shownAt.toFixed(2)}s after the tap`);
+  await pp.waitForTimeout(500);
+  await pp.locator('#dz-stage').screenshot({ path: `${SP}/final-designer.png` });
   console.log(out.filter(l => l.startsWith('FAIL')).join('\n') || 'no failures');
   console.log(`${out.length - fails} of ${out.length} checks passed`);
-  console.log(out.filter(l => /internal links|sharp photo|small phone index|desktop contact/.test(l)).join('\n'));
+  console.log(out.filter(l => /internal links|Designer colour|small phone index|desktop contact/.test(l)).join('\n'));
   await b.close();
 })();

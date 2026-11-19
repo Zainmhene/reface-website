@@ -46,7 +46,12 @@ const B = 'http://127.0.0.1:8766/';
   await page.fill('#f-name', 'Test Person'); await page.fill('#f-phone', '07000000000'); await page.click('#contact button[type=submit]'); await page.waitForTimeout(300);
   const opts = await page.$$eval('.send-options a', as => as.map(a => a.textContent.trim()));
   ok('form sends via WhatsApp or email: ' + opts.join(' / '), opts[0] === 'Send on WhatsApp' && opts[1] === 'Send by email');
-  ok('contact page shows email, phone lines and opening hours', (await page.textContent('#contact')).includes('info@refacegroup.co.uk') && (await page.textContent('#contact')).includes('lines open') && (await page.textContent('#contact')).includes('Monday – Thursday'));
+  ok('contact page shows email, phone lines and opening hours', (await page.textContent('#contact')).includes('info@refacegroup.co.uk') && (await page.textContent('#contact')).includes('lines open') && (await page.textContent('#contact')).includes('Monday – Friday') && (await page.textContent('#contact')).includes('9am – 5pm'));
+  ok('form has the 4 services', (await page.$$eval('#contact input[name=interest]', i => i.map(x => x.value))).join('|') === 'Kitchen makeover|Fitted kitchen|Fitted bedroom|Fitted bathroom');
+  await page.$eval('#contact input[value="Kitchen makeover"]', i => { i.checked = false; i.dispatchEvent(new Event('change')); });
+  ok('photo upload hidden unless Kitchen makeover is ticked', await page.$eval('#contact [data-photos]', d => d.hidden));
+  await page.$eval('#contact input[value="Kitchen makeover"]', i => { i.checked = true; i.dispatchEvent(new Event('change')); });
+  ok('photo upload shows for Kitchen makeover', !(await page.$eval('#contact [data-photos]', d => d.hidden)));
   // Before & after renders when photos are added (temporary test data, not saved)
   await page.goto(B + 'gallery.html');
   await page.evaluate(() => { window.REFACE.work = [{ title: 'Test', place: 'Here', before: 'assets/img/home/kitchens-800.webp', after: 'assets/img/home/bedrooms-800.webp' }]; });

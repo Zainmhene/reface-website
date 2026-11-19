@@ -39,17 +39,21 @@ def enquiry(source, room="kitchen"):
         <a class="contact-line" data-maps href="https://www.google.com/maps/search/?api=1&amp;query=Reface+85+Westoe+Rd+South+Shields+NE33+4LU" data-reveal><span class="cl-icon">{I["pin"]}</span><span><small>Find us</small><b>85 Westoe Rd, South Shields NE33 4LU</b></span></a>
         <a class="contact-line" data-mail href="#" data-reveal><span class="cl-icon">{I["mail"]}</span><span><small>Email</small><b data-mail="text">info@refacegroup.co.uk</b></span></a>
       </div>
-      <div data-reveal><p class="eyebrow" style="margin-bottom:10px">Opening hours</p><ul class="hours" data-hours><li><span>Monday – Thursday</span><b>10am – 4pm</b></li><li><span>Friday</span><b>9am – 4pm</b></li><li><span>Saturday</span><b>10am – 2pm</b></li><li><span>Sunday</span><b>Closed</b></li></ul></div>
+      <div data-reveal><p class="eyebrow" style="margin-bottom:10px">Opening hours</p><ul class="hours" data-hours><li><span>Monday – Friday</span><b>9am – 5pm</b></li><li><span>Saturday</span><b>10am – 3pm</b></li><li><span>Sunday</span><b>Closed</b></li></ul></div>
     </div>
     <form class="card-form" data-enquiry="{source}" novalidate data-reveal>
       <h3 style="margin-bottom:6px">Request a free quote</h3>
       <p class="muted small" style="margin-bottom:22px">Tell us a little about your project. It only takes a minute.</p>
       <div class="field"><span class="label">I'm interested in</span>
         <div class="check-pills">
-          <label><input type="checkbox" name="interest" value="Kitchen makeover"{" checked" if room == "kitchen" else ""}><span>Kitchen</span></label>
-          <label><input type="checkbox" name="interest" value="Fitted bedroom"{" checked" if room == "bedroom" else ""}><span>Bedroom</span></label>
-          <label><input type="checkbox" name="interest" value="Fitted bathroom"{" checked" if room == "bathroom" else ""}><span>Bathroom</span></label>
+          <label><input type="checkbox" name="interest" value="Kitchen makeover"{" checked" if room == "kitchen" else ""}><span>Kitchen makeover</span></label>
+          <label><input type="checkbox" name="interest" value="Fitted kitchen"><span>Fitted kitchen</span></label>
+          <label><input type="checkbox" name="interest" value="Fitted bedroom"{" checked" if room == "bedroom" else ""}><span>Fitted bedroom</span></label>
+          <label><input type="checkbox" name="interest" value="Fitted bathroom"{" checked" if room == "bathroom" else ""}><span>Fitted bathroom</span></label>
         </div></div>
+      <div class="field photo-field" data-photos hidden><label for="f-photos">Photos of your kitchen <span class="hint">(optional, up to 5)</span></label>
+        <input id="f-photos" name="photos" type="file" accept="image/*" multiple>
+        <p class="photo-tip">Photos help us price your makeover. Take them from the front, with the doors closed.</p></div>
       <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
       <div class="field-row">
         <div class="field"><label for="f-phone">Phone</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel"></div>

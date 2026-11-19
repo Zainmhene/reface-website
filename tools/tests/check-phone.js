@@ -18,7 +18,8 @@ const PHONES = [
     const errs = []; p.on('pageerror', e => errs.push(e.message)); p.on('console', m => m.type() === 'error' && errs.push(m.text()));
     const bad = []; p.on('response', r => r.status() >= 400 && bad.push(r.status() + ' ' + r.url()));
     const got = []; p.on('request', r => got.push(r.url()));
-    const open = async (u) => { await p.goto(B + u, { waitUntil: 'networkidle' }); await p.waitForTimeout(3300); };
+    // the site scrolls smoothly; the checker turns that off so it never taps while the page is still moving
+    const open = async (u) => { await p.goto(B + u, { waitUntil: 'networkidle' }); await p.addStyleTag({ content: 'html { scroll-behavior: auto !important; }' }); await p.waitForTimeout(3300); };
     const noSide = async (u) => ok(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `${name} ${u}: nothing sticks out sideways`);
 
     // ---------- Home ----------
@@ -44,30 +45,43 @@ const PHONES = [
     ok(await p.$eval('.action-bar', a => a.classList.contains('show')), `${name}: Call / WhatsApp / Contact bar appears when scrolling`);
     const bar = await p.$$eval('.action-bar a', as => as.map(a => a.getAttribute('href')));
     ok(bar[0] === 'tel:+441914563718' && bar[1].startsWith('https://wa.me/447457403407') && bar[2] === 'contact.html', `${name}: bottom bar buttons go to the right places`);
-    // Colour Studio
-    await p.evaluate(() => document.querySelector('.cs-stage').scrollIntoView({ block: 'center' })); await p.waitForTimeout(2500);
-    const st = await p.locator('.cs-stage').boundingBox();
-    ok(Math.abs(st.width - st.height) < 3, `${name}: colour photo is square`);
-    ok(/-sq-(600|1080)\.webp/.test(await p.getAttribute('.cs-a', 'src')) && await p.$eval('.cs-a', i => i.complete && i.naturalWidth > 0), `${name}: colour photo loads (phone version)`);
-    await p.locator('.cs-dot').nth(10).tap(); await p.waitForTimeout(1300);
-    ok((await p.textContent('.cs-name')) === 'Ivory Oak', `${name}: tapping a colour dot changes the colour`);
-    ok(decodeURIComponent(await p.getAttribute('.cs-cta', 'href')).includes('Ivory Oak'), `${name}: "Photoquote in this colour" includes the colour`);
-    await p.locator('.cs-styles button', { hasText: 'Handleless' }).tap(); await p.waitForTimeout(1300);
-    ok((await p.textContent('.cs-range')).includes('Gloss'), `${name}: Handleless works`);
-    for (const room of ['bedroom', 'bathroom']) {
-      await p.locator(`.cs-tabs button[data-room=${room}]`).tap(); await p.waitForTimeout(1300);
-      ok(await p.$eval('.cs-a', i => i.complete && i.naturalWidth > 0) && (await p.getAttribute('.cs-a', 'src')).includes(room), `${name}: ${room} tab works`);
-    }
-    const prev = await p.textContent('.cs-name');
-    await p.evaluate(() => document.querySelector('.cs-stage').scrollIntoView({ block: 'center' })); await p.waitForTimeout(400);
-    const sw = await p.locator('.cs-stage').boundingBox(); Object.assign(st, sw);
-    await p.mouse.move(st.x + st.width * 0.85, st.y + st.height * 0.4); await p.mouse.down();
-    await p.mouse.move(st.x + st.width * 0.15, st.y + st.height * 0.42, { steps: 8 }); await p.mouse.up(); await p.waitForTimeout(1300);
-    ok((await p.textContent('.cs-name')) !== prev, `${name}: swiping the photo changes the colour`);
+    // Room designer
+    // the site scrolls smoothly, so bring each button into view and let the page settle before tapping it
+    const tapIn = async (sel) => {
+      const top = await p.evaluate((q) => { const el = document.querySelector(q); el.scrollIntoView({ block: 'center', behavior: 'instant' });
+        const r = el.getBoundingClientRect(); const hit = document.elementFromPoint(r.x + r.width / 2, r.y + r.height / 2); return !!hit && el.contains(hit); }, sel);
+      ok(top, `${name}: nothing covers ${sel}`);
+      await p.evaluate((q) => document.querySelector(q).click(), sel); };
+    await p.evaluate(() => document.querySelector('#dz-stage').scrollIntoView({ block: 'center' })); await p.waitForTimeout(2500);
+    const st = await p.locator('#dz-stage').boundingBox();
+    ok(Math.abs(st.width - st.height) < 3, `${name}: room photo is square on phones`);
+    ok(await p.$eval('#dz-base-a', i => i.complete && i.naturalWidth > 0), `${name}: room photo loads`);
+    await tapIn('#dz-row-colour [data-c="ultra-matt-reed-green"]'); await p.waitForTimeout(1500);
+    ok((await p.getAttribute('#dz-base-a', 'src')).includes('shaker-ultra-matt-reed-green'), `${name}: tapping a colour changes the room`);
+    ok((await p.textContent('#dz-l-colour')).startsWith('Reed Green'), `${name}: colour name shows`);
+    await tapIn('#dz-row-door [data-d="classic-slab"]'); await p.waitForTimeout(1500);
+    ok((await p.getAttribute('#dz-base-a', 'src')).includes('flat-ultra-matt-reed-green'), `${name}: tapping a door changes the room`);
+    await tapIn('#dz-row-handle .pk:nth-child(4)'); await p.waitForTimeout(1200);
+    ok((await p.getAttribute('#dz-hl', 'src')).includes('t-bar-matt-black'), `${name}: tapping a handle changes the handles`);
+    await tapIn('#dz-row-handle .pk.none'); await p.waitForTimeout(500);
+    ok(await p.$eval('#dz-hl', i => i.hidden), `${name}: "None" takes the handles off`);
+    const href = decodeURIComponent(await p.getAttribute('#dz-cta', 'href'));
+    ok(href.startsWith('https://wa.me/447457403407?text=') && href.includes('Classic Slab') && href.includes('Reed Green') && href.includes('no handles'), `${name}: quote button sends the whole design on WhatsApp`);
+    await tapIn('#dz-s-cu'); await p.waitForTimeout(600);
+    ok(await p.$eval('#dz-s-cu', e => e.classList.contains('big')), `${name}: tapping the small picture shows the close-up`);
+    await tapIn('#dz-row-door .more'); await p.waitForTimeout(800);
+    ok(!(await p.$eval('#dz-sheet', s => s.hidden)), `${name}: "All" opens the full range`);
+    await p.locator('#dz-s-all [data-d="cathedral-arch"]').tap(); await p.waitForTimeout(800);
+    ok((await p.textContent('#dz-l-door')).startsWith('Cathedral Arch'), `${name}: picking from the full range works`);
+    await p.locator('#dz-sheet .done').tap(); await p.waitForTimeout(500);
+    ok(await p.$eval('#dz-sheet', s => s.hidden) && await p.$eval('#dz-stage', s => s.parentElement.id === 'dz-home'), `${name}: "Done" closes the full range`);
+    await tapIn('#dz-r-b'); await p.waitForTimeout(1500);
+    ok((await p.getAttribute('#dz-base-a', 'src')).includes('/designer/b/'), `${name}: Bedroom works`);
+    await tapIn('#dz-r-k'); await p.waitForTimeout(800);
     // reviews on home
     ok((await p.locator('#reviews .review').count()) === 3, `${name}: 3 reviews on the home page`);
     const rm = p.locator('#reviews .review-more-btn').first();
-    await rm.scrollIntoViewIfNeeded(); await rm.tap(); await p.waitForTimeout(300);
+    await tapIn('#reviews .review-more-btn'); await p.waitForTimeout(300);
     ok((await rm.textContent()) === 'Show less', `${name}: "Read more" opens a long review`);
     await noSide('home');
 
@@ -96,7 +110,7 @@ const PHONES = [
     // ---------- Contact ----------
     await open('contact.html');
     const txt = await p.textContent('#contact');
-    ok(txt.includes('07457 403407') && txt.includes('info@refacegroup.co.uk') && txt.includes('Monday – Thursday') && txt.includes('lines open'), `${name}: contact shows WhatsApp, email, hours and phone lines`);
+    ok(txt.includes('07457 403407') && txt.includes('info@refacegroup.co.uk') && txt.includes('Monday – Friday') && txt.includes('9am – 5pm') && txt.includes('lines open'), `${name}: contact shows WhatsApp, email, hours and phone lines`);
     await p.locator('#contact button[type=submit]').scrollIntoViewIfNeeded();
     await p.tap('#contact button[type=submit]'); await p.waitForTimeout(300);
     ok((await p.textContent('.form-status')).toLowerCase().includes('name'), `${name}: form asks for name and phone if empty`);

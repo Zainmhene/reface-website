@@ -13,9 +13,10 @@ Three things are needed from Reface. Then the launch takes about 30 minutes.
 Send the preview link and ask them to try it **on their phone** (most customers will use a phone). Ask them to check:
 
 - [ ] Phone (0191) 456 3718, WhatsApp 07457 403407, email info@refacegroup.co.uk, address 85 Westoe Rd
-- [ ] Opening hours (Mon–Thu 10–4, Fri 9–4, Sat 10–2) and phone-line hours (Mon–Fri 9–5, Sat 10–3)
+- [ ] Opening hours: Mon–Fri 9–5, Sat 10–3, Sun closed (Reface confirmed these on 19 Nov; Google should match)
 - [ ] Tap **Free Photoquote**: does WhatsApp open with a message ready to send?
-- [ ] The **Colour Studio**: try some colours, Kitchen / Bedroom / Bathroom
+- [ ] The **Room designer**: Kitchen and Bedroom, doors, colours, handles, "All", and the quote button
+- [ ] The door names (Reface can rename any of them; Zain has the private list of which supplier door each is)
 - [ ] The services list and wording on the home page
 - [ ] The reviews (copied word for word from Google) and the gallery
 - [ ] Send a test message from the contact form
@@ -84,8 +85,10 @@ The *email* settings (called MX records) are not touched.
 - **Enquiries straight to email:** the contact form currently opens WhatsApp or email on the customer's phone, which works.
   To get enquiries delivered to info@ instead, make a free form at formspree.io (free plan: 50 a month)
   and paste its link into `form.endpoint` in `js/config.js`.
-- **Monday hours:** Google says 10–4 but the WhatsApp Business profile says 9–4. The site follows Google; Reface should fix one of them.
-- **Real bathroom photo** for the Colour Studio (the current one is AI-made and labelled "Visualisation").
+- **Google hours:** the site now shows Mon–Fri 9–5, Sat 10–3. Reface should update Google and the WhatsApp Business profile to match.
+- **Kitchen photos on the form:** to receive the photos customers attach, the form needs a service that accepts files
+  (Formspree's paid plan, or similar). Without it, customers are asked to add their photos in the WhatsApp chat.
+- **Worktops in the Room designer:** waiting for a better kitchen photo (the current one doesn't show worktops well).
 - **More before & after photos:** the same spot photographed before and after a job makes the best slider.
 - **Their logo file** (SVG or PNG), if they want the exact logo instead of the matching text logo.
 - **Review count:** update `googleReviewCount` in `js/config.js` every month or so (173 on 2 Nov 2026).

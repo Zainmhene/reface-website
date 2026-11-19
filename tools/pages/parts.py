@@ -94,11 +94,11 @@ def footer(scripts=""):
         <li><a href="contact.html">Send an enquiry</a></li>
         <li><a data-maps href="https://www.google.com/maps/search/?api=1&amp;query=Reface+85+Westoe+Rd+South+Shields+NE33+4LU">Get directions</a></li></ul></div>
       <div><h4>Opening hours</h4><ul class="hours" data-hours>
-        <li><span>Monday – Thursday</span><b>10am – 4pm</b></li><li><span>Friday</span><b>9am – 4pm</b></li><li><span>Saturday</span><b>10am – 2pm</b></li><li><span>Sunday</span><b>Closed</b></li></ul></div>
+        <li><span>Monday – Friday</span><b>9am – 5pm</b></li><li><span>Saturday</span><b>10am – 3pm</b></li><li><span>Sunday</span><b>Closed</b></li></ul></div>
     </div>
     <div class="footer-bottom">
       <span>© <span data-year>2026</span> Reface Group · 85 Westoe Rd, South Shields NE33 4LU</span>
-      <span>Kitchen and bedroom photos show doors from our Classic &amp; Contemporary range.</span>
+      <span>Room pictures are visualisations; colours are a guide.</span>
     </div>
   </div>
 </footer>

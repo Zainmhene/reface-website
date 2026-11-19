@@ -11,7 +11,7 @@ Everything about the Reface website in one place. **Going live?** See [GO-LIVE.m
 | Phone (calls) | (0191) 456 3718, lines open Mon–Fri 9–5, Sat 10–3 |
 | WhatsApp (Photoquotes) | 07457 403407 (verified WhatsApp Business) |
 | Email | info@refacegroup.co.uk |
-| Opening hours (Google) | Mon–Thu 10–4, Fri 9–4, Sat 10–2, Sun closed |
+| Opening hours (confirmed by Reface) | Mon–Fri 9–5, Sat 10–3, Sun closed (phone lines the same) |
 | Google | 5.0 from 173 reviews (2 Nov 2026) |
 | Website | refacegroup.co.uk (currently their old site; the new one replaces it at launch) |
 | People named in reviews | Kev, Neil, Nick (office); Andy (fitter) |
@@ -34,12 +34,12 @@ we can grow it from there." Budget-friendly.
 
 | Page | What's on it |
 | --- | --- |
-| Home (`index.html`) | Still photo hero (computers: the finished navy kitchen, labelled "Visualisation"; phones: a brochure shaker kitchen), what we offer, **Colour Studio**, how a Photoquote works, 3 Google reviews, contact buttons |
+| Home (`index.html`) | Still photo hero (computers: the finished navy kitchen, labelled "Visualisation"; phones: a brochure shaker kitchen), what we offer, **Room designer**, how a Photoquote works, 3 Google reviews, contact buttons |
 | Before & After (`gallery.html`) | A real before & after slider (Lynne's quartz worktops), then 6 real jobs with photos and each customer's review |
 | Reviews (`reviews.html`) | The Google rating and 11 real Google reviews, word for word |
 | Contact (`contact.html`) | Phone, WhatsApp, email, address, hours and an enquiry form (sends by WhatsApp or email) |
 
-**Colour Studio:** Kitchen (Shaker or Handleless), Bedroom and Bathroom. Tap a colour dot or swipe and the room changes colour.
+**Room designer:** Kitchen or Bedroom. Pick a door, a colour and a handle (or no handles) and the room changes; the close-up shows the exact door with the handle fitted. "All" opens the whole range. The quote button sends the design on WhatsApp.
 It uses the real colour names from the brochures (52 door colours in the range; 47 shown).
 "Free Photoquote in this colour" sends the chosen colour on WhatsApp.
 
@@ -53,6 +53,7 @@ It uses the real colour names from the brochures (52 door colours in the range; 
 | 2 Nov | Two sets of hours, both labelled: phone lines (from their old website) and opening hours (from Google). |
 | 2 Nov | Logo matches theirs: navy "reface" with the yellow full stop. |
 | 2–3 Nov | Kept the Colour Studio (Zain wanted it premium, not too basic). Made it fast and sharp on phones. |
+| 19 Nov | Kevin's changes: Room designer replaces the Colour Studio (kitchen + bedroom, doors, colours, 65 handles). Four "What we offer" cards. Opening hours Mon–Fri 9–5, Sat 10–3. Optional kitchen photos on the contact form. Photoquote explained in plain words. |
 | 3 Nov | Hero is one still photo on every screen, no video (client wants basic). AI images are always labelled "Visualisation". |
 | 3 Nov | Hidden from Google (`PREVIEW = True`) until launch. |
 
@@ -69,12 +70,12 @@ Most changes are in **`js/config.js`**: change the text between the quotes, save
 - **Page wording:** the templates in `tools/pages/pages/` (one per page). Shared header and footer: `tools/pages/parts.py`.
   Then run `python3 tools/pages/build.py`. Don't edit the `.html` files directly; they're rebuilt from the templates.
 - **Colours and styles:** `css/site.css` (colour settings at the top).
-- **Colour Studio photos:** made by `tools/images/make_studio.py` from the project files (see `tools/images/README.md`).
+- **Room designer pictures:** made by the scripts in the private project files (they use the supplier brochures).
 
 ## Checking it works
 
 `tools/tests/` has the checks used before every update: 160 on 4 phone sizes, 130 across all pages on 4 screen sizes,
-and more for the Colour Studio, gallery and reviews. See `tools/tests/README.md` for how to run them.
+and more for the Room designer, gallery and reviews. See `tools/tests/README.md` for how to run them.
 
 ## Paid tools used
 

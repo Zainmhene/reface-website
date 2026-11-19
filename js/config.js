@@ -17,14 +17,13 @@ window.REFACE = {
     whatsapp: "447457403407",
     whatsappDisplay: "07457 403407",
 
-    // Opening hours: from the Google Business listing.
+    // Opening hours: confirmed by Reface (November 2026). Same as the phone lines.
     hours: [
-      { days: "Monday – Thursday", time: "10am – 4pm" },
-      { days: "Friday", time: "9am – 4pm" },
-      { days: "Saturday", time: "10am – 2pm" },
+      { days: "Monday – Friday", time: "9am – 5pm" },
+      { days: "Saturday", time: "10am – 3pm" },
       { days: "Sunday", time: "Closed" }
     ],
-    // Phone lines: from their current website ("Lines Open Mon-Fri 9am-5pm, Sat 10am-3pm").
+    // Phone lines: same as the opening hours.
     phoneLines: "Mon–Fri 9am–5pm, Sat 10am–3pm",
     address: "85 Westoe Rd, South Shields NE33 4LU",
     mapsUrl: "https://www.google.com/maps/search/?api=1&query=Reface+85+Westoe+Rd+South+Shields+NE33+4LU",

@@ -205,6 +205,10 @@ body.menu-open { overflow: hidden; }
 /* ---------- Service cards ---------- */
 .services { display: grid; gap: 16px; }
 @media (min-width: 900px) { .services { grid-template-columns: repeat(3, 1fr); gap: 22px; } }
+@media (min-width: 640px) { .services-4 { grid-template-columns: repeat(2, 1fr); } }
+.services-4 .service-card::after { background: linear-gradient(to top, rgba(8, 18, 42, .94) 0%, rgba(8, 18, 42, .82) 38%, rgba(8, 18, 42, .25) 68%, rgba(8, 18, 42, .05) 85%); }
+.services-4 .service-card h3, .services-4 .service-card p { text-shadow: 0 1px 12px rgba(8, 18, 42, .45); }
+@media (min-width: 1100px) { .services-4 { grid-template-columns: repeat(4, 1fr); gap: 18px; } .services-4 .service-card { aspect-ratio: 3 / 4.3; } .services-4 .service-card .svc-body { padding: 22px; } .services-4 .service-card h3 { font-size: 1.85rem; } }
 .service-card {
   position: relative; display: block; border-radius: var(--radius-lg); overflow: hidden; text-decoration: none; color: #fff;
   aspect-ratio: 4 / 4.6; background: var(--navy-deep); isolation: isolate; box-shadow: var(--shadow);
@@ -405,43 +409,6 @@ div.service-card { cursor: default; }
 .bg-navy .step p { color: var(--muted); }
 @media (max-width: 899px) { .service-card.no-photo { aspect-ratio: auto; min-height: 230px; } }
 
-/* ---------- Colour Studio (home): room tabs + colour dots on the photo ---------- */
-.cs { display: grid; gap: 14px; }
-.cs-bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
-.cs-tabs, .cs-styles { display: inline-flex; flex-wrap: wrap; gap: 4px; padding: 5px; border-radius: 999px; background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .12); }
-.cs-tabs button, .cs-styles button { border: 0; background: transparent; color: rgba(255, 255, 255, .75); font-weight: 700; padding: 0 18px; min-height: 42px; border-radius: 999px; transition: background .3s, color .3s; }
-.cs-styles button { min-height: 36px; padding: 0 14px; font-size: .88rem; }
-.cs-tabs button[aria-selected="true"], .cs-styles button[aria-pressed="true"] { background: #fff; color: var(--navy-deep); }
-.cs-styles:empty { display: none; }
-.cs-stage { position: relative; border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 1 / 1; background: #1b2846; touch-action: pan-y; user-select: none; -webkit-user-select: none; box-shadow: var(--shadow-lg); }
-@media (min-width: 700px) { .cs-stage { aspect-ratio: 16 / 9.6; } }
-.cs-stage img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: var(--pos, 70% 50%); pointer-events: none; -webkit-user-drag: none; transition: opacity .35s var(--ease); }
-.cs-wipe { position: absolute; inset: 0; overflow: hidden; visibility: hidden; pointer-events: none; }
-.cs-wipe.on { visibility: visible; }
-.cs-wipe, .cs-wipe .cs-b { will-change: transform; }
-.cs-stage.switching img { opacity: .2; }
-.cs-line { position: absolute; top: 0; bottom: 0; left: 0; width: 2px; background: #fff; box-shadow: 0 0 18px rgba(0, 0, 0, .35); opacity: 0; pointer-events: none; }
-.cs-wipe.from-left .cs-line { left: auto; right: 0; }
-.cs-dot.loading { animation: cs-pulse .9s ease-in-out infinite; }
-@keyframes cs-pulse { 50% { box-shadow: 0 0 0 3px rgba(10, 20, 44, .65), 0 0 0 7px rgba(217, 187, 135, .55); } }
-.cs-label { position: absolute; left: 14px; top: 14px; z-index: 2; display: grid; gap: 2px; padding: 9px 16px; border-radius: 16px; color: #fff; background: rgba(10, 20, 44, .72); border: 1px solid rgba(255, 255, 255, .18); }
-.cs-range { font-size: .66rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--brass-light); }
-.cs-name { font-family: var(--font-display); font-weight: 400; font-size: 1.35rem; line-height: 1.1; }
-.cs-dock { position: absolute; left: 12px; right: 12px; bottom: 12px; z-index: 2; display: grid; justify-items: center; gap: 8px; pointer-events: none; }
-.cs-hint { padding: 5px 12px; border-radius: 999px; background: rgba(255, 255, 255, .92); color: var(--navy-deep); font-size: .74rem; font-weight: 800; letter-spacing: .04em; transition: opacity .4s; animation: cs-bob 2.4s var(--ease) infinite; }
-.cs-hint.gone { opacity: 0; animation: none; }
-@keyframes cs-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
-.cs-dots { pointer-events: auto; display: flex; gap: 10px; max-width: 100%; overflow-x: auto; padding: 10px 14px; border-radius: 999px; background: rgba(10, 20, 44, .74); border: 1px solid rgba(255, 255, 255, .16); scrollbar-width: none; scroll-snap-type: x proximity; }
-.cs-dots::-webkit-scrollbar { display: none; }
-.cs-dot { flex: none; width: 34px; height: 34px; padding: 0; border-radius: 50%; border: 2px solid rgba(255, 255, 255, .8); background: var(--c) center / cover; box-shadow: inset 0 -5px 10px rgba(0, 0, 0, .18); scroll-snap-align: center; cursor: pointer; transition: transform .25s var(--ease), box-shadow .25s; }
-.cs-dot.gloss { background-image: linear-gradient(135deg, rgba(255, 255, 255, .55), rgba(255, 255, 255, 0) 45%); }
-.cs-dot:hover { transform: scale(1.08); }
-.cs-dot[aria-checked="true"] { transform: scale(1.14); box-shadow: 0 0 0 3px rgba(10, 20, 44, .65), 0 0 0 5px var(--brass-light); }
-@media (min-width: 700px) { .cs-dot { width: 38px; height: 38px; } .cs-name { font-size: 1.6rem; } }
-.cs-foot { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: center; justify-content: space-between; }
-.cs-note { margin: 0; color: rgba(238, 241, 248, .75); max-width: 46ch; }
-.studio-disclaimer { font-size: .78rem; color: rgba(238, 241, 248, .5); margin: 0; }
-
 /* ---------- Home hero: entrance animation + gentle parallax ----------
    The photo eases in from slightly zoomed, then the words rise in one after another.
    As you scroll, the photo moves a little slower than the page (js: initParallax). */
@@ -576,4 +543,24 @@ div.service-card { cursor: default; }
 /* Phones: a deeper shade behind the hero words so they read clearly over the busy picture wall */
 @media (max-width: 899px), (max-aspect-ratio: 9/10) {
   .hero-still::after { background: linear-gradient(to top, rgba(8, 18, 42, .95) 0%, rgba(8, 18, 42, .84) 46%, rgba(8, 18, 42, .5) 70%, rgba(8, 18, 42, .12) 88%); }
+}
+
+/* ---------- Contact form: optional kitchen photos ---------- */
+.photo-field input[type="file"] { width: 100%; padding: 12px; border: 1.5px dashed var(--line-strong); border-radius: 14px; background: #fff; font-size: .92rem; }
+.photo-field input[type="file"]::file-selector-button { margin-right: 12px; border: 0; border-radius: 999px; padding: 8px 14px; background: var(--navy); color: #fff; font-weight: 700; cursor: pointer; }
+.photo-tip { margin: 6px 0 0; color: var(--muted); font-size: .84rem; }
+
+/* ---------- A little life (kept subtle) ----------
+   Cards lift slightly under the mouse, and each section's small gold line draws in as it appears. */
+.step, .review, .work-card { transition: transform .45s var(--ease), box-shadow .45s var(--ease); }
+@media (hover: hover) {
+  .step:hover, .review:hover, .work-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+}
+.js .eyebrow[data-reveal]::before { width: 0; transition: width 1s var(--ease) .25s; }
+.js .eyebrow[data-reveal].in::before { width: 28px; }
+.dz .pk, .dz .rooms button { transition: transform .2s var(--ease), border-color .2s, background .2s; }
+@media (hover: hover) { .dz .pk:hover { transform: translateY(-2px); } }
+@media (prefers-reduced-motion: reduce) {
+  .step, .review, .work-card, .dz .pk { transition: none; }
+  .js .eyebrow[data-reveal]::before { width: 28px; transition: none; }
 }
