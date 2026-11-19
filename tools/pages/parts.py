@@ -3,6 +3,9 @@ CUR = ' aria-current="page"'
 
 # While Reface is reviewing the site, keep it out of Google. Set to False when it goes live.
 PREVIEW = True
+# The site's full address. Link previews (WhatsApp, Facebook) need it for the preview picture.
+# At launch change it to "https://www.refacegroup.co.uk/".
+SITE_URL = "https://zaindstyles.github.io/reface-website/"
 
 def head(title, desc, extra=""):
     return f'''<!doctype html>
@@ -16,7 +19,11 @@ def head(title, desc, extra=""):
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
 <meta property="og:type" content="website">
-<meta property="og:image" content="assets/img/home/hero-1600.webp">
+<meta property="og:image" content="{SITE_URL}assets/img/share.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="Reface">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/img/brand/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -87,11 +94,11 @@ def footer(scripts=""):
         <li><a href="contact.html">Send an enquiry</a></li>
         <li><a data-maps href="https://www.google.com/maps/search/?api=1&amp;query=Reface+85+Westoe+Rd+South+Shields+NE33+4LU">Get directions</a></li></ul></div>
       <div><h4>Opening hours</h4><ul class="hours" data-hours>
-        <li><span>Monday – Thursday</span><b>10am – 4pm</b></li><li><span>Friday</span><b>9am – 4pm</b></li><li><span>Saturday</span><b>10am – 2pm</b></li><li><span>Sunday</span><b>Closed</b></li></ul></div>
+        <li><span>Monday – Friday</span><b>9am – 5pm</b></li><li><span>Saturday</span><b>10am – 3pm</b></li><li><span>Sunday</span><b>Closed</b></li></ul></div>
     </div>
     <div class="footer-bottom">
       <span>© <span data-year>2026</span> Reface Group · 85 Westoe Rd, South Shields NE33 4LU</span>
-      <span>Kitchen and bedroom photos show doors from our Classic &amp; Contemporary range.</span>
+      <span>Room pictures are visualisations; colours are a guide.</span>
     </div>
   </div>
 </footer>

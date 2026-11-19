@@ -321,13 +321,22 @@
     ].filter((l) => l !== "").join("\n");
   }
 
-  async function sendEnquiry(data) {
+  async function sendEnquiry(data, photos) {
     const form = CFG.form || {};
-    const text = enquiryText(data);
+    const text = enquiryText(data) + (photos.length ? `\nPhotos: ${photos.length} attached` : "");
     if (form.endpoint) {
-      const body = Object.assign({}, data, { subject: `Website enquiry: ${data.name || ""}`, summary: text });
-      if (form.accessKey) body.access_key = form.accessKey;
-      const res = await fetch(form.endpoint, { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" }, body: JSON.stringify(body) });
+      const fields = Object.assign({}, data, { subject: `Website enquiry: ${data.name || ""}`, summary: text });
+      if (form.accessKey) fields.access_key = form.accessKey;
+      let res;
+      if (photos.length) {
+        // photos go as a normal file upload (the form service must allow attachments)
+        const body = new FormData();
+        Object.keys(fields).forEach((k) => body.append(k, fields[k]));
+        photos.forEach((ph) => body.append("photos", ph, ph.name));
+        res = await fetch(form.endpoint, { method: "POST", headers: { Accept: "application/json" }, body });
+      } else {
+        res = await fetch(form.endpoint, { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" }, body: JSON.stringify(fields) });
+      }
       if (!res.ok) throw new Error("Send failed");
       return { sent: true };
     }
@@ -337,10 +346,17 @@
   function initForms() {
     $$("form[data-enquiry]").forEach((f) => {
       const status = $(".form-status", f);
+      // "Photos of your kitchen" shows only when Kitchen makeover is ticked
+      const photoField = $("[data-photos]", f), makeover = $('input[value="Kitchen makeover"]', f);
+      const syncPhotos = () => { if (photoField && makeover) photoField.hidden = !makeover.checked; };
+      if (makeover) makeover.addEventListener("change", syncPhotos);
+      syncPhotos();
       f.addEventListener("submit", async (e) => {
         e.preventDefault();
         const fd = new FormData(f);
-        const data = Object.fromEntries(fd.entries());
+        const photoInput = f.elements.photos;
+        const photos = photoField && !photoField.hidden && photoInput ? Array.from(photoInput.files || []).slice(0, 5) : [];
+        const data = Object.fromEntries(Array.from(fd.entries()).filter(([k]) => k !== "photos"));
         data.interest = fd.getAll("interest").join(", ");
         if (data.website) return; // spam trap: real people never fill this hidden box
         const noName = !String(data.name || "").trim();
@@ -355,13 +371,13 @@
         const btn = $("button[type=submit]", f);
         btn.disabled = true; const label = btn.innerHTML; btn.textContent = "Sending…";
         try {
-          const r = await sendEnquiry(data);
+          const r = await sendEnquiry(data, photos);
           status.className = "form-status ok show";
           if (r.sent) {
             status.textContent = `Thank you ${data.name.split(" ")[0]}, your enquiry is on its way. We'll be in touch during opening hours.`;
-            f.reset();
+            f.reset(); syncPhotos();
           } else {
-            status.innerHTML = `Nearly done. Tap below to send your enquiry:
+            status.innerHTML = `Nearly done. Tap below to send your enquiry${photos.length ? ", then add your photos in the WhatsApp chat" : ""}:
               <div class="send-options">
                 <a class="btn btn-whatsapp btn-block" href="${r.whatsapp}" target="_blank" rel="noopener">Send on WhatsApp</a>
                 ${r.mailto ? `<a class="btn btn-ghost btn-block" href="${r.mailto}">Send by email</a>` : `<a class="btn btn-ghost btn-block" href="tel:${BIZ.phoneLink}">Or call ${esc(BIZ.phoneDisplay)}</a>`}
