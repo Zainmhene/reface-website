@@ -32,7 +32,7 @@ The email and phone-line hours come from refacegroup.co.uk; the opening hours an
 ## Share a link (GitHub Pages)
 
 Settings → Pages → Source "Deploy from a branch" → Branch `main`, folder `/ (root)` → Save.
-The link is https://zaindstyles.github.io/reface-website/ and updates a minute or two after each change to `main`.
+The link is https://zainmhene.github.io/reface-website/ and updates a minute or two after each change to `main`.
 
 ## See it on your computer
 

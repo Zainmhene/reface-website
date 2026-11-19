@@ -25,8 +25,8 @@ we can grow it from there." Budget-friendly.
 
 ## Links
 
-- **Preview:** https://zaindstyles.github.io/reface-website/
-- **Code:** https://github.com/ZainDStyles/reface-website (every change is a pull request; merging updates the site in about a minute)
+- **Preview:** https://zainmhene.github.io/reface-website/
+- **Code:** https://github.com/Zainmhene/reface-website (every change is a pull request; merging updates the site in about a minute)
 - **Project files** (brochures, sharpened photos, screenshots): `Reface project files.zip`, kept outside the repo
   because it's big and the repo is public. Its README explains each folder.
 

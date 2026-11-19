@@ -3,7 +3,7 @@
 This repo is the **Reface** website: kitchen makeovers, fitted bedrooms and fitted bathrooms for Reface Group
 (refacegroup.co.uk, (0191) 456 3718, info@refacegroup.co.uk, 85 Westoe Rd, South Shields NE33 4LU;
 "Kitchen renovator in South Shields" on Google, serves South Shields and nearby areas). Zain is building it for the business.
-This repo (ZainDStyles/reface-website) is the site's home. It was first built in Zain's old life-hq repo and moved here
+This repo (Zainmhene/reface-website, formerly ZainDStyles) is the site's home. Preview: https://zainmhene.github.io/reface-website/. It was first built in Zain's old life-hq repo and moved here
 with a fresh history.
 
 Keep it separate from Zain's personal website, TSUGI and other client projects. Never copy code or data between them.
