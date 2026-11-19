@@ -5,7 +5,7 @@ CUR = ' aria-current="page"'
 PREVIEW = True
 # The site's full address. Link previews (WhatsApp, Facebook) need it for the preview picture.
 # At launch change it to "https://www.refacegroup.co.uk/".
-SITE_URL = "https://zaindstyles.github.io/reface-website/"
+SITE_URL = "https://zainmhene.github.io/reface-website/"
 
 def head(title, desc, extra=""):
     return f'''<!doctype html>

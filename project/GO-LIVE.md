@@ -1,7 +1,7 @@
 # Reface website: go-live checklist
 
 **Where we are (3 Nov 2026):** the site is built, tested and online as a preview:
-**https://zaindstyles.github.io/reface-website/**
+**https://zainmhene.github.io/reface-website/**
 It's hidden from Google until launch. Hosting is free (GitHub Pages); Reface already pays for the domain.
 
 Three things are needed from Reface. Then the launch takes about 30 minutes.
@@ -66,7 +66,7 @@ The *email* settings (called MX records) are not touched.
    - run `python3 tools/pages/build.py`, then merge
 2. **GitHub:** Settings → Pages → Custom domain → `www.refacegroup.co.uk` → Save.
 3. **Domain settings (DNS)** at the registrar:
-   - `www` → **CNAME** → `zaindstyles.github.io`
+   - `www` → **CNAME** → `zainmhene.github.io`
    - `@` (the bare refacegroup.co.uk) → four **A** records: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
    - remove any *old* A or CNAME records for `@` and `www` that point to the old website
    - leave **MX** and **TXT** records (email) exactly as they are
